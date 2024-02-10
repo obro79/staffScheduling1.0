@@ -1,113 +1,50 @@
 package model;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.ArrayList;
+import java.time.LocalTime;
 
-public class Availability {
+public class Availability extends WeeklyAvailability {
 
-    private int idealWeeklyHours;
-    private int maxWeeklyHours;
-    private int monStart;
-    private int monEnd;
-    private int tueStart;
-    private int tueEnd;
-    private int wedStart;
-    private int wedEnd;
-    private int thurStart;
-    private int thurEnd;
-    private int friStart;
-    private int friEnd;
-    private int satStart;
-    private int satEnd;
-    private int sunStart;
-    private int sunEnd;
-    private LinkedList<Integer> weekAvailibility;
+    private String day;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    public Availability(int idealWeeklyHours, int maxWeeklyHours, int monStart, int monEnd, int tueStart, int tueEnd,
-                      int wedStart, int wedEnd, int thurStart, int thurEnd, int friStart, int friEnd, int satStart,
-                      int satEnd, int sunStart, int sunEnd) {
-
-        this.idealWeeklyHours = idealWeeklyHours;
-        this.maxWeeklyHours = maxWeeklyHours;
-        this.monStart = monStart;
-        this.monEnd = monEnd;
-        this.tueStart = tueStart;
-        this.tueEnd = tueEnd;
-        this.wedStart = wedStart;
-        this.wedEnd = wedEnd;
-        this.thurStart = thurStart;
-        this.thurEnd = thurEnd;
-        this.friStart = friStart;
-        this.friEnd = friEnd;
-        this.satStart = satStart;
-        this.satEnd = satEnd;
-        this.sunStart = sunStart;
-        this.sunEnd = sunEnd;
+    public Availability(String day, LocalTime startTime, LocalTime endTime) {
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    public int getIdealWeeklyHours() {
-        return this.idealWeeklyHours;
+    // Getters and Setters
+    public String getDay() {
+        return day;
     }
 
-    public int getMaxWeeklyHours() {
-        return this.maxWeeklyHours;
+    public void setDay(String day) {
+        this.day = day;
     }
 
-    public int getMonStart() {
-        return this.monStart;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public int getMonEnd() {
-        return this.monEnd;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
-    public int getTueStart() {
-        return this.tueStart;
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
-    public int getTueEnd() {
-        return this.tueEnd;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
-    public int getWedStart() {
-        return this.wedStart;
-    }
-
-    public int getWedEnd() {
-        return this.wedEnd;
-    }
-
-    public int getThurStart() {
-        return this.thurStart;
-    }
-
-    public int getThurEnd() {
-        return this.thurEnd;
-    }
-
-    public int getFriStart() {
-        return this.friStart;
-    }
-
-    public int getFriEnd() {
-        return this.friEnd;
-    }
-
-    public int getSatStart() {
-        return this.satStart;
-    }
-
-    public int getSatEnd() {
-        return this.satEnd;
-    }
-
-    public int getSunStart() {
-        return this.sunStart;
-    }
-
-    public int getSunEnd() {
-        return this.sunEnd;
+    // toString method for easy printing
+    @Override
+    public String toString() {
+        return day + ": " + startTime + " to " + endTime;
     }
 
 }
+
+
