@@ -1,17 +1,23 @@
 # My Personal Project
 
-## Poker Trainer
+## Staff Scheduler (Catered towards Resturants)
 
 A *bulleted* list:
-- It will be a graphical user interface that will show the user their 2 playing cards and ask if they should raise,
-fold, or call. After the user makes a decision it will give feedback on whether it was the best play, okay play or
-terrible play. The user will also be able to change their 'table position' and practice making their decisions from 
-different position because being in different positions changes which hands the user should play. It will also allow the
-user to star the hands that they keep getting wrong so they can focus on the hands they find the most difficult. 
-- The users will be people that are interested in improving their poker skills 
 
-- I'm want to get better at poker and the existing poker training apps don't have the exact functionality that I want or
-they cost too much money. This project will also allow me to apply the probability knowledge that I have been learning
-in my other math classes.
+- I will be designing a staff scheduling software. The 'manager' will be able to enter a list of employees where each
+employee has different attributes like occupation, name, availibility, days off, as well as preferred hours. 
+It also allows the manager to decide how many people they want working at a time. 
+software will take all these parameters into consideration and make a schedule that fits these criteria. If no schedule 
+can be made it will give a message saying why it's impossible like "No one put availibilty for Mondays."
 
-Example of what hands to play vs not ![Screenshot 2024-02-02 at 12.19.31 PM.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fkz%2Fqp1g3z1s4kbfcdv3q7tkr9yh0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_iiHuKg%2FScreenshot%202024-02-02%20at%2012.19.31%20PM.png)
+- The users will be managers of different workplacs that wants to schedule their employees automatically so they can
+free up time doing more important things
+
+- I'm want to do this project because I feel like this matches the project description closely as well as this will an
+ineffiency in my workplace and give me practice finding a good algorithm so that this can scale decently well when
+adding more employees.
+
+- As a user i want to be able to add an arbitrary number of employees to my list
+- as a user i want to be able to specify the job that the employee has 
+- as a user i want to be able to specify the times that i need employees
+- as a user i want to be able to specify the number of employees that i need at a time
