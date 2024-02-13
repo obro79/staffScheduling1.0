@@ -1,11 +1,15 @@
 package model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyAvailability {
 
     private List<Availability> weeklyAvailability;
+    protected String day;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
 
     public WeeklyAvailability() {
         this.weeklyAvailability = new ArrayList<>();
@@ -13,6 +17,12 @@ public class WeeklyAvailability {
 
     public void addAvailability(Availability availability) {
         weeklyAvailability.add(availability);
+    }
+
+    public void printWeeklyAvailability() {
+        for (Availability availability : weeklyAvailability) {
+            System.out.println(availability);
+        }
     }
 
     // Method to get the availability for all days
