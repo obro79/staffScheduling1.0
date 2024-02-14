@@ -2,7 +2,7 @@ package model;
 
 import java.util.*;
 
-public class Employee {
+public class Employee extends WeeklyAvailability {
 
     private String name;
     private String job;
@@ -22,6 +22,7 @@ public class Employee {
         } else {
             System.out.println("Ok get back to work!");
         }
+
     }
 
     public String getName() {

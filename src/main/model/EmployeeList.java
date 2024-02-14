@@ -2,7 +2,7 @@ package model;
 
 import java.util.LinkedList;
 
-public class EmployeeList {
+public class EmployeeList extends Employee {
 
     private LinkedList<Employee> employeeList;
 
@@ -13,4 +13,5 @@ public class EmployeeList {
     public LinkedList<Employee> getEmployeeList() {
         return this.employeeList;
     }
+
 }

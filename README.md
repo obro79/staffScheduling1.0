@@ -17,7 +17,8 @@ free up time doing more important things
 ineffiency in my workplace and give me practice finding a good algorithm so that this can scale decently well when
 adding more employees.
 
-- As a user i want to be able to add an arbitrary number of employees to my list
-- as a user i want to be able to specify the job that the employee has 
-- as a user i want to be able to specify the times that i need employees
-- as a user i want to be able to specify the number of employees that i need at a time
+- As a user, I want to be able to create a new employee and add it to a list of employees
+- As a user, I want to be able to select a employee and add a update their availability player to the team
+- As a user, I want to be able to select a employee and view their weekly availability {list of availabilities}
+- As a user, I want to specify and confirm the number of employees I need at a time. 
+{List of Number of Employees Needed}. 

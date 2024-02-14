@@ -2,16 +2,17 @@ package ui;
 
 
 
-import model.Availability;
+import model.DailyAvailability;
 import model.Employee;
+import model.WeeklyAvailability;
 
 public class Main {
     public static void main(String[] args) {
 
         Employee newEmployee = new Employee();
-        Availability forNewEmployee = new Availability();
-
-
+        WeeklyAvailability newWeeklyAvailability = new WeeklyAvailability();
+        newWeeklyAvailability.updateAvailability();
     }
+
 }
 
