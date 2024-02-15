@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
-    @SuppressWarnings("methodlength") // i tried for like 2 hours to reduce this method to <25 best I got was 26
+    @SuppressWarnings("methodlength")
+    // i tried for like 2 hours to reduce this method to <25 best I got was 26
     // used enums and helpers and everything felix said it's ok for switch else
 
     public static void runEmployeeManagementSystem() {

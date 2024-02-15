@@ -22,6 +22,14 @@ public class DailyAvailability {
     }
 
     public String getDay() {
-       return this.day;
+        return this.day;
+    }
+
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return this.endTime;
     }
 }
