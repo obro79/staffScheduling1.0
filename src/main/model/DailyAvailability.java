@@ -1,9 +1,11 @@
 package model;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public class DailyAvailability extends Availability {
-
+public class DailyAvailability {
     private String day;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -14,32 +16,6 @@ public class DailyAvailability extends Availability {
         this.endTime = endTime;
     }
 
-    // Getters and Setters
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    // toString method for easy printing
     @Override
     public String toString() {
         return day + ": " + startTime + " to " + endTime;

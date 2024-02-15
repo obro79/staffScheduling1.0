@@ -1,12 +1,15 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.Employee;
+import model.EmployeeList;
 
 public class UiHandler {
+    public static final Scanner scanner = new Scanner(System.in);
 
     public static void runEmployeeManagementSystem() {
-        Scanner scanner = new Scanner(System.in);
+
         int option;
 
         do {
@@ -26,13 +29,13 @@ public class UiHandler {
 
             switch (option) {
                 case 1:
-                    Employee newEmployee = new Employee();
+                    Employee newEmployee = new Employee(); //good now
                     break;
                 case 2:
                     updateEmployeeAvailability();
                     break;
                 case 3:
-                    getListOfEmployees();
+                    EmployeeList.getInstance().printAllEmployeeNames();
                     break;
                 case 4:
                     getEmployeeAvailability();

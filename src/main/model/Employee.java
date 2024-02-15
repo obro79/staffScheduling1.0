@@ -8,40 +8,42 @@ public class Employee extends WeeklyAvailability {
     private String job;
 
     public Employee() {
-        Scanner scanner = new Scanner(System.in);
-        boolean infoCorrect;
-
         do {
-            System.out.print("Enter employee's name: ");
-            this.name = scanner.nextLine(); // Reads the next line for the name
-
-            System.out.print("Enter employee's job: ");
-            this.job = scanner.nextLine(); // Reads the next line for the job
-
-            System.out.println("Would you also like to update their availability right now? (Yes/No)");
-            String answer = scanner.nextLine();
-
-            if (answer.equalsIgnoreCase("Yes")) {
-                this.updateAvailability();
+            getInput("Enter employee's name: ", true);
+            getInput("Enter employee's job: ", true);
+            if (getInput("Would you also like to update their availability right now? (Yes/No): ",false).equalsIgnoreCase("Yes")) {
+                updateAvailability();
             } else {
                 System.out.println("Ok, you can add it later");
             }
-
-            System.out.println("Employee's name: " + this.name);
-            System.out.println("Employee's job: " + this.job);
-            System.out.print("Please Confirm (Yes/No): ");
-            String answer2 = scanner.nextLine();
-
-            if (answer2.equalsIgnoreCase("Yes")) {
-                infoCorrect = true;
-                System.out.println("Great! The Employee has been added.");
-            } else {
-                System.out.println("Information is incorrect. Please enter again.");
-                infoCorrect = false;
-            }
-        } while (!infoCorrect);
+        } while (!getConfirmation());
+        addSelfToList();
     }
 
+
+    private String getInput(String prompt, boolean saveInput) {
+
+        System.out.print(prompt);
+        String input = ui.UiHandler.scanner.nextLine();
+        if (saveInput) {
+            if (prompt.toLowerCase().contains("name")) {
+                this.name = input;
+            } else if (prompt.toLowerCase().contains("job")) {
+                this.job = input;
+            }
+        }
+        return input;
+    }
+
+    private boolean getConfirmation() {
+        System.out.println("Employee's name: " + this.name);
+        System.out.println("Employee's job: " + this.job);
+        return getInput("Please Confirm (Yes/No): ", false).equalsIgnoreCase("Yes");
+    }
+
+    private void addSelfToList() {
+        EmployeeList.getInstance().addEmployee(this);
+    }
 
 
     public String getName() {

@@ -1,17 +1,37 @@
 package model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
-public class EmployeeList extends Employee {
+public class EmployeeList {
 
-    private LinkedList<Employee> employeeList;
+    private ArrayList<Employee> employeeList;
+    private static EmployeeList onlyEmployeeList = new EmployeeList();
 
-    public EmployeeList() {
-        employeeList = new LinkedList<Employee>();
+    private EmployeeList() {
+        this.employeeList = new ArrayList<Employee>();
     }
 
-    public LinkedList<Employee> getEmployeeList() {
+    public static EmployeeList getInstance() {
+        return onlyEmployeeList;
+    }
+
+    public ArrayList<Employee> getEmployeeList() {
         return this.employeeList;
     }
 
+    public void addEmployee(Employee e) {
+        if (!employeeList.contains(e)) {
+            employeeList.add(e);
+            System.out.println("Employee added: " + e.getName());
+        } else {
+            System.out.println("This employee is already in the list!");
+        }
+    }
+
+    public void printAllEmployeeNames() {
+        System.out.println("List of all employee names:");
+        for (Employee e : employeeList) {
+            System.out.println(e.getName());
+        }
+    }
 }
