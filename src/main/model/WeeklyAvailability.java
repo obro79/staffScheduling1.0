@@ -9,14 +9,14 @@ import java.util.Scanner;
 public class WeeklyAvailability {
 
 
-    private List<DailyAvailability> weeklyDailyAvailability;
+    protected List<DailyAvailability> weeklyDailyAvailability;
 
     public WeeklyAvailability() {
         this.weeklyDailyAvailability = new ArrayList<>();
     }
 
     public void updateAvailability() {
-        // Assuming `scanner` is passed or available globally
+
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
         for (String day : daysOfWeek) {

@@ -1,9 +1,9 @@
 package ui;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import model.Employee;
 import model.EmployeeList;
+
+import java.util.Scanner;
 
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
@@ -66,9 +66,17 @@ public class UiHandler {
     }
 
     private static void updateEmployeeAvailability() {
-        // Implementation
-        System.out.println("Updating employee availability...");
-    }
+        scanner.nextLine();
+        System.out.println("Which Employee's Availability would you like to update? (Enter their Name): ");
+        String employeeName = String.valueOf(scanner);
+        for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
+            if (e.getName() == employeeName) {
+                System.out.println("Ok Let's update their availability.");
+                e.updateAvailability();
+            }
+        }
+        System.out.println("It looks like there is no employee with that name.");
+    } // would you like to add one?
 
     private static void getListOfEmployees() {
         // Implementation
@@ -76,9 +84,24 @@ public class UiHandler {
     }
 
     private static void getEmployeeAvailability() {
-        // Implementation
-        System.out.println("Getting employee's availability...");
+
+        System.out.println("Which Employee's Availability would you like to get? (Enter their Name): ");
+        scanner.nextLine();
+        String employeeName = String.valueOf(scanner);
+        for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
+            if (e.getName() == employeeName) {
+                System.out.println("Ok here's their availability: ");
+                e.updateAvailability();
+            }
+        }
+        System.out.println("It looks like there is no employee with that name.");
+        System.out.println("Would you like to try a different employee?: ");
+        String response = scanner.nextLine();
+        if (response.equalsIgnoreCase("Yes")) {
+            getEmployeeAvailability();
+        }
     }
+
 
     private static void getStoreHours() {
         // Implementation
