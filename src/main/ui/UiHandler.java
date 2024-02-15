@@ -13,7 +13,6 @@ public class UiHandler {
     // used enums and helpers and everything felix said it's ok for switch else
 
     public static void runEmployeeManagementSystem() {
-        Scanner scanner = new Scanner(System.in); // Make sure scanner is defined outside this snippet
         int option;
 
         do {
@@ -34,7 +33,7 @@ public class UiHandler {
 
             switch (option) {
                 case 1:
-                    Employee newEmployee = new Employee(); // Assuming constructor handles everything
+                    Employee newEmployee = new Employee();
                     break;
                 case 2:
                     updateEmployeeAvailability();
@@ -64,27 +63,21 @@ public class UiHandler {
                     System.out.println("Invalid option. Please select a valid option.");
             }
         } while (option != 9); // Update condition to reflect new exit option
-        scanner.close(); // Note: Only close the scanner if you're done with System.in for the rest of the program
+        scanner.close();
     }
 
-    // Assume this method exists, adjust as needed for your application
     private static void getSchedulingNeeds() {
         System.out.println("Displaying Scheduling Needs...");
-        // Logic to display scheduling needs
-    }
-
-
-    private static void addEmployee() {
-        // Implementation
-        System.out.println("Adding an employee...");
+        System.out.println("Getting scheduling needs...");
+        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
+        operationalNeeds.printEmployeeNeeds();
     }
 
     private static void updateEmployeeAvailability() {
-        scanner.nextLine();
         System.out.println("Which Employee's Availability would you like to update? (Enter their Name): ");
-        String employeeName = String.valueOf(scanner);
+        String employeeName = scanner.nextLine();
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
-            if (e.getName() == employeeName) {
+            if (e.getName().equalsIgnoreCase(employeeName)) {
                 System.out.println("Ok Let's update their availability.");
                 e.updateAvailability();
             }
@@ -92,10 +85,6 @@ public class UiHandler {
         System.out.println("It looks like there is no employee with that name.");
     } // would you like to add one?
 
-    private static void getListOfEmployees() {
-
-        System.out.println("Getting list of employees...");
-    }
 
     private static void getEmployeeAvailability() {
 
@@ -132,16 +121,11 @@ public class UiHandler {
     }
 
     private static void updateSchedulingNeeds() {
+
         System.out.println("Updating scheduling needs...");
         OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
         operationalNeeds.updateEmployeeNeeds();
     }
 
-    private static void getSchedulingNeed() {
-        System.out.println("Getting scheduling needs...");
-        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
-        operationalNeeds.updateEmployeeNeeds();
-        operationalNeeds.printEmployeeNeeds();
-    }
 }
 
