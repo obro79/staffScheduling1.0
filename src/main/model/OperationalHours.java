@@ -1,23 +1,32 @@
-package model;
 
-import model.DailyAvailability;
+package model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Scanner;
 
-public class OperationalHours {
 
+
+import model.DailyAvailability;
+
+public class OperationalHours {
+    private static OperationalHours instance;
     protected List<DailyAvailability> storeHours;
 
-    public OperationalHours() {
+    private OperationalHours() {
         this.storeHours = new ArrayList<>();
     }
 
+    public static synchronized OperationalHours getInstance() {
+        if (instance == null) {
+            instance = new OperationalHours();
+        }
+        return instance;
+    }
+
     public void updateStoreHours() {
-        Scanner scanner = new Scanner(System.in); // Assuming you have a scanner instance
+        Scanner scanner = new Scanner(System.in); // Consider managing scanner externally for better resource management
 
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
@@ -30,6 +39,7 @@ public class OperationalHours {
             storeHours.add(new DailyAvailability(day, openingTime, closingTime));
         }
 
+        // No need to close the scanner here if it's used elsewhere in your application
     }
 
     public void printStoreHours() {

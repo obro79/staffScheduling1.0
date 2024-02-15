@@ -2,6 +2,7 @@ package ui;
 
 import model.Employee;
 import model.EmployeeList;
+import model.OperationalHours;
 
 import java.util.Scanner;
 
@@ -98,13 +99,16 @@ public class UiHandler {
     private static void getOperationalHours() {
 
         System.out.println("Getting store hours...");
-
+        model.OperationalHours operationalHours = model.OperationalHours.getInstance();
+        operationalHours.printStoreHours();
     }
 
     private static void updateOperationalHours() {
 
         System.out.println("Updating store hours...");
-        // updateStoreHours();
+        OperationalHours operationalHours = model.OperationalHours.getInstance();
+        operationalHours.updateStoreHours();
+
     }
 
     private static void updateSchedulingNeeds() {
