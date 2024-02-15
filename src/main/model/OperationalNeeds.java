@@ -2,6 +2,7 @@
 package model;
 
 import model.EmployeeNeeds;
+import ui.UiHandler;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,20 +29,19 @@ public class OperationalNeeds {
     }
 
     public void updateStoreHours() {
-        Scanner scanner = new Scanner(System.in); // Consider managing scanner externally for better resource management
+        Scanner answer = UiHandler.scanner;
 
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
         for (String day : daysOfWeek) {
             System.out.println("Enter store hours for " + day + ": ");
             System.out.print("Opening Time (HH:MM): ");
-            LocalTime openingTime = LocalTime.parse(scanner.nextLine());
+            LocalTime openingTime = LocalTime.parse(answer.nextLine());
             System.out.print("Closing Time (HH:MM): ");
-            LocalTime closingTime = LocalTime.parse(scanner.nextLine());
+            LocalTime closingTime = LocalTime.parse(answer.nextLine());
             storeHours.add(new DailyAvailability(day, openingTime, closingTime));
         }
 
-        // No need to close the scanner here if it's used elsewhere in your application
     }
 
     public void printStoreHours() {
@@ -58,7 +58,7 @@ public class OperationalNeeds {
     public void updateEmployeeNeeds() {
         Scanner scanner = new Scanner(System.in); // Assume scanner is passed or globally accessible
 
-        for (DailyAvailability day : this.storeHours) {
+        for (DailyAvailability day : storeHours) {
             System.out.println("Enter employee needs for " + day.getDay() + ": ");
             boolean moreNeeds = true;
 
@@ -71,7 +71,7 @@ public class OperationalNeeds {
                 int numberOfEmployees = scanner.nextInt();
                 scanner.nextLine(); // Consume the newline
 
-                this.allEmployeeNeeds.add(new EmployeeNeeds(day.getDay(), startTime, endTime, numberOfEmployees));
+                allEmployeeNeeds.add(new EmployeeNeeds(day.getDay(), startTime, endTime, numberOfEmployees));
 
                 System.out.print("Are there more time slots for this day? (yes/no): ");
                 moreNeeds = scanner.nextLine().trim().equalsIgnoreCase("yes");
@@ -80,11 +80,10 @@ public class OperationalNeeds {
     }
 
     public void printEmployeeNeeds() {
+
         System.out.println("Employee Needs:");
         for (EmployeeNeeds need : this.allEmployeeNeeds) {
             System.out.println(need);
         }
     }
-
 }
-

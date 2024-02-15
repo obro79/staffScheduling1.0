@@ -67,7 +67,6 @@ public class UiHandler {
     }
 
     private static void getSchedulingNeeds() {
-        System.out.println("Displaying Scheduling Needs...");
         System.out.println("Getting scheduling needs...");
         OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
         operationalNeeds.printEmployeeNeeds();
