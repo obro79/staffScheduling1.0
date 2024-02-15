@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
+    @SuppressWarnings("methodlength") // i tried for like 2 hours to reduce this method to <25 best I got was 26
+    // used enums and helpers and everything felix said it's ok for switch else
+
     public static void runEmployeeManagementSystem() {
 
         int option;
@@ -18,8 +21,8 @@ public class UiHandler {
             System.out.println("(2) Update Existing Employee Availability");
             System.out.println("(3) Get List of Employees");
             System.out.println("(4) Get Employee’s Availability");
-            System.out.println("(5) Get Store Hours");
-            System.out.println("(6) Update Store Hours");
+            System.out.println("(5) Get Operational Hours");
+            System.out.println("(6) Update Operational Hours");
             System.out.println("(7) Update Scheduling Needs");
             System.out.println("(8) Exit");
             System.out.print("Select an option (1-8): ");
@@ -28,35 +31,25 @@ public class UiHandler {
             scanner.nextLine(); // Consume the newline
 
             switch (option) {
-                case 1:
-                    Employee newEmployee = new Employee(); //good now
+                case 1: Employee newEmployee = new Employee(); //good now
                     break;
-                case 2:
-                    updateEmployeeAvailability();
+                case 2: updateEmployeeAvailability();
                     break;
-                case 3:
-                    EmployeeList.getInstance().printAllEmployeeNames();
+                case 3: EmployeeList.getInstance().printAllEmployeeNames();
                     break;
-                case 4:
-                    getEmployeeAvailability();
+                case 4: getEmployeeAvailability();
                     break;
-                case 5:
-                    getStoreHours();
+                case 5: getOperationalHours();
                     break;
-                case 6:
-                    updateStoreHours();
+                case 6: updateOperationalHours();
                     break;
-                case 7:
-                    updateSchedulingNeeds();
+                case 7: updateSchedulingNeeds();
                     break;
-                case 8:
-                    System.out.println("Exiting...");
+                case 8: System.out.println("Exiting...");
                     break;
-                default:
-                    System.out.println("Invalid option. Please select a valid option.");
+                default: System.out.println("Invalid option. Please select a valid option.");
             }
         } while (option != 8);
-
         scanner.close();
     }
 
@@ -79,7 +72,7 @@ public class UiHandler {
     } // would you like to add one?
 
     private static void getListOfEmployees() {
-        // Implementation
+
         System.out.println("Getting list of employees...");
     }
 
@@ -102,15 +95,16 @@ public class UiHandler {
         }
     }
 
+    private static void getOperationalHours() {
 
-    private static void getStoreHours() {
-        // Implementation
         System.out.println("Getting store hours...");
+
     }
 
-    private static void updateStoreHours() {
-        // Implementation
+    private static void updateOperationalHours() {
+
         System.out.println("Updating store hours...");
+        // updateStoreHours();
     }
 
     private static void updateSchedulingNeeds() {
