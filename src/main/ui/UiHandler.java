@@ -2,7 +2,7 @@ package ui;
 
 import model.Employee;
 import model.EmployeeList;
-import model.OperationalHours;
+import model.OperationalNeeds;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class UiHandler {
     // used enums and helpers and everything felix said it's ok for switch else
 
     public static void runEmployeeManagementSystem() {
-
+        Scanner scanner = new Scanner(System.in); // Make sure scanner is defined outside this snippet
         int option;
 
         do {
@@ -25,34 +25,54 @@ public class UiHandler {
             System.out.println("(5) Get Operational Hours");
             System.out.println("(6) Update Operational Hours");
             System.out.println("(7) Update Scheduling Needs");
-            System.out.println("(8) Exit");
-            System.out.print("Select an option (1-8): ");
+            System.out.println("(8) Get Scheduling Needs"); // New option added here
+            System.out.println("(9) Exit"); // Updated to be option 9
+            System.out.print("Select an option (1-9): "); // Update prompt to reflect new option count
 
             option = scanner.nextInt();
             scanner.nextLine(); // Consume the newline
 
             switch (option) {
-                case 1: Employee newEmployee = new Employee(); //good now
+                case 1:
+                    Employee newEmployee = new Employee(); // Assuming constructor handles everything
                     break;
-                case 2: updateEmployeeAvailability();
+                case 2:
+                    updateEmployeeAvailability();
                     break;
-                case 3: EmployeeList.getInstance().printAllEmployeeNames();
+                case 3:
+                    EmployeeList.getInstance().printAllEmployeeNames();
                     break;
-                case 4: getEmployeeAvailability();
+                case 4:
+                    getEmployeeAvailability();
                     break;
-                case 5: getOperationalHours();
+                case 5:
+                    getOperationalHours();
                     break;
-                case 6: updateOperationalHours();
+                case 6:
+                    updateOperationalHours();
                     break;
-                case 7: updateSchedulingNeeds();
+                case 7:
+                    updateSchedulingNeeds();
                     break;
-                case 8: System.out.println("Exiting...");
+                case 8:
+                    getSchedulingNeeds();
                     break;
-                default: System.out.println("Invalid option. Please select a valid option.");
+                case 9:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please select a valid option.");
             }
-        } while (option != 8);
-        scanner.close();
+        } while (option != 9); // Update condition to reflect new exit option
+        scanner.close(); // Note: Only close the scanner if you're done with System.in for the rest of the program
     }
+
+    // Assume this method exists, adjust as needed for your application
+    private static void getSchedulingNeeds() {
+        System.out.println("Displaying Scheduling Needs...");
+        // Logic to display scheduling needs
+    }
+
 
     private static void addEmployee() {
         // Implementation
@@ -99,21 +119,29 @@ public class UiHandler {
     private static void getOperationalHours() {
 
         System.out.println("Getting store hours...");
-        model.OperationalHours operationalHours = model.OperationalHours.getInstance();
-        operationalHours.printStoreHours();
+        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
+        operationalNeeds.printStoreHours();
     }
 
     private static void updateOperationalHours() {
 
         System.out.println("Updating store hours...");
-        OperationalHours operationalHours = model.OperationalHours.getInstance();
-        operationalHours.updateStoreHours();
+        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
+        operationalNeeds.updateStoreHours();
 
     }
 
     private static void updateSchedulingNeeds() {
-        // Implementation
         System.out.println("Updating scheduling needs...");
+        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
+        operationalNeeds.updateEmployeeNeeds();
+    }
+
+    private static void getSchedulingNeed() {
+        System.out.println("Getting scheduling needs...");
+        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
+        operationalNeeds.updateEmployeeNeeds();
+        operationalNeeds.printEmployeeNeeds();
     }
 }
 

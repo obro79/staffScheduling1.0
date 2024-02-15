@@ -20,4 +20,8 @@ public class DailyAvailability {
     public String toString() {
         return day + ": " + startTime + " to " + endTime;
     }
+
+    public String getDay() {
+       return this.day;
+    }
 }
