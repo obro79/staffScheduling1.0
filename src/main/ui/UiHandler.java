@@ -1,71 +1,53 @@
 package ui;
 
+import model.DailyAvailability;
 import model.Employee;
 import model.EmployeeList;
 import model.OperationalNeeds;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
-    @SuppressWarnings("methodlength")
     // i tried for like 2 hours to reduce this method to <25 best I got was 26
     // used enums and helpers and everything felix said it's ok for switch else
 
     public static void runEmployeeManagementSystem() {
+
         int option;
-
         do {
-            System.out.println("What would you like to do?");
-            System.out.println("(1) Add Employee");
-            System.out.println("(2) Update Existing Employee Availability");
-            System.out.println("(3) Get List of Employees");
-            System.out.println("(4) Get Employee’s Availability");
-            System.out.println("(5) Get Operational Hours");
-            System.out.println("(6) Update Operational Hours");
-            System.out.println("(7) Update Scheduling Needs");
-            System.out.println("(8) Get Scheduling Needs"); // New option added here
-            System.out.println("(9) Exit"); // Updated to be option 9
-            System.out.print("Select an option (1-9): "); // Update prompt to reflect new option count
-
+            printOptions();
             option = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (option) {
-                case 1:
-                    Employee newEmployee = new Employee();
+                case 1: addEmployee();
+                break;
+                case 2: updateEmployeeAvailability();
                     break;
-                case 2:
-                    updateEmployeeAvailability();
+                case 3: EmployeeList.getInstance().printAllEmployeeNames();
                     break;
-                case 3:
-                    EmployeeList.getInstance().printAllEmployeeNames();
+                case 4: getEmployeeAvailability();
                     break;
-                case 4:
-                    getEmployeeAvailability();
+                case 5: getOperationalHours();
                     break;
-                case 5:
-                    getOperationalHours();
+                case 6: updateOperationalHours();
                     break;
-                case 6:
-                    updateOperationalHours();
+                case 7: updateSchedulingNeeds();
                     break;
-                case 7:
-                    updateSchedulingNeeds();
+                case 8: getSchedulingNeeds();
                     break;
-                case 8:
-                    getSchedulingNeeds();
+                case 9: System.out.println("Exiting...");
                     break;
-                case 9:
-                    System.out.println("Exiting...");
-                    break;
-                default:
-                    System.out.println("Invalid option. Please select a valid option.");
+                default: System.out.println("Invalid option. Please select a valid option.");
             }
         } while (option != 9); // Update condition to reflect new exit option
         scanner.close();
     }
+
 
     private static void getSchedulingNeeds() {
         System.out.println("Getting scheduling needs...");
@@ -97,6 +79,7 @@ public class UiHandler {
                 e.updateAvailability();
             }
         }
+
         System.out.println("It looks like there is no employee with that name.");
         System.out.println("Would you like to try a different employee?: ");
         String response = scanner.nextLine();
@@ -125,6 +108,76 @@ public class UiHandler {
         System.out.println("Updating scheduling needs...");
         OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
         operationalNeeds.updateEmployeeNeeds();
+    }
+
+    public static void printOptions() {
+        System.out.println("What would you like to do?");
+        System.out.println("(1) Add Employee");
+        System.out.println("(2) Update Existing Employee Availability");
+        System.out.println("(3) Get List of Employees");
+        System.out.println("(4) Get Employee’s Availability");
+        System.out.println("(5) Get Operational Hours"); // will swap option 5 and 6 later. that will make more sense
+        System.out.println("(6) Update Operational Hours");
+        System.out.println("(7) Update Scheduling Needs");
+        System.out.println("(8) Get Scheduling Needs");
+        System.out.println("(9) Exit");
+        System.out.print("Select an option (1-9): ");
+    }
+
+
+    public static void addEmployee() {
+
+        String name;
+        String job;
+        boolean confirmed;
+
+        Employee newEmployee;
+
+        do {
+            System.out.print("Enter employee's name: ");
+            name = scanner.nextLine();
+            System.out.print("Enter employee's job: ");
+            job = scanner.nextLine();
+
+            newEmployee = new Employee();
+            newEmployee.setName(name);
+            newEmployee.setJob(job);
+
+            String prompt = "Would you also like to update their availability right now? (Yes/No): ";
+            System.out.println(prompt);
+            if (scanner.nextLine().equalsIgnoreCase("Yes")) {
+                updateAvailability();
+            } else {
+                System.out.println("Ok, you can add it later");
+            }
+
+            confirmed = getConfirmation(newEmployee);
+        } while (!confirmed);
+        newEmployee.addSelfToList();
+    }
+
+    private static boolean getConfirmation(Employee e) {
+        System.out.println("Employee's name: " + e.getName());
+        System.out.println("Employee's job: " + e.getJob());
+        System.out.print("Please Confirm (Yes/No): ");
+        String confirmation = scanner.nextLine();
+        return confirmation.equalsIgnoreCase("Yes");
+    }
+
+
+    public static void updateAvailability() {
+        ArrayList<DailyAvailability> weeklyAvailability = new ArrayList<>();
+
+        String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+        for (String day : daysOfWeek) {
+            System.out.println("Enter availability for " + day + ": ");
+            System.out.print("Start Time (HH:MM): ");
+            LocalTime startTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
+            System.out.print("End Time (HH:MM): ");
+            LocalTime endTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
+            weeklyAvailability.add(new DailyAvailability(day, startTime, endTime));
+        }
     }
 
 }

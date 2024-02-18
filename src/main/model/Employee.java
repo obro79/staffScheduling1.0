@@ -11,17 +11,6 @@ public class Employee {
     private ArrayList<DailyAvailability> weeklyAvailability;
 
     public Employee() {
-        this.weeklyAvailability = new ArrayList<>();
-        do {
-            getInput("Enter employee's name: ", true);
-            getInput("Enter employee's job: ", true);
-            if (getInput("Would you also like to update their availability right now? (Yes/No): ",false).equalsIgnoreCase("Yes")) {
-                updateAvailability();
-            } else {
-                System.out.println("Ok, you can add it later");
-            }
-        } while (!getConfirmation());
-        addSelfToList();
     }
 
     private String getInput(String prompt, boolean saveInput) {
@@ -58,7 +47,7 @@ public class Employee {
         }
     }
 
-    private void addSelfToList() {
+    public void addSelfToList() {
         EmployeeList.getInstance().addEmployee(this);
     }
 
@@ -72,5 +61,13 @@ public class Employee {
 
     public ArrayList<DailyAvailability> getWeeklyAvailability() {
         return weeklyAvailability;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 }
