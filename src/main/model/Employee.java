@@ -27,26 +27,6 @@ public class Employee {
         return input;
     }
 
-    private boolean getConfirmation() {
-        System.out.println("Employee's name: " + this.name);
-        System.out.println("Employee's job: " + this.job);
-        return getInput("Please Confirm (Yes/No): ", false).equalsIgnoreCase("Yes");
-    }
-
-    public void updateAvailability() {
-
-        String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-
-        for (String day : daysOfWeek) {
-            System.out.println("Enter availability for " + day + ": ");
-            System.out.print("Start Time (HH:MM): ");
-            LocalTime startTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
-            System.out.print("End Time (HH:MM): ");
-            LocalTime endTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
-            weeklyAvailability.add(new DailyAvailability(day, startTime, endTime));
-        }
-    }
-
     public void addSelfToList() {
         EmployeeList.getInstance().addEmployee(this);
     }

@@ -178,6 +178,7 @@ public class UiHandler {
             LocalTime endTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
             weeklyAvailability.add(new DailyAvailability(day, startTime, endTime));
         }
+
     }
 
 }
