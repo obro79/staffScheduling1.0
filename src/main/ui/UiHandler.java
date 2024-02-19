@@ -1,12 +1,10 @@
 package ui;
 
-import model.DailyAvailability;
-import model.Employee;
-import model.EmployeeList;
-import model.OperationalNeeds;
+import model.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UiHandler {
@@ -28,17 +26,17 @@ public class UiHandler {
                 break;
                 case 2: updateEmployeeAvailability();
                     break;
-                case 3: EmployeeList.getInstance().printAllEmployeeNames();
+                case 3: printAllEmployeeNames();
                     break;
                 case 4: getEmployeeAvailability();
                     break;
                 case 5: getOperationalHours();
                     break;
-                case 6: updateOperationalHours();
+                case 6: updateStoreHours();
                     break;
-                case 7: updateSchedulingNeeds();
+                case 7: updateEmployeeNeeds();
                     break;
-                case 8: getSchedulingNeeds();
+                case 8: printEmployeeNeeds();
                     break;
                 case 9: System.out.println("Exiting...");
                     break;
@@ -49,19 +47,13 @@ public class UiHandler {
     }
 
 
-    private static void getSchedulingNeeds() {
-        System.out.println("Getting scheduling needs...");
-        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
-        operationalNeeds.printEmployeeNeeds();
-    }
-
     private static void updateEmployeeAvailability() {
         System.out.println("Which Employee's Availability would you like to update? (Enter their Name): ");
         String employeeName = scanner.nextLine();
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
             if (e.getName().equalsIgnoreCase(employeeName)) {
                 System.out.println("Ok Let's update their availability.");
-                e.updateAvailability();
+                updateAvailability();
             }
         }
         System.out.println("It looks like there is no employee with that name.");
@@ -76,7 +68,7 @@ public class UiHandler {
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
             if (e.getName() == employeeName) {
                 System.out.println("Ok here's their availability: ");
-                e.updateAvailability();
+                updateAvailability();
             }
         }
 
@@ -179,6 +171,66 @@ public class UiHandler {
             weeklyAvailability.add(new DailyAvailability(day, startTime, endTime));
         }
 
+    }
+
+    public static void printAllEmployeeNames() {
+        System.out.println("List of all employee names:");
+        for (Employee e : EmployeeList.getInstance().getEmployeeList()) {
+            System.out.println(e.getName());
+        }
+    }
+
+    // Operational Needs
+
+    public static void updateStoreHours() {
+
+        String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+        for (String day : daysOfWeek) {
+            System.out.println("Enter store hours for " + day + ": ");
+            System.out.print("Opening Time (HH:MM): ");
+            LocalTime openingTime = LocalTime.parse(scanner.nextLine());
+            System.out.print("Closing Time (HH:MM): ");
+            LocalTime closingTime = LocalTime.parse(scanner.nextLine());
+            List<DailyAvailability> storeHours = model.OperationalNeeds.getInstance().getStoreHours();
+            storeHours.add(new DailyAvailability(day, openingTime, closingTime));
+        }
+
+    }
+
+    public static void updateEmployeeNeeds() {
+        System.out.println("Updating scheduling needs...");
+
+        for (DailyAvailability day : model.OperationalNeeds.getInstance().getStoreHours()) {
+            System.out.println("Enter employee needs for " + day.getDay() + ": ");
+            boolean moreNeeds = true;
+
+            while (moreNeeds) {
+                System.out.print("Start Time (HH:MM): ");
+                LocalTime startTime = LocalTime.parse(scanner.nextLine().trim());
+                System.out.print("End Time (HH:MM): ");
+                LocalTime endTime = LocalTime.parse(scanner.nextLine().trim());
+                System.out.print("Number of employees needed: ");
+                int numberOfEmployees = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+
+                ArrayList<EmployeeNeeds> employeeNeeds = model.OperationalNeeds.getInstance().getAllEmployeeNeeds();
+
+                employeeNeeds.add(new EmployeeNeeds(day.getDay(), startTime, endTime, numberOfEmployees));
+
+                System.out.print("Are there more time slots for this day? (yes/no): ");
+                moreNeeds = scanner.nextLine().trim().equalsIgnoreCase("yes");
+            }
+        }
+    }
+
+
+    private static void printEmployeeNeeds() {
+        System.out.println("Getting scheduling needs...");
+        System.out.println("Employee Needs:");
+        for (EmployeeNeeds need : model.OperationalNeeds.getInstance().getAllEmployeeNeeds()) {
+            System.out.println(need);
+        }
     }
 
 }

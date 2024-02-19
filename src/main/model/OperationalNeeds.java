@@ -16,7 +16,7 @@ public class OperationalNeeds {
     private ArrayList<EmployeeNeeds> allEmployeeNeeds;
 
 
-    private OperationalNeeds() {
+    public OperationalNeeds() {
         this.storeHours = new ArrayList<>();
         this.allEmployeeNeeds = new ArrayList<>();
     }
@@ -56,7 +56,7 @@ public class OperationalNeeds {
     }
 
     public void updateEmployeeNeeds() {
-        Scanner scanner = new Scanner(System.in); // Assume scanner is passed or globally accessible
+        Scanner scanner = new Scanner(System.in);
 
         for (DailyAvailability day : storeHours) {
             System.out.println("Enter employee needs for " + day.getDay() + ": ");
@@ -79,11 +79,8 @@ public class OperationalNeeds {
         }
     }
 
-    public void printEmployeeNeeds() {
 
-        System.out.println("Employee Needs:");
-        for (EmployeeNeeds need : this.allEmployeeNeeds) {
-            System.out.println(need);
-        }
+    public ArrayList<EmployeeNeeds> getAllEmployeeNeeds() {
+        return this.allEmployeeNeeds;
     }
 }

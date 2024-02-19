@@ -28,10 +28,4 @@ public class EmployeeList {
         }
     }
 
-    public void printAllEmployeeNames() {
-        System.out.println("List of all employee names:");
-        for (Employee e : employeeList) {
-            System.out.println(e.getName());
-        }
-    }
 }
