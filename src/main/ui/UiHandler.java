@@ -12,8 +12,10 @@ public class UiHandler {
 
     // i tried for like 2 hours to reduce this method to <25 best I got was 26
     // used enums and helpers and everything felix said it's ok for switch else
+
     @SuppressWarnings("methodlength")
 
+    //EFFECTS: will execute one of the cases
     public static void runEmployeeManagementSystem() {
 
         int option;
@@ -48,8 +50,7 @@ public class UiHandler {
     }
 
 
-
-
+    //EFFECTS: allows user to update employee's Availability for existing Employee
     private static void updateEmployeeAvailability() {
         System.out.println("Which Employees Availability would you like to update? (Enter their Name): ");
         String employeeName = scanner.nextLine();
@@ -63,13 +64,15 @@ public class UiHandler {
     } // would you like to add one?
 
 
+
+    //MODIFIES: Employee if they are in employeeList
+    //EFFECTS: updates the employees availability or lets user know that the employee doesnt exist
     private static void getEmployeeAvailability() {
 
         System.out.println("Which Employees Availability would you like to get? (Enter their Name): ");
-        scanner.nextLine();
-        String employeeName = String.valueOf(scanner);
+        String answer = scanner.nextLine();
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
-            if (e.getName() == employeeName) {
+            if (e.getName() == answer) {
                 System.out.println("Ok here's their availability: ");
                 updateAvailability();
             }
@@ -84,7 +87,7 @@ public class UiHandler {
     }
 
 
-
+    //EFFECTS: Prints all the options that the user can do to the console
     public static void printOptions() {
         System.out.println("What would you like to do?");
         System.out.println("(1) Add Employee");
@@ -99,7 +102,7 @@ public class UiHandler {
         System.out.print("Select an option (1-9): ");
     }
 
-
+    //EFFECTS: Creates a new employee with the job and name specified by the user
     public static void addEmployee() {
 
         String name;
@@ -131,6 +134,8 @@ public class UiHandler {
         newEmployee.addSelfToList();
     }
 
+
+    //EFFECTS: returns if the info inputed by the user is correct
     private static boolean getConfirmation(Employee e) {
         System.out.println("Employees name: " + e.getName());
         System.out.println("Employees job: " + e.getJob());
@@ -139,7 +144,8 @@ public class UiHandler {
         return confirmation.equalsIgnoreCase("Yes");
     }
 
-
+    //REQUIRES: it's called on an employee
+    //EFFECTS: Fils out the weeklyAvailability according to the user
     public static void updateAvailability() {
         ArrayList<DailyAvailability> weeklyAvailability = new ArrayList<>();
 
@@ -156,6 +162,8 @@ public class UiHandler {
 
     }
 
+    //REQUIRES: EmployeeList is not empty
+    //EFFECTS: Prints all the employee names in employeeList to the console
     public static void printAllEmployeeNames() {
         System.out.println("List of all employee names:");
         for (Employee e : EmployeeList.getInstance().getEmployeeList()) {
@@ -163,8 +171,9 @@ public class UiHandler {
         }
     }
 
-    // Operational Needs
 
+    //MODIFIES: storeHours
+    //EFFECTS: Adds store hours for each day of the week to the list
     public static void updateStoreHours() {
 
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -181,12 +190,16 @@ public class UiHandler {
 
     }
 
+    //REQUIRES: that storeHours is not empty
+    //EFFECTS: prints the list of Operational hours to the console
     public static void printOperationalHours() {
         for (DailyAvailability d: model.OperationalNeeds.getInstance().getStoreHours()) {
             System.out.println(d);
         }
     }
 
+    //REQUIRES: StoreHours is not empty
+    //EFFECTS: Adds an arbitrary number of EmployeeNeeds to employeeNeeds
     public static void updateEmployeeNeeds() {
         System.out.println("Updating scheduling needs...");
 
@@ -213,6 +226,8 @@ public class UiHandler {
         }
     }
 
+    //REQUIRES: EmployeeNeeds is not Empty
+    //EFFECTS: prints all elements of EmployeeNeeds to the console
     private static void printEmployeeNeeds() {
         System.out.println("Getting scheduling needs...");
         System.out.println("Employee Needs:");

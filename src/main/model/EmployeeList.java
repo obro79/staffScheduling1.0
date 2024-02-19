@@ -9,6 +9,7 @@ public class EmployeeList {
     private List<Employee> employeeList;
     private static final EmployeeList onlyEmployeeList = new EmployeeList();
 
+    //EFFECTS: creates a new instance of EmployeeList
     private EmployeeList() {
         this.employeeList = new ArrayList<>();
     }
@@ -18,10 +19,11 @@ public class EmployeeList {
     }
 
     public List<Employee> getEmployeeList() {
-
         return Collections.unmodifiableList(employeeList);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds given Employee to employeelist
     public void addEmployee(Employee e) {
         this.employeeList.add(e);
     }

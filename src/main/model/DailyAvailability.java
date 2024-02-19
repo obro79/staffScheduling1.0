@@ -7,13 +7,15 @@ public class DailyAvailability {
     private LocalTime startTime;
     private LocalTime endTime;
 
+
+    //EFFECTS: creates a new instance of DailyAvailability with day, startTime, endTime
     public DailyAvailability(String day, LocalTime startTime, LocalTime endTime) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    @Override
+    //EFFECTS: Turns the DailyAvailability to a String
     public String toString() {
         return day + ": " + startTime + " to " + endTime;
     }

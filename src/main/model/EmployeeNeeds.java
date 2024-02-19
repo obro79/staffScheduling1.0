@@ -9,6 +9,7 @@ public class EmployeeNeeds {
     private LocalTime endTime;
     private int numberOfEmployees;
 
+    //Effects creates a new Employee Needs with given day, startTime, endTime, numberOfEmployees
     public EmployeeNeeds(String day, LocalTime startTime, LocalTime endTime, int numberOfEmployees) {
         this.day = day;
         this.startTime = startTime;
@@ -16,7 +17,8 @@ public class EmployeeNeeds {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    @Override
+
+    //EFFECTS: converts EmployeeNeeds to a string
     public String toString() {
         return day + ": " + startTime + " to " + endTime + ", " + numberOfEmployees + " employees needed";
     }
