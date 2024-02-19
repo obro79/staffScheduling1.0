@@ -17,7 +17,6 @@ public class EmployeeNeeds {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-
     //EFFECTS: converts EmployeeNeeds to a string
     public String toString() {
         return day + ": " + startTime + " to " + endTime + ", " + numberOfEmployees + " employees needed";

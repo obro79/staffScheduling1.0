@@ -49,7 +49,6 @@ public class UiHandler {
         scanner.close();
     }
 
-
     //EFFECTS: allows user to update employee's Availability for existing Employee
     private static void updateEmployeeAvailability() {
         System.out.println("Which Employees Availability would you like to update? (Enter their Name): ");
@@ -62,8 +61,6 @@ public class UiHandler {
         }
         System.out.println("It looks like there is no employee with that name.");
     } // would you like to add one?
-
-
 
     //MODIFIES: Employee if they are in employeeList
     //EFFECTS: updates the employees availability or lets user know that the employee doesnt exist
