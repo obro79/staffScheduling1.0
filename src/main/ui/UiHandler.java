@@ -78,7 +78,7 @@ public class UiHandler {
         if (response.equalsIgnoreCase("Yes")) {
             getEmployeeAvailability();
         }
-    }
+    }//
 
     private static void getOperationalHours() {
 
