@@ -31,7 +31,7 @@ public class UiHandler {
                     break;
                 case 4: getEmployeeAvailability();
                     break;
-                case 5: getOperationalHours();
+                case 5: printOperationalHours();
                     break;
                 case 6: updateStoreHours();
                     break;
@@ -46,6 +46,8 @@ public class UiHandler {
         } while (option != 9); // Update condition to reflect new exit option
         scanner.close();
     }
+
+
 
 
     private static void updateEmployeeAvailability() {
@@ -81,27 +83,7 @@ public class UiHandler {
         }
     }
 
-    private static void getOperationalHours() {
 
-        System.out.println("Getting store hours...");
-        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
-        operationalNeeds.printStoreHours();
-    }
-
-    private static void updateOperationalHours() {
-
-        System.out.println("Updating store hours...");
-        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
-        operationalNeeds.updateStoreHours();
-
-    }
-
-    private static void updateSchedulingNeeds() {
-
-        System.out.println("Updating scheduling needs...");
-        OperationalNeeds operationalNeeds = OperationalNeeds.getInstance();
-        operationalNeeds.updateEmployeeNeeds();
-    }
 
     public static void printOptions() {
         System.out.println("What would you like to do?");
@@ -199,6 +181,12 @@ public class UiHandler {
 
     }
 
+    public static void printOperationalHours() {
+        for (DailyAvailability d: model.OperationalNeeds.getInstance().getStoreHours()) {
+            System.out.println(d);
+        }
+    }
+
     public static void updateEmployeeNeeds() {
         System.out.println("Updating scheduling needs...");
 
@@ -224,7 +212,6 @@ public class UiHandler {
             }
         }
     }
-
 
     private static void printEmployeeNeeds() {
         System.out.println("Getting scheduling needs...");

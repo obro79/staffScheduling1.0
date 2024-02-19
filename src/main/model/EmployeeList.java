@@ -19,13 +19,4 @@ public class EmployeeList {
         return this.employeeList;
     }
 
-    public void addEmployee(Employee e) {  //Look at this later
-        if (!employeeList.contains(e)) {
-            employeeList.add(e);
-            System.out.println("Employee added: " + e.getName());
-        } else {
-            System.out.println("This employee is already in the list!");
-        }
-    }
-
 }

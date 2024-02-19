@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EmployeeListTest {
 
     private ArrayList<Employee> employeeList;
-    private EmployeeList onlyEmployeeList;
+    private static EmployeeList onlyEmployeeList;
 
 
     @BeforeEach
@@ -23,7 +23,9 @@ public class EmployeeListTest {
     }
 
 
-    private EmployeeList() {
+
+
+    private void EmployeeList() {
         this.employeeList = new ArrayList<Employee>();
     }
 

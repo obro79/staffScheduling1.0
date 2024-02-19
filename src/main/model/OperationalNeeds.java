@@ -15,7 +15,6 @@ public class OperationalNeeds {
     protected List<DailyAvailability> storeHours;
     private ArrayList<EmployeeNeeds> allEmployeeNeeds;
 
-
     public OperationalNeeds() {
         this.storeHours = new ArrayList<>();
         this.allEmployeeNeeds = new ArrayList<>();
@@ -31,8 +30,6 @@ public class OperationalNeeds {
     public List<DailyAvailability> getStoreHours() {
         return storeHours;
     }
-
-
 
 
     public ArrayList<EmployeeNeeds> getAllEmployeeNeeds() {
