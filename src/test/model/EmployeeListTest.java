@@ -1,48 +1,47 @@
 package model;
 
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EmployeeListTest {
 
     private ArrayList<Employee> employeeList;
     private static EmployeeList onlyEmployeeList;
+    private EmployeeList emplist1;
+    private Employee employee1;
 
 
     @BeforeEach
-
-    public void runBefore() {
-
+    void runBefore() {
+        employee1 = new Employee();
+        employee1.setJob("Cook");
+        employee1.setName("Owen");
     }
 
-
-
-
-    private void EmployeeList() {
-        this.employeeList = new ArrayList<Employee>();
+    @Test
+    void testSingletonInstance() {
+        EmployeeList firstInstance = EmployeeList.getInstance();
+        EmployeeList secondInstance = EmployeeList.getInstance();
+        assertSame(firstInstance, secondInstance);
     }
 
-    public static EmployeeList getInstance() {
-        return onlyEmployeeList;
+    @Test
+    void testGetEmployeeList() {
+
+        EmployeeList employeeList = EmployeeList.getInstance();
+        assertNotNull(employeeList.getEmployeeList());
+
+        // Test the list is empty initially
+        assertTrue(employeeList.getEmployeeList().isEmpty());
+
+        // Test adding an employee to the list and retrieving it
+        employeeList.getEmployeeList().add(employee1);
+        assertFalse(employeeList.getEmployeeList().isEmpty());
+        assertEquals(employee1, employeeList.getEmployeeList().get(0));
     }
 
-    public ArrayList<Employee> getEmployeeList() {
-        return this.employeeList;
-    }
-
-    public void addEmployee(Employee e) {  //Look at this later
-        if (!employeeList.contains(e)) {
-            employeeList.add(e);
-            System.out.println("Employee added: " + e.getName());
-        } else {
-            System.out.println("This employee is already in the list!");
-        }
-    }
 }

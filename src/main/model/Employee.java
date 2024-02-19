@@ -1,8 +1,8 @@
 package model;
 
-import java.time.LocalTime;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Employee {
 
