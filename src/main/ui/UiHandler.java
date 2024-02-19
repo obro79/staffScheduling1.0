@@ -12,6 +12,7 @@ public class UiHandler {
 
     // i tried for like 2 hours to reduce this method to <25 best I got was 26
     // used enums and helpers and everything felix said it's ok for switch else
+    @SuppressWarnings("methodlength")
 
     public static void runEmployeeManagementSystem() {
 
@@ -78,7 +79,7 @@ public class UiHandler {
         if (response.equalsIgnoreCase("Yes")) {
             getEmployeeAvailability();
         }
-    }//
+    }
 
     private static void getOperationalHours() {
 

@@ -11,21 +11,9 @@ public class Employee {
     private ArrayList<DailyAvailability> weeklyAvailability;
 
     public Employee() {
+        this.weeklyAvailability = new ArrayList<DailyAvailability>();
     }
 
-    private String getInput(String prompt, boolean saveInput) {
-
-        System.out.print(prompt);
-        String input = ui.UiHandler.scanner.nextLine();
-        if (saveInput) {
-            if (prompt.toLowerCase().contains("name")) {
-                this.name = input;
-            } else if (prompt.toLowerCase().contains("job")) {
-                this.job = input;
-            }
-        }
-        return input;
-    }
 
     public void addSelfToList() {
         EmployeeList.getInstance().addEmployee(this);
@@ -50,4 +38,6 @@ public class Employee {
     public void setJob(String job) {
         this.job = job;
     }
+
+
 }

@@ -21,6 +21,7 @@ public class DailyAvailabilityTest {
 
     @BeforeEach
     public void runBefore() {
+
         startTime = LocalTime.of(10, 0); // 10:00 AM
         endTime = LocalTime.of(12, 0);   // 12:00 PM
         day = "Monday";
@@ -32,4 +33,27 @@ public class DailyAvailabilityTest {
 
         assertEquals(da1.toString(), "Monday: 10:00 to 12:00");
     }
+
+    @Test
+
+    public void getDayTest() {
+        assertEquals(da1.getDay(), "Monday");
+    }
+
+    @Test
+
+    public void getStartTimeTest() {
+
+        assertEquals(da1.getStartTime(), LocalTime.of(10,00));
+    }
+
+    @Test
+
+    public void getEndTimeTest() {
+        assertEquals(da1.getEndTime(),LocalTime.of(12,00));
+    }
+
+
 }
+
+
