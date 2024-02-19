@@ -39,7 +39,7 @@ public class EmployeeListTest {
         assertTrue(employeeList.getEmployeeList().isEmpty());
 
         // Test adding an employee to the list and retrieving it
-        employeeList.getEmployeeList().add(employee1);
+        employeeList.addEmployee(employee1);
         assertFalse(employeeList.getEmployeeList().isEmpty());
         assertEquals(employee1, employeeList.getEmployeeList().get(0));
     }

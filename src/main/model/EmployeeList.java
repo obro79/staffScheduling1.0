@@ -2,25 +2,27 @@ package model;
 
 import java.util.ArrayList;
 
+import java.util.Collections;
+import java.util.List;
+
 public class EmployeeList {
+    private List<Employee> employeeList;
+    private static final EmployeeList onlyEmployeeList = new EmployeeList();
 
-    private ArrayList<Employee> employeeList;
-    private static EmployeeList onlyEmployeeList = new EmployeeList();
-
-    public EmployeeList() {
-        this.employeeList = new ArrayList<Employee>();
+    private EmployeeList() {
+        this.employeeList = new ArrayList<>();
     }
 
     public static EmployeeList getInstance() {
         return onlyEmployeeList;
     }
 
-    public ArrayList<Employee> getEmployeeList() {
-        return this.employeeList;
+    public List<Employee> getEmployeeList() {
+
+        return Collections.unmodifiableList(employeeList);
     }
 
     public void addEmployee(Employee e) {
-        getInstance().addEmployee(e);
+        this.employeeList.add(e);
     }
-
 }
