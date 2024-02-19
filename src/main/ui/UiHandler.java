@@ -51,7 +51,7 @@ public class UiHandler {
 
 
     private static void updateEmployeeAvailability() {
-        System.out.println("Which Employee's Availability would you like to update? (Enter their Name): ");
+        System.out.println("Which Employees Availability would you like to update? (Enter their Name): ");
         String employeeName = scanner.nextLine();
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
             if (e.getName().equalsIgnoreCase(employeeName)) {
@@ -65,7 +65,7 @@ public class UiHandler {
 
     private static void getEmployeeAvailability() {
 
-        System.out.println("Which Employee's Availability would you like to get? (Enter their Name): ");
+        System.out.println("Which Employees Availability would you like to get? (Enter their Name): ");
         scanner.nextLine();
         String employeeName = String.valueOf(scanner);
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
@@ -90,7 +90,7 @@ public class UiHandler {
         System.out.println("(1) Add Employee");
         System.out.println("(2) Update Existing Employee Availability");
         System.out.println("(3) Get List of Employees");
-        System.out.println("(4) Get Employee’s Availability");
+        System.out.println("(4) Get Employees Availability");
         System.out.println("(5) Get Operational Hours"); // will swap option 5 and 6 later. that will make more sense
         System.out.println("(6) Update Operational Hours");
         System.out.println("(7) Update Scheduling Needs");
@@ -132,8 +132,8 @@ public class UiHandler {
     }
 
     private static boolean getConfirmation(Employee e) {
-        System.out.println("Employee's name: " + e.getName());
-        System.out.println("Employee's job: " + e.getJob());
+        System.out.println("Employees name: " + e.getName());
+        System.out.println("Employees job: " + e.getJob());
         System.out.print("Please Confirm (Yes/No): ");
         String confirmation = scanner.nextLine();
         return confirmation.equalsIgnoreCase("Yes");
