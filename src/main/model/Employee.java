@@ -3,6 +3,7 @@ package model;
 
 import java.util.ArrayList;
 
+//Represents an employee at the resturant with a name, job and an availability
 
 public class Employee {
 
@@ -30,7 +31,7 @@ public class Employee {
     }
 
     public ArrayList<DailyAvailability> getWeeklyAvailability() {
-        return weeklyAvailability;
+        return this.weeklyAvailability;
     }
 
     //MODIFIES: this

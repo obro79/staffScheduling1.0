@@ -1,6 +1,6 @@
 package ui;
 
-
+// this class runs uihandler
 public class Main {
     // 1 needs to be done before 2
     // 1 needs to be done before 3,

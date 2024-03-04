@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+// stores a list of EmployeeNeeds as well as the hours of the store
 public class OperationalNeeds {
     private static OperationalNeeds instance;
     protected List<DailyAvailability> storeHours;

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+//Handles all the user interactions; prompts the user to choose from one of the options.
+
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
@@ -56,7 +59,7 @@ public class UiHandler {
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
             if (e.getName().equalsIgnoreCase(employeeName)) {
                 System.out.println("Ok Let's update their availability.");
-                updateAvailability();
+                updateAvailability(e);
             }
         }
         System.out.println("It looks like there is no employee with that name.");
@@ -65,24 +68,40 @@ public class UiHandler {
     //MODIFIES: Employee if they are in employeeList
     //EFFECTS: updates the employees availability or lets user know that the employee doesnt exist
     private static void getEmployeeAvailability() {
+        boolean retry = false; // Flag to control the retry loop
+        do {
+            System.out.println("Which Employee's Availability would you like to get? (Enter their Name): ");
+            String employeeName = scanner.nextLine();
+            boolean found = false; // Flag to check if an employee is found
 
-        System.out.println("Which Employees Availability would you like to get? (Enter their Name): ");
-        String answer = scanner.nextLine();
-        for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
-            if (e.getName() == answer) {
-                System.out.println("Ok here's their availability: ");
-                updateAvailability();
+            for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
+                if (e.getName().equalsIgnoreCase(employeeName)) {
+                    System.out.println("Ok, here's their availability: ");
+                    printEmployeeAvailability(e);
+                    found = true; // Mark as found
+                    break; // Exit the loop as we've found the employee
+                }
             }
-        }
 
-        System.out.println("It looks like there is no employee with that name.");
-        System.out.println("Would you like to try a different employee?: ");
-        String response = scanner.nextLine();
-        if (response.equalsIgnoreCase("Yes")) {
-            getEmployeeAvailability();
-        }
+            if (!found) {
+                System.out.println("It looks like there is no employee with that name.");
+            }
+
+            System.out.println("Would you like to try a different employee? (Yes/No): ");
+            String response = scanner.nextLine();
+            retry = response.equalsIgnoreCase("Yes"); // Update the retry flag based on user input
+        } while (retry); // Continue looping if the user wants to retry
     }
 
+
+
+
+
+    public static void printEmployeeAvailability(Employee e) {
+        for (DailyAvailability d: e.getWeeklyAvailability()) {
+            System.out.println(d.toString());
+        }
+    }
 
     //EFFECTS: Prints all the options that the user can do to the console
     public static void printOptions() {
@@ -121,7 +140,7 @@ public class UiHandler {
             String prompt = "Would you also like to update their availability right now? (Yes/No): ";
             System.out.println(prompt);
             if (scanner.nextLine().equalsIgnoreCase("Yes")) {
-                updateAvailability();
+               // updateAvailability();
             } else {
                 System.out.println("Ok, you can add it later");
             }
@@ -143,8 +162,7 @@ public class UiHandler {
 
     //REQUIRES: it's called on an employee
     //EFFECTS: Fils out the weeklyAvailability according to the user
-    public static void updateAvailability() {
-        ArrayList<DailyAvailability> weeklyAvailability = new ArrayList<>();
+    public static void updateAvailability(Employee e) {
 
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
@@ -154,7 +172,7 @@ public class UiHandler {
             LocalTime startTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
             System.out.print("End Time (HH:MM): ");
             LocalTime endTime = LocalTime.parse(ui.UiHandler.scanner.nextLine());
-            weeklyAvailability.add(new DailyAvailability(day, startTime, endTime));
+            e.getWeeklyAvailability().add(new DailyAvailability(day, startTime, endTime));
         }
 
     }

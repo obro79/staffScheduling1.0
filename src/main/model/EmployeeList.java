@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//stores a list of employees and there is only one of them.
+
 public class EmployeeList {
     private List<Employee> employeeList;
     private static final EmployeeList onlyEmployeeList = new EmployeeList();

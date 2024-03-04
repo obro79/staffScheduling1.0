@@ -2,7 +2,8 @@ package model;
 
 import java.time.LocalTime;
 
-
+//EmployeeNeeds allows user to specify which day, and from a time to another time and the number of employees
+// needed at a time
 public class EmployeeNeeds {
     private String day;
     private LocalTime startTime;

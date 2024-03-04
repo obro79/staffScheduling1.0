@@ -2,6 +2,9 @@ package model;
 
 import java.time.LocalTime;
 
+
+//This class is the daily availability that each employee has
+
 public class DailyAvailability {
     private String day;
     private LocalTime startTime;
