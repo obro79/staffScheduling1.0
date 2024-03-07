@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 //This class is the daily availability that each employee has
@@ -21,6 +23,14 @@ public class DailyAvailability {
     //EFFECTS: Turns the DailyAvailability to a String
     public String toString() {
         return day + ": " + startTime + " to " + endTime;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("day", this.day);
+        json.put("startTime", this.startTime.toString());
+        json.put("endTime", this.endTime.toString());
+        return json;
     }
 
     public String getDay() {

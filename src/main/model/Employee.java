@@ -2,6 +2,11 @@ package model;
 
 
 import java.util.ArrayList;
+import org.json.JSONObject;
+
+import model.DailyAvailability;
+
+
 
 //Represents an employee at the resturant with a name, job and an availability
 
@@ -21,6 +26,8 @@ public class Employee {
     public void addSelfToList() {
         EmployeeList.getInstance().addEmployee(this);
     }
+
+
 
     public String getName() {
         return this.name;

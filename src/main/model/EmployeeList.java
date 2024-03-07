@@ -9,19 +9,20 @@ import java.util.List;
 
 public class EmployeeList {
     private List<Employee> employeeList;
-    private static final EmployeeList onlyEmployeeList = new EmployeeList();
+    private static EmployeeList onlyEmployeeList = new EmployeeList();
 
     //EFFECTS: creates a new instance of EmployeeList
-    private EmployeeList() {
+    public EmployeeList() {
         this.employeeList = new ArrayList<>();
+    }
+
+
+    public List<Employee> getEmployeeList() {
+        return this.employeeList;
     }
 
     public static EmployeeList getInstance() {
         return onlyEmployeeList;
-    }
-
-    public List<Employee> getEmployeeList() {
-        return Collections.unmodifiableList(employeeList);
     }
 
     //MODIFIES: this

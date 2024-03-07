@@ -4,22 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 // stores a list of EmployeeNeeds as well as the hours of the store
-public class OperationalNeeds {
-    private static OperationalNeeds instance;
+public class Store  {
+    private static Store instance;
     protected List<DailyAvailability> storeHours;
-    private ArrayList<EmployeeNeeds> allEmployeeNeeds;
+    private List<EmployeeNeeds> allEmployeeNeeds;
+    private EmployeeList employeeList;
 
     //EFFECTS: Creates a new instance of OperationalNeeds
-    public OperationalNeeds() {
+    public Store() {
         this.storeHours = new ArrayList<>();
         this.allEmployeeNeeds = new ArrayList<>();
+        this.employeeList = new EmployeeList();
     }
 
     //EFFECTS: Ensures that there is only ever one operationalNeeds
-    public static synchronized OperationalNeeds getInstance() {
+    public static synchronized Store getInstance() {
         if (instance == null) {
-            instance = new OperationalNeeds();
+            instance = new Store();
         }
         return instance;
     }
@@ -30,6 +33,14 @@ public class OperationalNeeds {
 
 
     public ArrayList<EmployeeNeeds> getAllEmployeeNeeds() {
-        return this.allEmployeeNeeds;
+        return (ArrayList<EmployeeNeeds>) this.allEmployeeNeeds;
     }
+
+    public EmployeeList getEmployeeList() {
+        return this.employeeList;
+
+    }
+
+
+
 }

@@ -20,5 +20,6 @@ adding more employees.
 - As a user, I want to be able to create a new employee and add it to a list of employees
 - As a user, I want to be able to select a employee and add a update their availability player to the team
 - As a user, I want to be able to select a employee and view their weekly availability {list of availabilities}
-- As a user, I want to specify the times and the number of employees I need at a time. 
-
+- As a user, I want to specify the times and the number of employees I need at a time.
+- As a user, I want to be able to save my list of employees if i choose to
+- As a user, I want to be able to be able to load my employee list if i choose to

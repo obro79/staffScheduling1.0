@@ -1,5 +1,9 @@
 package ui;
 
+import ui.UiHandler;
+
+import java.io.FileNotFoundException;
+
 // this class runs uihandler
 public class Main {
     // 1 needs to be done before 2
@@ -10,7 +14,11 @@ public class Main {
 
 
     public static void main(String[] args) {
-        UiHandler.runEmployeeManagementSystem();
+        try {
+            new StoreApp();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run application: file not found");
+        }
     }
 }
 

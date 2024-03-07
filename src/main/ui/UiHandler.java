@@ -13,10 +13,9 @@ import java.util.Scanner;
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
-    // i tried for like 2 hours to reduce this method to <25 best I got was 26
-    // used enums and helpers and everything felix said it's ok for switch else
+    public UiHandler() {
 
-    @SuppressWarnings("methodlength")
+    }
 
     //EFFECTS: will execute one of the cases
     public static void runEmployeeManagementSystem() {
@@ -53,7 +52,7 @@ public class UiHandler {
     }
 
     //EFFECTS: allows user to update employee's Availability for existing Employee
-    private static void updateEmployeeAvailability() {
+    public static void updateEmployeeAvailability() {
         System.out.println("Which Employees Availability would you like to update? (Enter their Name): ");
         String employeeName = scanner.nextLine();
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
@@ -67,7 +66,7 @@ public class UiHandler {
 
     //MODIFIES: Employee if they are in employeeList
     //EFFECTS: updates the employees availability or lets user know that the employee doesnt exist
-    private static void getEmployeeAvailability() {
+    static void getEmployeeAvailability() {
         boolean retry = false; // Flag to control the retry loop
         do {
             System.out.println("Which Employee's Availability would you like to get? (Enter their Name): ");
@@ -199,7 +198,7 @@ public class UiHandler {
             LocalTime openingTime = LocalTime.parse(scanner.nextLine());
             System.out.print("Closing Time (HH:MM): ");
             LocalTime closingTime = LocalTime.parse(scanner.nextLine());
-            List<DailyAvailability> storeHours = model.OperationalNeeds.getInstance().getStoreHours();
+            List<DailyAvailability> storeHours = Store.getInstance().getStoreHours();
             storeHours.add(new DailyAvailability(day, openingTime, closingTime));
         }
 
@@ -208,7 +207,7 @@ public class UiHandler {
     //REQUIRES: that storeHours is not empty
     //EFFECTS: prints the list of Operational hours to the console
     public static void printOperationalHours() {
-        for (DailyAvailability d: model.OperationalNeeds.getInstance().getStoreHours()) {
+        for (DailyAvailability d: Store.getInstance().getStoreHours()) {
             System.out.println(d);
         }
     }
@@ -218,7 +217,7 @@ public class UiHandler {
     public static void updateEmployeeNeeds() {
         System.out.println("Updating scheduling needs...");
 
-        for (DailyAvailability day : model.OperationalNeeds.getInstance().getStoreHours()) {
+        for (DailyAvailability day : Store.getInstance().getStoreHours()) {
             System.out.println("Enter employee needs for " + day.getDay() + ": ");
             boolean moreNeeds = true;
 
@@ -231,7 +230,7 @@ public class UiHandler {
                 int numberOfEmployees = scanner.nextInt();
                 scanner.nextLine(); // Consume the newline
 
-                ArrayList<EmployeeNeeds> employeeNeeds = model.OperationalNeeds.getInstance().getAllEmployeeNeeds();
+                ArrayList<EmployeeNeeds> employeeNeeds = Store.getInstance().getAllEmployeeNeeds();
 
                 employeeNeeds.add(new EmployeeNeeds(day.getDay(), startTime, endTime, numberOfEmployees));
 
@@ -243,11 +242,21 @@ public class UiHandler {
 
     //REQUIRES: EmployeeNeeds is not Empty
     //EFFECTS: prints all elements of EmployeeNeeds to the console
-    private static void printEmployeeNeeds() {
+    public static void printEmployeeNeeds() {
         System.out.println("Getting scheduling needs...");
         System.out.println("Employee Needs:");
-        for (EmployeeNeeds need : model.OperationalNeeds.getInstance().getAllEmployeeNeeds()) {
+        for (EmployeeNeeds need : Store.getInstance().getAllEmployeeNeeds()) {
             System.out.println(need);
+        }
+    }
+
+    public void printAllStoreAttributes(Store s) {
+        this.printOperationalHours();
+        this.printEmployeeNeeds();
+        List<Employee> employeeList = s.getEmployeeList().getEmployeeList();
+        for (Employee e : employeeList) {
+            System.out.println(e.getName());
+            printEmployeeAvailability(e);
         }
     }
 

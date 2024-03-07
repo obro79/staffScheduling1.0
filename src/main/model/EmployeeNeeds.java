@@ -1,6 +1,9 @@
 package model;
 
 import java.time.LocalTime;
+import org.json.JSONObject;
+import org.json.*;
+
 
 //EmployeeNeeds allows user to specify which day, and from a time to another time and the number of employees
 // needed at a time
@@ -18,10 +21,22 @@ public class EmployeeNeeds {
         this.numberOfEmployees = numberOfEmployees;
     }
 
+
+
     //EFFECTS: converts EmployeeNeeds to a string
     public String toString() {
         return day + ": " + startTime + " to " + endTime + ", " + numberOfEmployees + " employees needed";
     }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("day", this.day);
+        json.put("startTime", this.startTime.toString());
+        json.put("endTime", this.endTime.toString());
+        json.put("numberOfEmployees", this.numberOfEmployees);
+        return json;
+    }
+
 
     public String getDay() {
         return this.day;
