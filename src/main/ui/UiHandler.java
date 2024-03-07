@@ -94,8 +94,6 @@ public class UiHandler {
 
 
 
-
-
     public static void printEmployeeAvailability(Employee e) {
         for (DailyAvailability d: e.getWeeklyAvailability()) {
             System.out.println(d.toString());

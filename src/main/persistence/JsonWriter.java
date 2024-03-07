@@ -47,7 +47,6 @@ public class JsonWriter {
         }
         json.put("allEmployeeNeeds", needsArray);
 
-        // Assuming EmployeeList to JSON is similar
 
         saveToFile(json.toString(TAB));
     }
