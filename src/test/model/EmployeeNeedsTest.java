@@ -4,6 +4,8 @@ package model;
 import java.time.LocalTime;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +61,21 @@ public class EmployeeNeedsTest {
         assertEquals(empNeeds1.getNumberOfEmployees(), 10);
     }
 
+    @Test
+    void toJsontest() {
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("startTime", "12:00");
+        expectedJson.put("endTime", "13:00");
+        expectedJson.put("day", "Monday");
+        expectedJson.put("numberOfEmployees", 10);
 
+        JSONObject actualJson = empNeeds1.toJson();
+
+
+        assertEquals(expectedJson.toString(), actualJson.toString());
+    }
 }
+
+
 
 

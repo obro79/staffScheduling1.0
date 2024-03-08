@@ -4,6 +4,8 @@ import ui.UiHandler;
 
 import java.io.FileNotFoundException;
 
+
+//TODO write tests for all the new toJson methods in each class
 // this class runs uihandler
 public class Main {
     // 1 needs to be done before 2

@@ -1,10 +1,14 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
-import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EmployeeTest {
 
@@ -17,7 +21,7 @@ public class EmployeeTest {
     @BeforeEach
 
     public void runBefore() {
-        newEmployee1 = new Employee("Owen","Cook");
+        newEmployee1 = new Employee("Owen", "Cook");
     }
 
     @Test
@@ -50,6 +54,20 @@ public class EmployeeTest {
         newEmployee1.setJob("Cook");
         assertEquals("Cook", newEmployee1.getJob());
 
+    }
+
+
+    @Test
+    void toJsontest() {
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("name", "Owen");
+        expectedJson.put("job", "Cook");
+        expectedJson.put("weeklyAvailability", new JSONArray());
+
+        JSONObject actualJson = newEmployee1.toJson();
+
+
+        assertEquals(expectedJson.toString(), actualJson.toString());
     }
 
 

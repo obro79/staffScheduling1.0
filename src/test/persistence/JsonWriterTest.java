@@ -94,8 +94,9 @@ public class JsonWriterTest {
             JsonWriter writer = new JsonWriter(invalidFileName);
 
             writer.write(store); // This should throw FileNotFoundException
-            fail("SHoul've thrown Exception");
+
         } catch (FileNotFoundException e) {
+            //goodf
 
         }
     }

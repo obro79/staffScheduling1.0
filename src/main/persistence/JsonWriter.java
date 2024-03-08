@@ -35,34 +35,36 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of store to file
     // EFFECTS: writes JSON representation of store to file
     // MODIFIES: this
-// EFFECTS: writes JSON representation of store to file //TODO make helpers and gget this shorter
-    @SuppressWarnings("methodlength")
+// EFFECTS: writes JSON representation of store to file
     public void write(Store store) throws FileNotFoundException {
         try {
 
             this.open();
             JSONObject json = new JSONObject();
 
-            // Convert storeHours to JSON
-            JSONArray storeHoursArray = new JSONArray();
-            for (DailyAvailability da : store.getStoreHours()) {
-                storeHoursArray.put(da.toJson());
-            }
-            json.put("storeHours", storeHoursArray);
+            this.putStoreHoursArray(store,json);
+            this.putAllEmployeeNeedsArray(store,json);
+            this.putEmployeeListArray(store, json);
+//            // Convert storeHours to JSON
+//            JSONArray storeHoursArray = new JSONArray(); //public void putStoreHoursArray()
+//            for (DailyAvailability da : store.getStoreHours()) {
+//                storeHoursArray.put(da.toJson());
+//            }
+//            json.put("storeHours", storeHoursArray);
 
             // Convert allEmployeeNeeds to JSON
-            JSONArray needsArray = new JSONArray();
-            for (EmployeeNeeds en : store.getAllEmployeeNeeds()) {
-                needsArray.put(en.toJson());
-            }
-            json.put("allEmployeeNeeds", needsArray);
+//            JSONArray needsArray = new JSONArray();
+//            for (EmployeeNeeds en : store.getAllEmployeeNeeds()) {
+//                needsArray.put(en.toJson());
+//            }
+//            json.put("allEmployeeNeeds", needsArray);
 
             // Convert employees to JSON
-            JSONArray employeesArray = new JSONArray();
-            for (Employee employee : store.getEmployeeList().getEmployeeList()) {
-                employeesArray.put(employee.toJson());
-            }
-            json.put("employees", employeesArray);
+//            JSONArray employeesArray = new JSONArray();
+//            for (Employee employee : store.getEmployeeList().getEmployeeList()) {
+//                employeesArray.put(employee.toJson());
+//            }
+//            json.put("employees", employeesArray);
 
             saveToFile(json.toString(TAB));
         } catch (FileNotFoundException e) {
@@ -73,6 +75,33 @@ public class JsonWriter {
             }
         }
     }
+
+    public void putStoreHoursArray(Store store, JSONObject json) {
+        JSONArray storeHoursArray = new JSONArray(); //public void putStoreHoursArray()
+        for (DailyAvailability da : store.getStoreHours()) {
+            storeHoursArray.put(da.toJson());
+        }
+        json.put("storeHours", storeHoursArray);
+
+    }
+
+    public void putAllEmployeeNeedsArray(Store store, JSONObject json) {
+        JSONArray needsArray = new JSONArray();
+        for (EmployeeNeeds en : store.getAllEmployeeNeeds()) {
+            needsArray.put(en.toJson());
+        }
+        json.put("allEmployeeNeeds", needsArray);
+    }
+
+    public void putEmployeeListArray(Store store, JSONObject json) {
+        JSONArray employeesArray = new JSONArray();
+        for (Employee employee : store.getEmployeeList().getEmployeeList()) {
+            employeesArray.put(employee.toJson());
+        }
+        json.put("employees", employeesArray);
+    }
+
+
 
     // MODIFIES: this
     // EFFECTS: closes writer

@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,7 @@ public class StoreTest {
     @BeforeEach
 
     public void runBefore() {
+
 
     }
 
@@ -42,6 +45,27 @@ public class StoreTest {
         Store store = Store.getInstance();
         assertNotNull(store.getAllEmployeeNeeds(), "getAllEmployeeNeeds should return a non-null List");
         assertTrue(store.getAllEmployeeNeeds().isEmpty(), "getAllEmployeeNeeds should return an empty List by default");
+    }
+
+    @Test
+    void getEmployeeListTest() {
+        Store store = Store.getInstance();
+        EmployeeList employeeList = store.getEmployeeList();
+
+        assertNotNull(employeeList, "getEmployeeList should return a non-null EmployeeList");
+        assertTrue(employeeList.getEmployeeList().isEmpty(), "getEmployeeList should initially return an empty list");
+
+        // Add mock employees to the list for testing
+        Employee emp1 = new Employee("Alice", "Manager");
+        Employee emp2 = new Employee("Bob", "Cook");
+        employeeList.addEmployee(emp1);
+        employeeList.addEmployee(emp2);
+
+        // Check if employees are correctly added
+        List<Employee> retrievedList = employeeList.getEmployeeList();
+        assertEquals(2, retrievedList.size(), "getEmployeeList should return a list with two employees");
+        assertSame(emp1, retrievedList.get(0), "First employee should be Alice");
+        assertSame(emp2, retrievedList.get(1), "Second employee should be Bob");
     }
 
 

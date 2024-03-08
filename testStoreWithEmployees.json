@@ -1,9 +1,16 @@
 {
     "storeHours": [],
     "allEmployeeNeeds": [],
-    "employees": [{
-        "name": "Owen",
-        "job": "Chef",
-        "weeklyAvailability": []
-    }]
+    "employees": [
+        {
+            "name": "Name",
+            "job": "Job",
+            "weeklyAvailability": []
+        },
+        {
+            "name": "Owen",
+            "job": "Chef",
+            "weeklyAvailability": []
+        }
+    ]
 }

@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.json.JSONObject;
 
 
 public class DailyAvailabilityTest {
@@ -51,6 +52,20 @@ public class DailyAvailabilityTest {
         assertEquals(da1.getEndTime(),LocalTime.of(12,00));
     }
 
+    @Test
+    public void toJsonTest() {
+
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("day", "Monday");
+        expectedJson.put("startTime", "10:00");
+        expectedJson.put("endTime", "12:00");
+
+
+        JSONObject actualJson = da1.toJson();
+
+
+        assertEquals(expectedJson.toString(), actualJson.toString());
+    }
 
 }
 
