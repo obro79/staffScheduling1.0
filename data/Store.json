@@ -37,9 +37,5 @@
         }
     ],
     "allEmployeeNeeds": [],
-    "employees": [{
-        "name": "Owe",
-        "job": "j",
-        "weeklyAvailability": []
-    }]
+    "employees": []
 }

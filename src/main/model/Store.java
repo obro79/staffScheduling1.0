@@ -35,8 +35,8 @@ public class Store {
     }
 
 
-    public ArrayList<EmployeeNeeds> getAllEmployeeNeeds() {
-        return (ArrayList<EmployeeNeeds>) this.allEmployeeNeeds;
+    public List<EmployeeNeeds> getAllEmployeeNeeds() {
+        return this.allEmployeeNeeds;
     }
 
     public EmployeeList getEmployeeList() {

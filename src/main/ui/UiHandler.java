@@ -183,7 +183,7 @@ public class UiHandler {
                 int numberOfEmployees = scanner.nextInt();
                 scanner.nextLine(); // Consume the newline
 
-                ArrayList<EmployeeNeeds> employeeNeeds = s.getAllEmployeeNeeds();
+                List<EmployeeNeeds> employeeNeeds = s.getAllEmployeeNeeds();
 
                 employeeNeeds.add(new EmployeeNeeds(day.getDay(), startTime, endTime, numberOfEmployees));
 

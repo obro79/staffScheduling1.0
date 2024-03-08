@@ -11,9 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 //this persistance package is heaviliy inspired by the example given to us
-
+//TODO clean up names of ui methods, add method specifications, add class specifications, add tests
+//TODO make is so you dont have to enter day by day, you can shortcut to whole week
 public class JsonWriter {
-
 
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -44,14 +44,14 @@ public class JsonWriter {
 
             // Convert storeHours to JSON
             JSONArray storeHoursArray = new JSONArray();
-            for (DailyAvailability da : Store.getInstance().getStoreHours()) {
+            for (DailyAvailability da : store.getStoreHours()) {
                 storeHoursArray.put(da.toJson());
             }
             json.put("storeHours", storeHoursArray);
 
             // Convert allEmployeeNeeds to JSON
             JSONArray needsArray = new JSONArray();
-            for (EmployeeNeeds en : store.getInstance().getAllEmployeeNeeds()) {
+            for (EmployeeNeeds en : store.getAllEmployeeNeeds()) {
                 needsArray.put(en.toJson());
             }
             json.put("allEmployeeNeeds", needsArray);
