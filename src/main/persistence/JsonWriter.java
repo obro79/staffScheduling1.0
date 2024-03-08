@@ -36,6 +36,7 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of store to file
     // MODIFIES: this
 // EFFECTS: writes JSON representation of store to file //TODO make helpers and gget this shorter
+    @SuppressWarnings("methodlength")
     public void write(Store store) throws FileNotFoundException {
         try {
 
