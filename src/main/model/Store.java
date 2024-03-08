@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 // stores a list of EmployeeNeeds as well as the hours of the store
 public class Store {
     private static Store instance;
@@ -18,7 +19,7 @@ public class Store {
     public Store() {
         this.storeHours = new ArrayList<>();
         this.allEmployeeNeeds = new ArrayList<>();
-        this.employeeList = new EmployeeList();
+        this.employeeList = model.EmployeeList.getInstance();
     }
 
     //EFFECTS: Ensures that there is only ever one operationalNeeds

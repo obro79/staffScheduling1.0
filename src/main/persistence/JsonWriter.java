@@ -35,34 +35,42 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of store to file
     // EFFECTS: writes JSON representation of store to file
     // MODIFIES: this
-// EFFECTS: writes JSON representation of store to file
+// EFFECTS: writes JSON representation of store to file //TODO make helpers and gget this shorter
     public void write(Store store) throws FileNotFoundException {
+        try {
 
-        this.open();
-        JSONObject json = new JSONObject();
+            this.open();
+            JSONObject json = new JSONObject();
 
-        // Convert storeHours to JSON
-        JSONArray storeHoursArray = new JSONArray();
-        for (DailyAvailability da : store.getStoreHours()) {
-            storeHoursArray.put(da.toJson());
+            // Convert storeHours to JSON
+            JSONArray storeHoursArray = new JSONArray();
+            for (DailyAvailability da : Store.getInstance().getStoreHours()) {
+                storeHoursArray.put(da.toJson());
+            }
+            json.put("storeHours", storeHoursArray);
+
+            // Convert allEmployeeNeeds to JSON
+            JSONArray needsArray = new JSONArray();
+            for (EmployeeNeeds en : store.getInstance().getAllEmployeeNeeds()) {
+                needsArray.put(en.toJson());
+            }
+            json.put("allEmployeeNeeds", needsArray);
+
+            // Convert employees to JSON
+            JSONArray employeesArray = new JSONArray();
+            for (Employee employee : store.getEmployeeList().getEmployeeList()) {
+                employeesArray.put(employee.toJson());
+            }
+            json.put("employees", employeesArray);
+
+            saveToFile(json.toString(TAB));
+        } catch (FileNotFoundException e) {
+            System.err.println("Error opening the file");
+        } finally {
+            if (this.writer != null) {
+                this.close();
+            }
         }
-        json.put("storeHours", storeHoursArray);
-
-        // Convert allEmployeeNeeds to JSON
-        JSONArray needsArray = new JSONArray();
-        for (EmployeeNeeds en : store.getAllEmployeeNeeds()) {
-            needsArray.put(en.toJson());
-        }
-        json.put("allEmployeeNeeds", needsArray);
-
-        // Convert employees to JSON
-        JSONArray employeesArray = new JSONArray();
-        for (Employee employee : store.getEmployeeList().getEmployeeList()) {
-            employeesArray.put(employee.toJson());
-        }
-        json.put("employees", employeesArray);
-
-        saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this

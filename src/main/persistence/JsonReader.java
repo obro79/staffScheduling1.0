@@ -48,7 +48,7 @@ public class JsonReader {
                         LocalTime.parse(hourObject.optString("startTime")),
                         LocalTime.parse(hourObject.optString("endTime"))
                 );
-                store.getStoreHours().add(availability);
+                store.getInstance().getStoreHours().add(availability);
             }
         }
 
@@ -63,7 +63,7 @@ public class JsonReader {
                         LocalTime.parse(needObject.optString("endTime")),
                         needObject.optInt("numberOfEmployees")
                 );
-                store.getAllEmployeeNeeds().add(needs);
+                store.getInstance().getAllEmployeeNeeds().add(needs);
             }
         }
 
@@ -73,7 +73,7 @@ public class JsonReader {
             for (int i = 0; i < employeeListArray.length(); i++) {
                 JSONObject employeeObject = employeeListArray.optJSONObject(i);
                 Employee employee = parseEmployee(employeeObject);
-                store.getEmployeeList().addEmployee(employee);
+                store.getInstance().getEmployeeList().addEmployee(employee);
             }
         }
 
