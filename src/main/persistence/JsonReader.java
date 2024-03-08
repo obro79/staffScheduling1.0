@@ -36,7 +36,7 @@ public class JsonReader {
 
     //TODO make helpers
     //EFFECTS: turns all the Json data into store fields then sets a store with those fields and returns it
-    @SuppressWarnings("Method Length")
+    @SuppressWarnings("methodlength")
     public Store parseStore(JSONObject jsonObject) {
         Store store = new Store();
 
