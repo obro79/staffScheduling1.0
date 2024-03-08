@@ -1,0 +1,45 @@
+{
+    "storeHours": [
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Monday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Tuesday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Wednesday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Thursday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Friday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Saturday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Sunday"
+        }
+    ],
+    "allEmployeeNeeds": [],
+    "employees": [{
+        "name": "Owe",
+        "job": "j",
+        "weeklyAvailability": []
+    }]
+}

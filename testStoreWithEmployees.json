@@ -1,0 +1,9 @@
+{
+    "storeHours": [],
+    "allEmployeeNeeds": [],
+    "employees": [{
+        "name": "Owen",
+        "job": "Chef",
+        "weeklyAvailability": []
+    }]
+}
