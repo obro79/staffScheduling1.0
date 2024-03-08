@@ -35,8 +35,9 @@ public class JsonReader {
     }
 
     //TODO make helpers
+    //@SuppressWarnings("methodlength")
     //EFFECTS: turns all the Json data into store fields then sets a store with those fields and returns it
-    @SuppressWarnings("methodlength")
+
     public Store parseStore(JSONObject jsonObject) {
         Store store = new Store();
 
@@ -55,19 +56,7 @@ public class JsonReader {
         }
 
         // Parse allEmployeeNeeds
-        if (jsonObject.optJSONArray("allEmployeeNeeds") != null) {
-            JSONArray needsArray = jsonObject.optJSONArray("allEmployeeNeeds");
-            for (int i = 0; i < needsArray.length(); i++) {
-                JSONObject needObject = needsArray.optJSONObject(i);
-                EmployeeNeeds needs = new EmployeeNeeds(
-                        needObject.getString("day"),
-                        LocalTime.parse(needObject.optString("startTime")),
-                        LocalTime.parse(needObject.optString("endTime")),
-                        needObject.optInt("numberOfEmployees")
-                );
-                store.getAllEmployeeNeeds().add(needs);
-            }
-        }
+        this.parseEmployeeNeeds(jsonObject,store);
 
         // Parse employeeList
         if (jsonObject.optJSONArray("employeeList") != null) {
@@ -82,9 +71,25 @@ public class JsonReader {
         return store;
     }
 
+    public void parseEmployeeNeeds(JSONObject jsonObject, Store store) {
+        if (jsonObject.optJSONArray("allEmployeeNeeds") != null) {
+            JSONArray needsArray = jsonObject.optJSONArray("allEmployeeNeeds");
+            for (int i = 0; i < needsArray.length(); i++) {
+                JSONObject needObject = needsArray.optJSONObject(i);
+                EmployeeNeeds needs = new EmployeeNeeds(
+                        needObject.getString("day"),
+                        LocalTime.parse(needObject.optString("startTime")),
+                        LocalTime.parse(needObject.optString("endTime")),
+                        needObject.optInt("numberOfEmployees")
+                );
+                store.getAllEmployeeNeeds().add(needs);
+            }
+        }
+    }
+
 
     //Effects: takes all the json data and
-    private Employee parseEmployee(JSONObject jsonObject) {
+    public Employee parseEmployee(JSONObject jsonObject) {
 
         String name = jsonObject.optString("name");
         String job = jsonObject.optString("job");
