@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import static ui.UiHandler.printAllEmployeeNames;
-import static ui.UiHandler.printEmployeeAvailability;
+
+
 
 public class StoreApp {
 
@@ -65,25 +65,25 @@ public class StoreApp {
                         this.uiHandler.addEmployee();
                         break;
                     case 5:
-                        this.uiHandler.updateEmployeeAvailability();
+                        this.uiHandler.updateEmployeeAvailability(this.thisStore);
                         break;
                     case 6:
-                        printAllEmployeeNames();
+                        this.uiHandler.printAllEmployeeNames(this.thisStore);
                         break;
                     case 7:
-                        this.uiHandler.getEmployeeAvailability();
+                        this.uiHandler.getEmployeeAvailability(this.thisStore);
                         break;
                     case 8:
-                        this.uiHandler.printOperationalHours();
+                        this.uiHandler.printOperationalHours(this.thisStore);
                         break;
                     case 9:
-                        this.uiHandler.updateStoreHours();
+                        this.uiHandler.updateStoreHours(this.thisStore);
                         break;
                     case 10:
-                        this.uiHandler.updateEmployeeNeeds();
+                        this.uiHandler.updateEmployeeNeeds(this.thisStore);
                         break;
                     case 11:
-                        this.uiHandler.printEmployeeNeeds();
+                        this.uiHandler.printEmployeeNeeds(this.thisStore);
                         break;
                     case 12:
                         quit();
@@ -129,7 +129,15 @@ public class StoreApp {
     }
 
     public void loadAllStoreAttributes() {
-        this.jsonReader.parseStore(this.jsonObject); //stub //TODO
+        try {
+            // Use the read method of JsonReader to load the Store from the JSON file
+            thisStore = jsonReader.read(); // Assuming read() returns a Store object
+            System.out.println("Store loaded successfully from file.");
+        } catch (IOException e) {
+            System.out.println("Unable to load the store from file: " + e.getMessage());
+            // Handle the exception, e.g., by logging it or informing the user
+        }
+
     }
 
     public void quit() throws FileNotFoundException {

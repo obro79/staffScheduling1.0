@@ -26,7 +26,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads Store from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Store read() throws IOException {
         String jsonData = readFile(source);
@@ -36,7 +36,7 @@ public class JsonReader {
 
 
     public Store parseStore(JSONObject jsonObject) {
-        Store store = Store.getInstance();
+        Store store = new Store();
 
         // Parse storeHours
         if (jsonObject.optJSONArray("storeHours") != null) {
@@ -48,7 +48,7 @@ public class JsonReader {
                         LocalTime.parse(hourObject.optString("startTime")),
                         LocalTime.parse(hourObject.optString("endTime"))
                 );
-                store.getInstance().getStoreHours().add(availability);
+                store.getStoreHours().add(availability);
             }
         }
 
@@ -63,7 +63,7 @@ public class JsonReader {
                         LocalTime.parse(needObject.optString("endTime")),
                         needObject.optInt("numberOfEmployees")
                 );
-                store.getInstance().getAllEmployeeNeeds().add(needs);
+                store.getAllEmployeeNeeds().add(needs);
             }
         }
 
@@ -73,7 +73,7 @@ public class JsonReader {
             for (int i = 0; i < employeeListArray.length(); i++) {
                 JSONObject employeeObject = employeeListArray.optJSONObject(i);
                 Employee employee = parseEmployee(employeeObject);
-                store.getInstance().getEmployeeList().addEmployee(employee);
+                store.getEmployeeList().addEmployee(employee);
             }
         }
 

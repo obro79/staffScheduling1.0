@@ -1,11 +1,14 @@
 package ui;
 
 import model.*;
+import ui.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+
 
 
 //Handles all the user interactions; prompts the user to choose from one of the options.
@@ -19,7 +22,7 @@ public class UiHandler {
     }
 
     //EFFECTS: allows user to update employee's Availability for existing Employee
-    public static void updateEmployeeAvailability() {
+    public void updateEmployeeAvailability(Store s) {
         System.out.println("Which Employees Availability would you like to update? (Enter their Name): ");
         String employeeName = scanner.nextLine();
         for (Employee e : model.EmployeeList.getInstance().getEmployeeList()) {
@@ -33,7 +36,7 @@ public class UiHandler {
 
     //MODIFIES: Employee if they are in employeeList
     //EFFECTS: updates the employees availability or lets user know that the employee doesnt exist
-    static void getEmployeeAvailability() {
+    public void getEmployeeAvailability(Store s) {
         boolean retry = false; // Flag to control the retry loop
         do {
             System.out.println("Which Employee's Availability would you like to get? (Enter their Name): ");
@@ -61,7 +64,7 @@ public class UiHandler {
 
 
 
-    public static void printEmployeeAvailability(Employee e) {
+    public void printEmployeeAvailability(Employee e) {
         for (DailyAvailability d: e.getWeeklyAvailability()) {
             System.out.println(d.toString());
         }
@@ -69,7 +72,7 @@ public class UiHandler {
 
 
     //EFFECTS: Creates a new employee with the job and name specified by the user
-    public static void addEmployee() {
+    public void addEmployee() {
 
         String name;
         String job;
@@ -101,7 +104,7 @@ public class UiHandler {
 
 
     //EFFECTS: returns if the info inputed by the user is correct
-    private static boolean getConfirmation(Employee e) {
+    private boolean getConfirmation(Employee e) {
         System.out.println("Employees name: " + e.getName());
         System.out.println("Employees job: " + e.getJob());
         System.out.print("Please Confirm (Yes/No): ");
@@ -111,7 +114,7 @@ public class UiHandler {
 
     //REQUIRES: it's called on an employee
     //EFFECTS: Fils out the weeklyAvailability according to the user
-    public static void updateAvailability(Employee e) {
+    public void updateAvailability(Employee e) {
 
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
@@ -128,7 +131,7 @@ public class UiHandler {
 
     //REQUIRES: EmployeeList is not empty
     //EFFECTS: Prints all the employee names in employeeList to the console
-    public static void printAllEmployeeNames() {
+    public void printAllEmployeeNames(Store s) {
         System.out.println("List of all employee names:");
         for (Employee e : EmployeeList.getInstance().getEmployeeList()) {
             System.out.println(e.getName());
@@ -138,7 +141,7 @@ public class UiHandler {
 
     //MODIFIES: storeHours
     //EFFECTS: Adds store hours for each day of the week to the list
-    public static void updateStoreHours() {
+    public void updateStoreHours(Store s) {
 
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
@@ -148,7 +151,7 @@ public class UiHandler {
             LocalTime openingTime = LocalTime.parse(scanner.nextLine());
             System.out.print("Closing Time (HH:MM): ");
             LocalTime closingTime = LocalTime.parse(scanner.nextLine());
-            List<DailyAvailability> storeHours = Store.getInstance().getStoreHours();
+            List<DailyAvailability> storeHours = s.getStoreHours();
             storeHours.add(new DailyAvailability(day, openingTime, closingTime));
         }
 
@@ -156,18 +159,18 @@ public class UiHandler {
 
     //REQUIRES: that storeHours is not empty
     //EFFECTS: prints the list of Operational hours to the console
-    public static void printOperationalHours() {
-        for (DailyAvailability d: Store.getInstance().getStoreHours()) {
+    public void printOperationalHours(Store s) {
+        for (DailyAvailability d: s.getStoreHours()) {
             System.out.println(d);
         }
     }
 
     //REQUIRES: StoreHours is not empty
     //EFFECTS: Adds an arbitrary number of EmployeeNeeds to employeeNeeds
-    public static void updateEmployeeNeeds() {
+    public void updateEmployeeNeeds(Store s) {
         System.out.println("Updating scheduling needs...");
 
-        for (DailyAvailability day : Store.getInstance().getStoreHours()) {
+        for (DailyAvailability day : s.getStoreHours()) {
             System.out.println("Enter employee needs for " + day.getDay() + ": ");
             boolean moreNeeds = true;
 
@@ -180,7 +183,7 @@ public class UiHandler {
                 int numberOfEmployees = scanner.nextInt();
                 scanner.nextLine(); // Consume the newline
 
-                ArrayList<EmployeeNeeds> employeeNeeds = Store.getInstance().getAllEmployeeNeeds();
+                ArrayList<EmployeeNeeds> employeeNeeds = s.getAllEmployeeNeeds();
 
                 employeeNeeds.add(new EmployeeNeeds(day.getDay(), startTime, endTime, numberOfEmployees));
 
@@ -192,17 +195,17 @@ public class UiHandler {
 
     //REQUIRES: EmployeeNeeds is not Empty
     //EFFECTS: prints all elements of EmployeeNeeds to the console
-    public static void printEmployeeNeeds() {
+    public void printEmployeeNeeds(Store s) {
         System.out.println("Getting scheduling needs...");
         System.out.println("Employee Needs:");
-        for (EmployeeNeeds need : Store.getInstance().getAllEmployeeNeeds()) {
+        for (EmployeeNeeds need : s.getAllEmployeeNeeds()) {
             System.out.println(need);
         }
     }
 
     public void printAllStoreAttributes(Store s) {
-        this.printOperationalHours();
-        this.printEmployeeNeeds();
+        this.printOperationalHours(s);
+        this.printEmployeeNeeds(s);
         List<Employee> employeeList = s.getEmployeeList().getEmployeeList();
         for (Employee e : employeeList) {
             System.out.println(e.getName());
