@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 
-//Handles all the user interactions; prompts the user to choose from one of the options.
+//Carries out the operations that the user wants to do given by the StoreApp
 
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
@@ -92,7 +92,7 @@ public class UiHandler {
             String prompt = "Would you also like to update their availability right now? (Yes/No): ";
             System.out.println(prompt);
             if (scanner.nextLine().equalsIgnoreCase("Yes")) {
-               // updateAvailability();
+                updateAvailability(newEmployee);
             } else {
                 System.out.println("Ok, you can add it later");
             }
@@ -204,6 +204,7 @@ public class UiHandler {
         }
     }
 
+    //EFFECTS: Prints all the fields of the store to the console
     public void printAllStoreAttributes(Store s) {
         this.printOperationalHours(s);
         this.printEmployeeNeeds(s);

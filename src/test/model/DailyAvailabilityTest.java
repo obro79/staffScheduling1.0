@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.json.JSONObject;
 
 
+// Tests the DailyAvailability Class
 public class DailyAvailabilityTest {
 
     private String day;

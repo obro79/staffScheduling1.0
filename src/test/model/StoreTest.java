@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Tests the Store Class
 public class StoreTest {
 
     private static Store instance;

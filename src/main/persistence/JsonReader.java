@@ -17,6 +17,8 @@ import model.Store;
 import java.time.LocalTime;
 
 //this persistance package is heaviliy inspired by the example given to us
+
+//Takes all the data in the Json file and turns it into data that is used to set Store fields
 public class JsonReader {
     // Represents a reader that reads workroom from JSON data stored in file
     private String source;
@@ -116,7 +118,7 @@ public class JsonReader {
         return employee;
     }
 
-    // throwing excetion because not all store fields have a value so need to guard against that.
+    // throwing exception because not all store fields have a value so need to guard against that.
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {

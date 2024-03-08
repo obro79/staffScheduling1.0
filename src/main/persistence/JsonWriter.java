@@ -11,8 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 //this persistance package is heaviliy inspired by the example given to us
-//TODO clean up names of ui methods, add method specifications, add class specifications, add tests
-//TODO make is so you dont have to enter day by day, you can shortcut to whole week
+
+//Takes all the Json Data and writes it a Json File
 public class JsonWriter {
 
     private static final int TAB = 4;

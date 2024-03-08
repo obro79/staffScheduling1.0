@@ -15,14 +15,14 @@ public class Store {
     private List<EmployeeNeeds> allEmployeeNeeds;
     private EmployeeList employeeList;
 
-    //EFFECTS: Creates a new instance of OperationalNeeds
+    //EFFECTS: Creates a new instance of Store
     public Store() {
         this.storeHours = new ArrayList<>();
         this.allEmployeeNeeds = new ArrayList<>();
         this.employeeList = model.EmployeeList.getInstance();
     }
 
-    //EFFECTS: Ensures that there is only ever one operationalNeeds
+    //EFFECTS: Ensures that there is only ever one Store
     public static synchronized Store getInstance() {
         if (instance == null) {
             instance = new Store();

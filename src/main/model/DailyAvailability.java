@@ -21,7 +21,7 @@ public class DailyAvailability implements Writeable {
         this.endTime = endTime;
     }
 
-    //EFFECTS: returns the DailyAvailability to a String
+    //EFFECTS: returns the DailyAvailability as a String
     public String toString() {
         return day + ": " + startTime + " to " + endTime;
     }

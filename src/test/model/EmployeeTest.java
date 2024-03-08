@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+//Tests the Employee Class
 public class EmployeeTest {
 
     private String name;

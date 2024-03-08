@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 
 
-
+// Handles all the user inputs
 public class StoreApp {
 
     private static final String JSON_STORE = "./data/Store.json";
@@ -28,7 +28,7 @@ public class StoreApp {
 
     public static final Scanner scanner = new Scanner(System.in);
 
-
+    //EFFECTS: creates a new instance of a store with a UiHandler, thisStore, jsonWriter, jsonReader, jsonObject
     public StoreApp() throws FileNotFoundException {
         this.uiHandler = new UiHandler();
         this.thisStore = new Store();
@@ -41,7 +41,7 @@ public class StoreApp {
 
     @SuppressWarnings("methodlength")
 
-    //EFFECTS: will execute one of the cases
+    //EFFECTS: will execute one of the cases inputted by the user
     public void runEmployeeManagementSystem() throws FileNotFoundException {
 
         try {
@@ -98,6 +98,7 @@ public class StoreApp {
         }
     }
 
+    //EFFECTS: prints all the options to the console
     public void printOptions() {
         System.out.println("Select from: ");
         System.out.println("(1) Print All Store Attributes");
@@ -116,6 +117,7 @@ public class StoreApp {
     }
 
 
+    //EFFECTS: saves all the store attributes to a Json File
     public void saveAllStoreAttributes() throws FileNotFoundException {
         try {
             this.jsonWriter.open();
@@ -128,6 +130,8 @@ public class StoreApp {
         }
     }
 
+    //MODIFIES: store
+    //EFFECTS: Makes a store with all the data that was previously saved to the Json file
     public void loadAllStoreAttributes() {
         try {
             // Use the read method of JsonReader to load the Store from the JSON file
@@ -140,6 +144,7 @@ public class StoreApp {
 
     }
 
+    //EFFECTS: Ends the execution of hte program and ensures the user has saved their work
     public void quit() throws FileNotFoundException {
         try {
             System.out.println("Would you like to save your current work? (Yes/No)");
