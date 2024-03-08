@@ -1,12 +1,14 @@
 package model;
 
+import persistence.Writeable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 
 // stores a list of EmployeeNeeds as well as the hours of the store
-public class Store  {
+public class Store {
     private static Store instance;
     protected List<DailyAvailability> storeHours;
     private List<EmployeeNeeds> allEmployeeNeeds;

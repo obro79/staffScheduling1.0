@@ -1,6 +1,7 @@
 package ui;
 
 import model.EmployeeList;
+import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import model.Store;
@@ -23,6 +24,7 @@ public class StoreApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private UiHandler uiHandler;
+    private JSONObject jsonObject;
 
     public static final Scanner scanner = new Scanner(System.in);
 
@@ -32,6 +34,7 @@ public class StoreApp {
         this.thisStore = new Store();
         this.jsonWriter = new JsonWriter(JSON_STORE);
         this.jsonReader = new JsonReader(JSON_STORE);
+        this.jsonObject = new JSONObject();
         runEmployeeManagementSystem();
     }
 
@@ -39,43 +42,60 @@ public class StoreApp {
     @SuppressWarnings("methodlength")
 
     //EFFECTS: will execute one of the cases
-    public void runEmployeeManagementSystem() {
+    public void runEmployeeManagementSystem() throws FileNotFoundException {
 
-        int option;
-        do {
-            printOptions();
-            option = scanner.nextInt();
-            scanner.nextLine();
+        try {
+            int option;
+            do {
+                printOptions();
+                option = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (option) {
-                case 1: this.uiHandler.printAllStoreAttributes(this.thisStore);
-                    break;
-                case 2: saveAllStoreAttributes();
-                    break;
-                case 3: loadAllStoreAttributes();
-                    break;
-                case 4: this.uiHandler.addEmployee();
-                    break;
-                case 5: this.uiHandler.updateEmployeeAvailability();
-                    break;
-                case 6: printAllEmployeeNames();
-                    break;
-                case 7: this.uiHandler.getEmployeeAvailability();
-                    break;
-                case 8: this.uiHandler.printOperationalHours();
-                    break;
-                case 9: this.uiHandler.updateStoreHours();
-                    break;
-                case 10: this.uiHandler.updateEmployeeNeeds();
-                    break;
-                case 11: this.uiHandler.printEmployeeNeeds();
-                    break;
-                case 12: System.out.println("Exiting...");
-                    break;
-                default: System.out.println("Invalid option. Please select a valid option.");
-            }
-        } while (option != 12); // Update condition to reflect new exit option
-        scanner.close();
+                switch (option) {
+                    case 1:
+                        this.uiHandler.printAllStoreAttributes(this.thisStore);
+                        break;
+                    case 2:
+                        saveAllStoreAttributes();
+                        break;
+                    case 3:
+                        loadAllStoreAttributes();
+                        break;
+                    case 4:
+                        this.uiHandler.addEmployee();
+                        break;
+                    case 5:
+                        this.uiHandler.updateEmployeeAvailability();
+                        break;
+                    case 6:
+                        printAllEmployeeNames();
+                        break;
+                    case 7:
+                        this.uiHandler.getEmployeeAvailability();
+                        break;
+                    case 8:
+                        this.uiHandler.printOperationalHours();
+                        break;
+                    case 9:
+                        this.uiHandler.updateStoreHours();
+                        break;
+                    case 10:
+                        this.uiHandler.updateEmployeeNeeds();
+                        break;
+                    case 11:
+                        this.uiHandler.printEmployeeNeeds();
+                        break;
+                    case 12:
+                        quit();
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please select a valid option.");
+                }
+            } while (option != 12); // Update condition to reflect new exit option
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            //
+        }
     }
 
     public void printOptions() {
@@ -96,22 +116,35 @@ public class StoreApp {
     }
 
 
-
-    public void saveAllStoreAttributes() {
-        this.thisStore.getStoreHours();
+    public void saveAllStoreAttributes() throws FileNotFoundException {
+        try {
+            this.jsonWriter.open();
+            this.jsonWriter.write(this.thisStore);
+            this.jsonWriter.close();
+            System.out.println("Saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("No file with that name was found");
+            throw e; // Re-throwing the exception to signal that the save operation failed
+        }
     }
 
     public void loadAllStoreAttributes() {
-        //stub
+        this.jsonReader.parseStore(this.jsonObject); //stub //TODO
     }
 
-    public void quit() {
-        System.out.println("Would you like to save your current work? (Yes/No)");
-        String answer = scanner.nextLine();
-        if (answer.trim().equalsIgnoreCase("Yes")) {
-            saveAllStoreAttributes();
+    public void quit() throws FileNotFoundException {
+        try {
+            System.out.println("Would you like to save your current work? (Yes/No)");
+            String answer = scanner.nextLine();
+            if (answer.trim().equalsIgnoreCase("Yes")) {
+                saveAllStoreAttributes();
+            } else {
+                System.out.println("Ok your current work won't be saved.");
+            }
+        } catch (FileNotFoundException e) {
+            //dd
         }
-        System.out.println("Ok your current work won't be saved.");
+
     }
 
     public Store getThisStore() {

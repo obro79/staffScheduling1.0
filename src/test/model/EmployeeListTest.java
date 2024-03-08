@@ -17,7 +17,7 @@ public class EmployeeListTest {
 
     @BeforeEach
     void runBefore() {
-        employee1 = new Employee();
+        employee1 = new Employee("Owen","Cook");
         employee1.setJob("Cook");
         employee1.setName("Owen");
     }

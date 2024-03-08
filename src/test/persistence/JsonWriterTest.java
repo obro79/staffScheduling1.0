@@ -8,8 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,9 +34,8 @@ public class JsonWriterTest {
     @Test
     void testWriteValidStore() throws IOException {
         Store store = new Store();
-        Employee employee = new Employee();
-        employee.setJob("Job");
-        employee.setName("Name");
+        Employee employee = new Employee("Name","Job");
+
         store.getEmployeeList().addEmployee(employee);
 
         JsonWriter writer = new JsonWriter(file.toString());
@@ -49,14 +51,54 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testFileNotFoundException() {
-        // Assuming an invalid path to simulate FileNotFoundException
-        JsonWriter writer = new JsonWriter("/invalid/path/testStore.json");
-        // assertThrows(FileNotFoundException.class, writer::open);
+    public void testWriteEmptyStore() throws IOException {
+        String testFileName = "testStoreEmpty.json";
+        Store store = new Store(); // Assuming Store has a public constructor
+        JsonWriter writer = new JsonWriter(testFileName);
+
+        writer.write(store);
+        writer.close();
+
+        // Now, read the file and assert its contents
+        String content = new String(Files.readAllBytes(Paths.get(testFileName)), StandardCharsets.UTF_8);
+        assertNotNull(content);
+        assertTrue(content.contains("storeHours")); // Checks if the structure is present
+        assertTrue(content.contains("allEmployeeNeeds"));
+        assertTrue(content.contains("employees")); // Ensure it's handling an empty list correctly
     }
 
-    @AfterEach
-    void tearDown() {
-        // Cleanup if necessary
+    @Test
+    public void testWriteStoreWithEmployees() throws IOException {
+        String testFileName = "testStoreWithEmployees.json";
+        Store store = new Store();
+        store.getEmployeeList().addEmployee(new Employee("Owen", "Chef"));
+        JsonWriter writer = new JsonWriter(testFileName);
+
+        writer.write(store);
+        writer.close();
+
+        // Now, read the file and assert its contents
+        String content = new String(Files.readAllBytes(Paths.get(testFileName)), StandardCharsets.UTF_8);
+        assertNotNull(content);
+        assertTrue(content.contains("storeHours"));
+        assertTrue(content.contains("allEmployeeNeeds"));
+        assertTrue(content.contains("employees"));
+        assertTrue(content.contains("Owen")); // Replace with actual employee name expected
     }
+
+    @Test
+    public void testWriteWithInvalidPath() throws FileNotFoundException {
+        try {
+            String invalidFileName = "/invalid/path/testStore.json";
+            Store store = new Store(); // Assuming Store has a public constructor
+            JsonWriter writer = new JsonWriter(invalidFileName);
+
+            writer.write(store); // This should throw FileNotFoundException
+            fail("SHoul've thrown Exception");
+        } catch (FileNotFoundException e) {
+
+        }
+    }
+
+
 }

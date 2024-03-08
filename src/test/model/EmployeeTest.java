@@ -17,7 +17,7 @@ public class EmployeeTest {
     @BeforeEach
 
     public void runBefore() {
-        newEmployee1 = new Employee();
+        newEmployee1 = new Employee("Owen","Cook");
     }
 
     @Test
@@ -53,16 +53,7 @@ public class EmployeeTest {
     }
 
 
-    @Test
 
-    public void addSelfToListTest() {
-        newEmployee1.setJob("Cook");
-        newEmployee1.setName("Owen");
-        newEmployee1.addSelfToList();
-
-        // assertTrue(EmployeeList.getEmployeeList().contains(newEmployee1));
-
-    }
 
     @Test
 

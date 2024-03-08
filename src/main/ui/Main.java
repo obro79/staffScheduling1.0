@@ -13,7 +13,7 @@ public class Main {
     // all inputs must be in the form that is specified.
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         try {
             new StoreApp();
         } catch (FileNotFoundException e) {

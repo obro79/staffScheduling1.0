@@ -3,11 +3,12 @@ package model;
 import java.time.LocalTime;
 import org.json.JSONObject;
 import org.json.*;
+import persistence.Writeable;
 
 
 //EmployeeNeeds allows user to specify which day, and from a time to another time and the number of employees
 // needed at a time
-public class EmployeeNeeds {
+public class EmployeeNeeds implements Writeable {
     private String day;
     private LocalTime startTime;
     private LocalTime endTime;

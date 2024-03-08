@@ -1,6 +1,7 @@
 package persistence;
 
 import model.Store;
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,6 +51,39 @@ class JsonReaderTest {
         Path file = tempDir.resolve("invalidStore.json");
         JsonReader reader = new JsonReader(file.toString());
     }
+
+
+    //TODO fix the over character limit
+    @SuppressWarnings("Over Character Limit")
+    @Test
+    void testEmployeeParsing() throws IOException {
+        Path file = tempDir.resolve("testStoreWithEmployees.json");
+        String jsonContentWithEmployees = "{\n" +
+                                          "    \"storeHours\": [\n" +
+                                          "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n" +
+                                          "    ],\n" +
+                                          "    \"allEmployeeNeeds\": [\n" +
+                                          "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n" +
+                                          "    ],\n" +
+                                          "    \"employeeList\": [\n" +
+                                          "        {\"name\": \"John Doe\", \"job\": \"Cashier\", \"weeklyAvailability\": [\n" +
+                                          "            {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\"}\n" +
+                                          "        ]}\n" +
+                                          "    ]\n" +
+                                          "}";
+        Files.writeString(file, jsonContentWithEmployees);
+
+        JsonReader reader = new JsonReader(file.toString());
+        Store store = reader.read();
+        assertNotNull(store);
+        assertFalse(store.getEmployeeList().getEmployeeList().isEmpty());
+        Employee firstEmployee = store.getEmployeeList().getEmployeeList().get(0);
+        assertEquals("John Doe", firstEmployee.getName());
+        assertEquals("Cashier", firstEmployee.getJob());
+        assertFalse(firstEmployee.getWeeklyAvailability().isEmpty());
+        assertEquals("Monday", firstEmployee.getWeeklyAvailability().get(0).getDay());
+    }
+
 
 
 }

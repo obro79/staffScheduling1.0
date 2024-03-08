@@ -3,11 +3,12 @@ package model;
 import java.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writeable;
 
 
 //This class is the daily availability that each employee has
 
-public class DailyAvailability {
+public class DailyAvailability implements Writeable {
     private String day;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -26,12 +27,14 @@ public class DailyAvailability {
     }
 
     public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("day", this.day);
-        json.put("startTime", this.startTime.toString());
-        json.put("endTime", this.endTime.toString());
-        return json;
+        JSONObject dailyAvailability = new JSONObject();
+        dailyAvailability.put("day", this.day);
+        dailyAvailability.put("startTime", this.startTime.toString());
+        dailyAvailability.put("endTime", this.endTime.toString());
+        return dailyAvailability;
     }
+
+
 
     public String getDay() {
         return this.day;

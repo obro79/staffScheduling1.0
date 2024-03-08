@@ -3,29 +3,29 @@ package model;
 
 import java.util.ArrayList;
 import org.json.JSONObject;
+import org.json.JSONArray;
+import java.time.format.DateTimeFormatter;
+
 
 import model.DailyAvailability;
-
+import persistence.Writeable;
 
 
 //Represents an employee at the resturant with a name, job and an availability
 
-public class Employee {
+public class Employee implements Writeable {
 
     private String name;
     private String job;
     private ArrayList<DailyAvailability> weeklyAvailability;
 
     //EFFECTS: creates a new instance of Employee
-    public Employee() {
+    public Employee(String name, String job) {
         this.weeklyAvailability = new ArrayList<DailyAvailability>();
+        this.job = job;
+        this.name = name;
     }
 
-    //MODIFIES: EmployeeList
-    //EFFECTS: Adds Employee to EmployeeList
-    public void addSelfToList() {
-        EmployeeList.getInstance().addEmployee(this);
-    }
 
 
 
@@ -53,5 +53,27 @@ public class Employee {
         this.job = job;
     }
 
+    public JSONObject toJson() {
+        JSONObject employee = new JSONObject();
+        employee.put("name", this.name);
+        employee.put("job", this.job);
 
+
+        // Convert the list of DailyAvailability to JSON
+        JSONArray availabilityArray = new JSONArray();
+        for (DailyAvailability availability : this.weeklyAvailability) {
+            JSONObject availabilityJson = new JSONObject();
+            availabilityJson.put("day", availability.getDay());
+            availabilityJson.put("startTime", availability.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME));
+            availabilityJson.put("endTime", availability.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME));
+
+            // If DailyAvailability contains other fields, convert them to JSON as well
+
+            availabilityArray.put(availabilityJson);
+        }
+        employee.put("weeklyAvailability", availabilityArray);
+
+        return employee;
+    }
 }
+

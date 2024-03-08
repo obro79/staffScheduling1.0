@@ -1,5 +1,6 @@
 package persistence;
 
+import model.Employee;
 import org.json.JSONObject;
 import org.json.*;
 import model.Store;
@@ -8,6 +9,8 @@ import java.io.File;
 import model.EmployeeNeeds;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+
+//this persistance package is heaviliy inspired by the example given to us
 
 public class JsonWriter {
 
@@ -25,28 +28,39 @@ public class JsonWriter {
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
     public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(destination));
+        this.writer = new PrintWriter(new File(destination));
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of store to file
-    public void write(Store store) {
+    // EFFECTS: writes JSON representation of store to file
+    // MODIFIES: this
+// EFFECTS: writes JSON representation of store to file
+    public void write(Store store) throws FileNotFoundException {
+
+        this.open();
         JSONObject json = new JSONObject();
 
         // Convert storeHours to JSON
         JSONArray storeHoursArray = new JSONArray();
         for (DailyAvailability da : store.getStoreHours()) {
-            storeHoursArray.put(da.toJson()); // Assuming DailyAvailability has a toJson method
+            storeHoursArray.put(da.toJson());
         }
         json.put("storeHours", storeHoursArray);
 
         // Convert allEmployeeNeeds to JSON
         JSONArray needsArray = new JSONArray();
         for (EmployeeNeeds en : store.getAllEmployeeNeeds()) {
-            needsArray.put(en.toJson()); // Assuming EmployeeNeeds has a toJson method
+            needsArray.put(en.toJson());
         }
         json.put("allEmployeeNeeds", needsArray);
 
+        // Convert employees to JSON
+        JSONArray employeesArray = new JSONArray();
+        for (Employee employee : store.getEmployeeList().getEmployeeList()) {
+            employeesArray.put(employee.toJson());
+        }
+        json.put("employees", employeesArray);
 
         saveToFile(json.toString(TAB));
     }
@@ -54,7 +68,7 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: closes writer
     public void close() {
-        writer.close();
+        this.writer.close();
     }
 
     // MODIFIES: this

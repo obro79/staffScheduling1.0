@@ -13,42 +13,9 @@ import java.util.Scanner;
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
+
     public UiHandler() {
 
-    }
-
-    //EFFECTS: will execute one of the cases
-    public static void runEmployeeManagementSystem() {
-
-        int option;
-        do {
-            printOptions();
-            option = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (option) {
-                case 1: addEmployee();
-                break;
-                case 2: updateEmployeeAvailability();
-                    break;
-                case 3: printAllEmployeeNames();
-                    break;
-                case 4: getEmployeeAvailability();
-                    break;
-                case 5: printOperationalHours();
-                    break;
-                case 6: updateStoreHours();
-                    break;
-                case 7: updateEmployeeNeeds();
-                    break;
-                case 8: printEmployeeNeeds();
-                    break;
-                case 9: System.out.println("Exiting...");
-                    break;
-                default: System.out.println("Invalid option. Please select a valid option.");
-            }
-        } while (option != 9); // Update condition to reflect new exit option
-        scanner.close();
     }
 
     //EFFECTS: allows user to update employee's Availability for existing Employee
@@ -100,20 +67,6 @@ public class UiHandler {
         }
     }
 
-    //EFFECTS: Prints all the options that the user can do to the console
-    public static void printOptions() {
-        System.out.println("What would you like to do?");
-        System.out.println("(1) Add Employee");
-        System.out.println("(2) Update Existing Employee Availability");
-        System.out.println("(3) Get List of Employees");
-        System.out.println("(4) Get Employees Availability");
-        System.out.println("(5) Get Operational Hours"); // will swap option 5 and 6 later. that will make more sense
-        System.out.println("(6) Update Operational Hours");
-        System.out.println("(7) Update Scheduling Needs");
-        System.out.println("(8) Get Scheduling Needs");
-        System.out.println("(9) Exit");
-        System.out.print("Select an option (1-9): ");
-    }
 
     //EFFECTS: Creates a new employee with the job and name specified by the user
     public static void addEmployee() {
@@ -130,9 +83,8 @@ public class UiHandler {
             System.out.print("Enter employee's job: ");
             job = scanner.nextLine();
 
-            newEmployee = new Employee();
-            newEmployee.setName(name);
-            newEmployee.setJob(job);
+            newEmployee = new Employee(name,job);
+
 
             String prompt = "Would you also like to update their availability right now? (Yes/No): ";
             System.out.println(prompt);
@@ -144,7 +96,7 @@ public class UiHandler {
 
             confirmed = getConfirmation(newEmployee);
         } while (!confirmed);
-        newEmployee.addSelfToList();
+        EmployeeList.getInstance().addEmployee(newEmployee);
     }
 
 
