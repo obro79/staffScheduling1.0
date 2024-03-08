@@ -11,7 +11,7 @@ import model.DailyAvailability;
 import persistence.Writeable;
 
 
-//Represents an employee at the resturant with a name, job and an availability
+//Represents an employee at the store with a name, job and availability
 
 public class Employee implements Writeable {
 
@@ -19,27 +19,13 @@ public class Employee implements Writeable {
     private String job;
     private ArrayList<DailyAvailability> weeklyAvailability;
 
-    //EFFECTS: creates a new instance of Employee
+    //EFFECTS: creates a new instance of Employee with name and job and empty availability
     public Employee(String name, String job) {
         this.weeklyAvailability = new ArrayList<DailyAvailability>();
         this.job = job;
         this.name = name;
     }
 
-
-
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getJob() {
-        return this.job;
-    }
-
-    public ArrayList<DailyAvailability> getWeeklyAvailability() {
-        return this.weeklyAvailability;
-    }
 
     //MODIFIES: this
     //EFFECTS: sets employees name to given name
@@ -53,6 +39,7 @@ public class Employee implements Writeable {
         this.job = job;
     }
 
+    //EFFECTS: turns an employee into a json object
     public JSONObject toJson() {
         JSONObject employee = new JSONObject();
         employee.put("name", this.name);
@@ -74,6 +61,18 @@ public class Employee implements Writeable {
         employee.put("weeklyAvailability", availabilityArray);
 
         return employee;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getJob() {
+        return this.job;
+    }
+
+    public ArrayList<DailyAvailability> getWeeklyAvailability() {
+        return this.weeklyAvailability;
     }
 }
 

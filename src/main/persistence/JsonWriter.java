@@ -85,13 +85,4 @@ public class JsonWriter {
         writer.print(json);
     }
 
-    public JSONObject toJson(Store s) {
-
-        JSONObject json = new JSONObject();
-
-        json.put("storeHours", s.getStoreHours());
-
-        return json;
-
-    }
 }

@@ -26,6 +26,7 @@ public class DailyAvailability implements Writeable {
         return day + ": " + startTime + " to " + endTime;
     }
 
+    //EFFECTS: Turns this into a Json object
     public JSONObject toJson() {
         JSONObject dailyAvailability = new JSONObject();
         dailyAvailability.put("day", this.day);

@@ -34,7 +34,9 @@ public class JsonReader {
         return parseStore(jsonObject);
     }
 
-
+    //TODO make helpers
+    //EFFECTS: turns all the Json data into store fields then sets a store with those fields and returns it
+    @SuppressWarnings("Method Length")
     public Store parseStore(JSONObject jsonObject) {
         Store store = new Store();
 
@@ -80,6 +82,8 @@ public class JsonReader {
         return store;
     }
 
+
+    //Effects: takes all the json data and
     private Employee parseEmployee(JSONObject jsonObject) {
 
         String name = jsonObject.optString("name");

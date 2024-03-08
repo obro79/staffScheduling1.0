@@ -29,6 +29,7 @@ public class EmployeeNeeds implements Writeable {
         return day + ": " + startTime + " to " + endTime + ", " + numberOfEmployees + " employees needed";
     }
 
+    //EFFECTS: turns this into a json object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("day", this.day);
