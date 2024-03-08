@@ -39,7 +39,7 @@ public class Employee implements Writeable {
         this.job = job;
     }
 
-    //EFFECTS: turns an employee into a json object
+    //EFFECTS: returns an employee turned into a json object
     public JSONObject toJson() {
         JSONObject employee = new JSONObject();
         employee.put("name", this.name);

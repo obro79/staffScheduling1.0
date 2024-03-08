@@ -34,10 +34,9 @@ public class JsonReader {
         return parseStore(jsonObject);
     }
 
-    //TODO make helpers
+
 
     //EFFECTS: turns all the Json data into store fields then sets a store with those fields and returns it
-
     public Store parseStore(JSONObject jsonObject) {
         Store store = new Store();
 
@@ -61,6 +60,8 @@ public class JsonReader {
         return store;
     }
 
+    //MODIFIES: store
+    //EFFECTS: turns allEmployeeNeeds that is stored in json into allEmployeeNeeds and uses it to set Store
     public void parseEmployeeNeeds(JSONObject jsonObject, Store store) {
         if (jsonObject.optJSONArray("allEmployeeNeeds") != null) {
             JSONArray needsArray = jsonObject.optJSONArray("allEmployeeNeeds");
@@ -77,6 +78,8 @@ public class JsonReader {
         }
     }
 
+    //MODIFIES: store
+    //EFFECTS: turns employeelist that is stored in json into allEmployeeNeeds and uses it to set Store
     public void parseEmployeeList(JSONObject jsonObject, Store store) {
         if (jsonObject.optJSONArray("employeeList") != null) {
             JSONArray employeeListArray = jsonObject.optJSONArray("employeeList");
@@ -89,7 +92,7 @@ public class JsonReader {
     }
 
 
-    //Effects: takes all the json data and
+    //Effects: takes all the json data and turns it into an employee and returns is
     public Employee parseEmployee(JSONObject jsonObject) {
 
         String name = jsonObject.optString("name");

@@ -8,7 +8,7 @@ import java.util.List;
 
 
 
-// stores a list of EmployeeNeeds as well as the hours of the store
+// Stores all attributes that belong to a store, storeHours, allEmployeeNeeds, employeeList
 public class Store {
     private static Store instance;
     protected List<DailyAvailability> storeHours;
