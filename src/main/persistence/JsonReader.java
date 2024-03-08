@@ -35,7 +35,7 @@ public class JsonReader {
     }
 
     //TODO make helpers
-    //@SuppressWarnings("methodlength")
+
     //EFFECTS: turns all the Json data into store fields then sets a store with those fields and returns it
 
     public Store parseStore(JSONObject jsonObject) {
@@ -54,20 +54,10 @@ public class JsonReader {
                 store.getStoreHours().add(availability);
             }
         }
-
         // Parse allEmployeeNeeds
         this.parseEmployeeNeeds(jsonObject,store);
-
         // Parse employeeList
-        if (jsonObject.optJSONArray("employeeList") != null) {
-            JSONArray employeeListArray = jsonObject.optJSONArray("employeeList");
-            for (int i = 0; i < employeeListArray.length(); i++) {
-                JSONObject employeeObject = employeeListArray.optJSONObject(i);
-                Employee employee = parseEmployee(employeeObject);
-                store.getEmployeeList().addEmployee(employee);
-            }
-        }
-
+        this.parseEmployeeList(jsonObject,store);
         return store;
     }
 
@@ -83,6 +73,17 @@ public class JsonReader {
                         needObject.optInt("numberOfEmployees")
                 );
                 store.getAllEmployeeNeeds().add(needs);
+            }
+        }
+    }
+
+    public void parseEmployeeList(JSONObject jsonObject, Store store) {
+        if (jsonObject.optJSONArray("employeeList") != null) {
+            JSONArray employeeListArray = jsonObject.optJSONArray("employeeList");
+            for (int i = 0; i < employeeListArray.length(); i++) {
+                JSONObject employeeObject = employeeListArray.optJSONObject(i);
+                Employee employee = parseEmployee(employeeObject);
+                store.getEmployeeList().addEmployee(employee);
             }
         }
     }
