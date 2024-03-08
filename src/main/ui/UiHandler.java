@@ -160,6 +160,7 @@ public class UiHandler {
     //REQUIRES: that storeHours is not empty
     //EFFECTS: prints the list of Operational hours to the console
     public void printOperationalHours(Store s) {
+        System.out.println("Here's the operational Hours:");
         for (DailyAvailability d: s.getStoreHours()) {
             System.out.println(d);
         }
@@ -207,8 +208,10 @@ public class UiHandler {
         this.printOperationalHours(s);
         this.printEmployeeNeeds(s);
         List<Employee> employeeList = s.getEmployeeList().getEmployeeList();
+        System.out.println("Here's all your employees!");
         for (Employee e : employeeList) {
             System.out.println(e.getName());
+            System.out.println(e.getJob());
             printEmployeeAvailability(e);
         }
     }

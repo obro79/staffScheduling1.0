@@ -2,6 +2,8 @@ package persistence;
 
 import model.Store;
 import model.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -10,9 +12,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-
-
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class JsonReaderTest {
 
@@ -21,6 +22,9 @@ class JsonReaderTest {
 
     @BeforeEach
     void setUp() throws IOException {
+        String t = "        {\"day\": \"Monday\"";
+        String s = ", \"startTime\": \"08:00\", \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n";
+
         // Create a sample JSON file in tempDir before each test
         Path file = tempDir.resolve("testStore.json");
         String jsonContent = "{\n" +
@@ -28,9 +32,11 @@ class JsonReaderTest {
                              "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n" +
                              "    ],\n" +
                              "    \"allEmployeeNeeds\": [\n" +
-                             "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n" +
+                             t + s +
                              "    ]\n" +
                              "}";
+
+
         Files.writeString(file, jsonContent);
     }
 
@@ -53,24 +59,30 @@ class JsonReaderTest {
     }
 
 
-    //TODO fix the over character limit
-    @SuppressWarnings("Over Character Limit")
     @Test
     void testEmployeeParsing() throws IOException {
         Path file = tempDir.resolve("testStoreWithEmployees.json");
+
+        String s = "            {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\"}\n";
+        String t = "        {\"name\": \"John Doe\", \"job\": \"Cashier\", \"weeklyAvailability\": [\n";
+        String j = "        {\"day\": \"Monday\", \"startTime\":";
+        String k = " \"08:00\", \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n";
+        String l = "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n";
         String jsonContentWithEmployees = "{\n" +
                                           "    \"storeHours\": [\n" +
-                                          "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n" +
+                                          l +
                                           "    ],\n" +
                                           "    \"allEmployeeNeeds\": [\n" +
-                                          "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n" +
+                                          j + k +
                                           "    ],\n" +
                                           "    \"employeeList\": [\n" +
-                                          "        {\"name\": \"John Doe\", \"job\": \"Cashier\", \"weeklyAvailability\": [\n" +
-                                          "            {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\"}\n" +
+                                          t +
+                                          s +
                                           "        ]}\n" +
                                           "    ]\n" +
                                           "}";
+
+
         Files.writeString(file, jsonContentWithEmployees);
 
         JsonReader reader = new JsonReader(file.toString());
@@ -83,7 +95,6 @@ class JsonReaderTest {
         assertFalse(firstEmployee.getWeeklyAvailability().isEmpty());
         assertEquals("Monday", firstEmployee.getWeeklyAvailability().get(0).getDay());
     }
-
 
 
 }
