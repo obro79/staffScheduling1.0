@@ -2,6 +2,9 @@ package persistence;
 
 import model.Employee;
 import model.Store;
+import model.DailyAvailability;
+import model.EmployeeNeeds;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.time.LocalTime;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +41,7 @@ public class JsonWriterTest {
     @Test
     void testWriteValidStore() throws IOException {
         Store store = new Store();
-        Employee employee = new Employee("Name","Job");
+        Employee employee = new Employee("Name", "Job");
 
         store.getEmployeeList().addEmployee(employee);
 
@@ -101,5 +108,65 @@ public class JsonWriterTest {
         }
     }
 
+    @Test
+    public void testPutStoreHoursArray() throws Exception {
+        Store store = new Store();
+        // Add sample store hours directly inside the test
+        store.getStoreHours().add(new DailyAvailability("Monday", LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        store.getStoreHours().add(new DailyAvailability("Tuesday", LocalTime.of(10, 0), LocalTime.of(18, 0)));
 
+        JSONObject json = new JSONObject();
+        JsonWriter writer = new JsonWriter(""); // Path is irrelevant for this test
+        writer.putStoreHoursArray(store, json);
+
+        JSONArray storeHoursArray = json.getJSONArray("storeHours");
+        assertEquals(2, storeHoursArray.length());
+
+        // Verify the first added store hour
+        JSONObject firstDay = storeHoursArray.getJSONObject(0);
+        assertEquals("Monday", firstDay.getString("day"));
+        assertEquals("09:00", firstDay.getString("startTime"));
+        assertEquals("17:00", firstDay.getString("endTime"));
+
+        // Verify the second added store hour
+        JSONObject secondDay = storeHoursArray.getJSONObject(1);
+        assertEquals("Tuesday", secondDay.getString("day"));
+        assertEquals("10:00", secondDay.getString("startTime"));
+        assertEquals("18:00", secondDay.getString("endTime"));
+    }
+
+    @Test
+    public void testPutAllEmployeeNeedsArray() throws Exception {
+        Store store = new Store();
+        // Add sample employee needs
+        EmployeeNeeds sampleNeed1 = new EmployeeNeeds("Wednesday", LocalTime.of(9, 0)
+                , LocalTime.of(12, 0), 3);
+        EmployeeNeeds sampleNeed2 = new EmployeeNeeds("Thursday", LocalTime.of(13, 0)
+                , LocalTime.of(17, 0), 2);
+        store.getAllEmployeeNeeds().add(sampleNeed1);
+        store.getAllEmployeeNeeds().add(sampleNeed2);
+
+        JSONObject json = new JSONObject();
+        JsonWriter writer = new JsonWriter(""); // Path is irrelevant for this test
+        writer.putAllEmployeeNeedsArray(store, json);
+
+        JSONArray needsArray = json.getJSONArray("allEmployeeNeeds");
+        assertEquals(2, needsArray.length());
+
+        // Verify the first added employee need
+        JSONObject firstNeed = needsArray.getJSONObject(0);
+        assertEquals("Wednesday", firstNeed.getString("day"));
+        assertEquals("09:00", firstNeed.getString("startTime"));
+        assertEquals("12:00", firstNeed.getString("endTime"));
+        assertEquals(3, firstNeed.getInt("numberOfEmployees"));
+
+        // Verify the second added employee need
+        JSONObject secondNeed = needsArray.getJSONObject(1);
+        assertEquals("Thursday", secondNeed.getString("day"));
+        assertEquals("13:00", secondNeed.getString("startTime"));
+        assertEquals("17:00", secondNeed.getString("endTime"));
+        assertEquals(2, secondNeed.getInt("numberOfEmployees"));
+
+
+    }
 }

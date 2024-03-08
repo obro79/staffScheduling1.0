@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import persistence.Writeable;
 
 
-//This class is the daily availability that each employee has
+//This class represents the daily availability that each employee has
 
 public class DailyAvailability implements Writeable {
     private String day;

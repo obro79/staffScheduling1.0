@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//stores a list of employees and there is only one of them.
+//stores a list of employees
 
 public class EmployeeList {
     private List<Employee> employeeList;
