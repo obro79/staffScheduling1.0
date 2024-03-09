@@ -101,17 +101,17 @@ public class StoreApp {
     //EFFECTS: prints all the options to the console
     public void printOptions() {
         System.out.println("Select from: ");
-        System.out.println("(1) Print All Store Attributes");
+        System.out.println("(1) Get All Store Attributes");
         System.out.println("(2) Save All Store Attributes ");
         System.out.println("(3) Load All Store Attributes ");
         System.out.println("(4) Add an Employee ");
-        System.out.println("(5) Update Employee Availability ");
+        System.out.println("(5) Update an Employee's Availability ");
         System.out.println("(6) Get All Employee Names");
         System.out.println("(7) Get an Employee's Availability");
         System.out.println("(8) Get Store Hours");
         System.out.println("(9) Update Store Hours");
         System.out.println("(10) Update Employee Needs");
-        System.out.println("(11) Print Employee Needs");
+        System.out.println("(11) Get Employee Needs");
         System.out.println("(12) Quit");
 
     }

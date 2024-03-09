@@ -1,9 +1,88 @@
 {
-    "storeHours": [],
-    "allEmployeeNeeds": [],
+    "storeHours": [
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Monday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Tuesday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Wednesday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Thursday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Friday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Saturday"
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Sunday"
+        }
+    ],
+    "allEmployeeNeeds": [
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Monday",
+            "numberOfEmployees": 12
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Tuesday",
+            "numberOfEmployees": 2
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Wednesday",
+            "numberOfEmployees": 7
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Thursday",
+            "numberOfEmployees": 8
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Friday",
+            "numberOfEmployees": 1
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Saturday",
+            "numberOfEmployees": 1
+        },
+        {
+            "startTime": "07:30",
+            "endTime": "07:30",
+            "day": "Sunday",
+            "numberOfEmployees": 2
+        }
+    ],
     "employees": [{
         "name": "Owen",
-        "job": "j",
+        "job": "job",
         "weeklyAvailability": [
             {
                 "startTime": "07:30:00",
