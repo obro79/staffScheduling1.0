@@ -1,84 +1,45 @@
 {
-    "storeHours": [
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Monday"
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Tuesday"
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Wednesday"
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Thursday"
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Friday"
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Saturday"
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Sunday"
-        }
-    ],
-    "allEmployeeNeeds": [
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Monday",
-            "numberOfEmployees": 12
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Tuesday",
-            "numberOfEmployees": 12
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Wednesday",
-            "numberOfEmployees": 1
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Thursday",
-            "numberOfEmployees": 2
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Friday",
-            "numberOfEmployees": 12
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Saturday",
-            "numberOfEmployees": 3
-        },
-        {
-            "startTime": "07:30",
-            "endTime": "07:30",
-            "day": "Sunday",
-            "numberOfEmployees": 2
-        }
-    ],
-    "employees": []
+    "storeHours": [],
+    "allEmployeeNeeds": [],
+    "employees": [{
+        "name": "Owen",
+        "job": "j",
+        "weeklyAvailability": [
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Monday"
+            },
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Tuesday"
+            },
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Wednesday"
+            },
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Thursday"
+            },
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Friday"
+            },
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Saturday"
+            },
+            {
+                "startTime": "07:30:00",
+                "endTime": "07:30:00",
+                "day": "Sunday"
+            }
+        ]
+    }]
 }

@@ -83,8 +83,8 @@ public class JsonReader {
     //MODIFIES: store
     //EFFECTS: turns employeelist that is stored in json into allEmployeeNeeds and uses it to set Store
     public void parseEmployeeList(JSONObject jsonObject, Store store) {
-        if (jsonObject.optJSONArray("employeeList") != null) {
-            JSONArray employeeListArray = jsonObject.optJSONArray("employeeList");
+        if (jsonObject.optJSONArray("employees") != null) {
+            JSONArray employeeListArray = jsonObject.optJSONArray("employees");
             for (int i = 0; i < employeeListArray.length(); i++) {
                 JSONObject employeeObject = employeeListArray.optJSONObject(i);
                 Employee employee = parseEmployee(employeeObject);

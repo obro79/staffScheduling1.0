@@ -133,7 +133,7 @@ public class UiHandler {
     //EFFECTS: Prints all the employee names in employeeList to the console
     public void printAllEmployeeNames(Store s) {
         System.out.println("List of all employee names:");
-        for (Employee e : EmployeeList.getInstance().getEmployeeList()) {
+        for (Employee e : s.getEmployeeList().getEmployeeList()) {
             System.out.println(e.getName());
         }
     }
