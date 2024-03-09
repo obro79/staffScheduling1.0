@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 
 
-// this class runs StoreApp
+// this class runs StoreApp.
 public class Main {
     // 1 needs to be done before 2
     // 1 needs to be done before 3,

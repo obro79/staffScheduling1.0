@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 
 
-// this class Handles all the user inputs
+// this class Handles all the user inputs.
 public class StoreApp {
 
     private static final String JSON_STORE = "./data/Store.json";

@@ -11,7 +11,7 @@ import model.DailyAvailability;
 import persistence.Writeable;
 
 
-//Represents an employee at the store with a name, job and availability
+//Represents an employee at the store with a name, job and availability.
 
 public class Employee implements Writeable {
 

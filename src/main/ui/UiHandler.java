@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 
-//this class Carries out the operations that the user wants to do given by the StoreApp
+//this class Carries out the operations that the user wants to do given by the StoreApp.
 
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);

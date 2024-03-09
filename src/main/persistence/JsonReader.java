@@ -18,7 +18,7 @@ import java.time.LocalTime;
 
 //this persistance package is heaviliy inspired by the example given to us
 
-//Takes all the data in the Json file and turns it into data that is used to set Store fields
+//Takes all the data in the Json file and turns it into data that is used to set Store fields.
 public class JsonReader {
     // Represents a reader that reads workroom from JSON data stored in file
     private String source;

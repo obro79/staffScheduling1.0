@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 
 //this persistance package is heaviliy inspired by the example given to us
 
-//Takes all the Json Data and writes it a Json File
+//Takes all the Json Data and writes it a Json File.
 public class JsonWriter {
 
     private static final int TAB = 4;

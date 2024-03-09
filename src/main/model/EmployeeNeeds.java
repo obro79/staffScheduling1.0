@@ -7,7 +7,7 @@ import persistence.Writeable;
 
 
 //EmployeeNeeds allows user to specify which day, and from a time to another time and the number of employees
-// needed at a time
+// needed at a time.
 public class EmployeeNeeds implements Writeable {
     private String day;
     private LocalTime startTime;
