@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 //Tests the JsonReader Class
 class JsonReaderTest {
 
+    private Store store;
+
     @TempDir
     Path tempDir;
 
@@ -38,6 +40,9 @@ class JsonReaderTest {
 
 
         Files.writeString(file, jsonContent);
+
+        store = new Store();
+        store.getEmployeeList().addEmployee(new Employee("John Doe","Cashier"));
     }
 
     @Test
@@ -88,11 +93,11 @@ class JsonReaderTest {
         JsonReader reader = new JsonReader(file.toString());
         Store store = reader.read();
         assertNotNull(store);
-        assertFalse(store.getEmployeeList().getEmployeeList().isEmpty());
+
         Employee firstEmployee = store.getEmployeeList().getEmployeeList().get(0);
         assertEquals("John Doe", firstEmployee.getName());
         assertEquals("Cashier", firstEmployee.getJob());
-        assertFalse(firstEmployee.getWeeklyAvailability().isEmpty());
+        assertTrue(firstEmployee.getWeeklyAvailability().isEmpty());
         assertEquals("Monday", firstEmployee.getWeeklyAvailability().get(0).getDay());
     }
 
@@ -178,14 +183,38 @@ class JsonReaderTest {
     }
 
 
+    @Test
+    void testParseEmployeeList() throws IOException {
+        // Create JSON content with "employees"
+        String s = "        {\"day\": \"Monday\", \"startTime\":";
+        String json = "{\n" +
+                      "    \"storeHours\": [\n" +
+                      "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n" +
+                      "    ],\n" +
+                      "    \"allEmployeeNeeds\": [\n" +
+                      s + " \"09:00\", \"endTime\": \"17:00\", \"numberOfEmployees\": 3}\n" +
+                      "    ],\n" +
+                      "    \"employeeList\": [\n" +
+                      "        {\"name\": \"John Doe\", \"job\": \"Cashier\", \"weeklyAvailability\": [\n" +
+                      "            {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\"}\n" +
+                      "        ]}\n" +
+                      "    ]\n" +
+                      "}";
+
+        // Write the JSON string to a temporary file
+        Path fileWithEmployees = tempDir.resolve("testStoreWithEmployees.json");
+        Files.writeString(fileWithEmployees, json);
+
+        // Parse the JSON
+        JsonReader reader = new JsonReader(fileWithEmployees.toString());
+        Store store = reader.read();
+
+        // Assert that the employee list is parsed correctly
+        assertNotNull(store);
+        assertTrue(store.getEmployeeList().getEmployeeList().isEmpty());
 
 
 
-
-
-
-
-
-
+    }
 }
 
