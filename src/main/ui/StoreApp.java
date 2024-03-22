@@ -7,13 +7,13 @@ import persistence.JsonWriter;
 import model.Store;
 import model.Employee;
 import model.EmployeeList;
+import ui.gui.GUI;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-
 
 
 // this class Handles all the user inputs.
@@ -26,6 +26,7 @@ public class StoreApp {
     private UiHandler uiHandler;
     private JSONObject jsonObject;
 
+
     public static final Scanner scanner = new Scanner(System.in);
 
     //EFFECTS: creates a new instance of a store with a UiHandler, thisStore, jsonWriter, jsonReader, jsonObject
@@ -35,68 +36,66 @@ public class StoreApp {
         this.jsonWriter = new JsonWriter(JSON_STORE);
         this.jsonReader = new JsonReader(JSON_STORE);
         this.jsonObject = new JSONObject();
-        runEmployeeManagementSystem();
     }
 
 
     @SuppressWarnings("methodlength")
 
-    //EFFECTS: will execute one of the cases inputted by the user
-    public void runEmployeeManagementSystem() throws FileNotFoundException {
-
-        try {
-            int option;
-            do {
-                printOptions();
-                option = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (option) {
-                    case 1:
-                        this.uiHandler.printAllStoreAttributes(this.thisStore);
-                        break;
-                    case 2:
-                        saveAllStoreAttributes();
-                        break;
-                    case 3:
-                        loadAllStoreAttributes();
-                        break;
-                    case 4:
-                        this.uiHandler.addEmployee();
-                        break;
-                    case 5:
-                        this.uiHandler.updateEmployeeAvailability(this.thisStore);
-                        break;
-                    case 6:
-                        this.uiHandler.printAllEmployeeNames(this.thisStore);
-                        break;
-                    case 7:
-                        this.uiHandler.getEmployeeAvailability(this.thisStore);
-                        break;
-                    case 8:
-                        this.uiHandler.printOperationalHours(this.thisStore);
-                        break;
-                    case 9:
-                        this.uiHandler.updateStoreHours(this.thisStore);
-                        break;
-                    case 10:
-                        this.uiHandler.updateEmployeeNeeds(this.thisStore);
-                        break;
-                    case 11:
-                        this.uiHandler.printEmployeeNeeds(this.thisStore);
-                        break;
-                    case 12:
-                        quit();
-                        break;
-                    default:
-                        System.out.println("Invalid option. Please select a valid option.");
-                }
-            } while (option != 12); // Update condition to reflect new exit option
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            //
-        }
-    }
+//    //EFFECTS: will execute one of the cases inputted by the user
+//    public void runEmployeeManagementSystem() throws FileNotFoundException {
+//
+//        try {
+//            int option;
+//            do {
+//                printOptions();
+//                option = scanner.nextInt();
+//                scanner.nextLine();
+//
+//                switch (option) {
+//                    case 1:
+//                        this.uiHandler.printAllStoreAttributes(this.thisStore);
+//                        break;
+//                    case 2:
+//                        saveAllStoreAttributes();
+//                        break;
+//                    case 3:
+//                        loadAllStoreAttributes();
+//                        break;
+//                    case 4:
+//                        this.uiHandler.addEmployee();
+//                        break;
+//                    case 5:
+//                        this.uiHandler.updateEmployeeAvailability(this.thisStore);
+//                        break;
+//                    case 6:
+//                        this.uiHandler.printAllEmployeeNames(this.thisStore);
+//                        break;
+//                    case 7:
+//                        this.uiHandler.getEmployeeAvailability(this.thisStore);
+//                        break;
+//                    case 8:
+//                        this.uiHandler.printOperationalHours(this.thisStore);
+//                        break;
+//                    case 9:
+//                        this.uiHandler.updateStoreHours(this.thisStore);
+//                        break;
+//                    case 10: this.uiHandler.updateEmployeeNeeds(this.thisStore);
+//                        break;
+//                    case 11:
+//                        this.uiHandler.printEmployeeNeeds(this.thisStore);
+//                        break;
+//                    case 12:
+//                        quit();
+//                        break;
+//                    default:
+//                        System.out.println("Invalid option. Please select a valid option.");
+//                }
+//            } while (option != 12); // Update condition to reflect new exit option
+//            scanner.close();
+//        } catch (FileNotFoundException e) {
+//            //
+//        }
+//    }
 
     //EFFECTS: prints all the options to the console
     public void printOptions() {

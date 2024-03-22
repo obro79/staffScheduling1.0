@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class UiHandler {
     public static final Scanner scanner = new Scanner(System.in);
 
-
     public UiHandler() {
 
     }
