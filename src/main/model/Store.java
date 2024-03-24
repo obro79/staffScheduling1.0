@@ -34,7 +34,6 @@ public class Store {
         return storeHours;
     }
 
-
     public List<EmployeeNeeds> getAllEmployeeNeeds() {
         return this.allEmployeeNeeds;
     }
