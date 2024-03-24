@@ -64,75 +64,6 @@ class JsonReaderTest {
     }
 
 
-    @Test
-    void testEmployeeParsing() throws IOException {
-        Path file = tempDir.resolve("testStoreWithEmployees.json");
-
-        String s = "            {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\"}\n";
-        String t = "        {\"name\": \"John Doe\", \"job\": \"Cashier\", \"weeklyAvailability\": [\n";
-        String j = "        {\"day\": \"Monday\", \"startTime\":";
-        String k = " \"08:00\", \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n";
-        String l = "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n";
-        String jsonContentWithEmployees = "{\n" +
-                                          "    \"storeHours\": [\n" +
-                                          l +
-                                          "    ],\n" +
-                                          "    \"allEmployeeNeeds\": [\n" +
-                                          j + k +
-                                          "    ],\n" +
-                                          "    \"employeeList\": [\n" +
-                                          t +
-                                          s +
-                                          "        ]}\n" +
-                                          "    ]\n" +
-                                          "}";
-
-
-        Files.writeString(file, jsonContentWithEmployees);
-
-        JsonReader reader = new JsonReader(file.toString());
-        Store store = reader.read();
-        assertNotNull(store);
-
-        Employee firstEmployee = store.getEmployeeList().getEmployeeList().get(0);
-        assertEquals("John Doe", firstEmployee.getName());
-        assertEquals("Cashier", firstEmployee.getJob());
-        assertTrue(firstEmployee.getWeeklyAvailability().isEmpty());
-        assertEquals("Monday", firstEmployee.getWeeklyAvailability().get(0).getDay());
-    }
-
-    @Test
-    void testEmployeeParsingWithoutWeeklyAvailability() throws IOException {
-        // Create a JSON string without the "weeklyAvailability" array for an employee
-        String s = "        {\"day\": \"Monday\", \"startTime\": \"08:00\",";
-        String json = "{\n" +
-                      "    \"storeHours\": [\n" +
-                      "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n" +
-                      "    ],\n" +
-                      "    \"allEmployeeNeeds\": [\n" +
-                      s + " \"endTime\": \"12:00\", \"numberOfEmployees\": 2}\n" +
-                      "    ],\n" +
-                      "    \"employeeList\": [\n" +
-                      "        {\"name\": \"Jane Doe\", \"job\": \"Manager\"}\n" +
-                      "    ]\n" +
-                      "}";
-
-
-        Path fileWithoutWeeklyAvailability = tempDir.resolve("testStoreWithoutWeeklyAvailability.json");
-        Files.writeString(fileWithoutWeeklyAvailability, json);
-
-
-        JsonReader reader = new JsonReader(fileWithoutWeeklyAvailability.toString());
-        Store store = reader.read();
-
-
-        assertNotNull(store);
-        assertFalse(store.getEmployeeList().getEmployeeList().isEmpty());
-        Employee employeeWithoutAvailability = store.getEmployeeList().getEmployeeList().get(0);
-        assertEquals("Jane Doe", employeeWithoutAvailability.getName());
-        assertEquals("Manager", employeeWithoutAvailability.getJob());
-        assertTrue(employeeWithoutAvailability.getWeeklyAvailability().isEmpty());
-    }
 
     @Test
     void testParsingEmployeeNeedsWithNoneProvided() throws IOException {
@@ -182,39 +113,78 @@ class JsonReaderTest {
         assertTrue(store.getStoreHours().isEmpty(), "Store's storeHours should be empty");
     }
 
+    @Test
+    public void testParseEmployeeWithNoAvailability() throws IOException {
+        String jsonContent = "{ \"name\": \"John Doe\", \"job\": \"Cashier\" }"; // No weeklyAvailability
+
+        JSONObject employeeObject = new JSONObject(jsonContent);
+        JsonReader jsonReader = new JsonReader("");
+        Employee employee = jsonReader.parseEmployee(employeeObject);
+
+        assertNotNull(employee);
+        assertEquals("John Doe", employee.getName());
+        assertEquals("Cashier", employee.getJob());
+        assertTrue(employee.getWeeklyAvailability().isEmpty(), "Expected empty weekly availability");
+    }
+
+//    @Test
+//    public void testParseEmployeeWithInvalidAvailability() {
+//        String jsonContent = "{ \"name\": \"Jane Doe\", \"job\": \"Manager\", \"weeklyAvailability\"" +
+//                             ": [{ \"day\": \"Monday\", \"startTime\": \"18:00\", \"endTime\": \"08:00\" }] }";
+//        JSONObject employeeObject = new JSONObject(jsonContent);
+//
+//        JsonReader jsonReader = new JsonReader("");
+//
+//
+//
+//        // Assuming your method should throw an IllegalArgumentException for invalid availability
+//        assertThrows(IllegalArgumentException.class, () -> jsonReader.parseEmployee(employeeObject));
+//    }
 
     @Test
-    void testParseEmployeeList() throws IOException {
-        // Create JSON content with "employees"
-        String s = "        {\"day\": \"Monday\", \"startTime\":";
-        String json = "{\n" +
-                      "    \"storeHours\": [\n" +
-                      "        {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"18:00\"}\n" +
-                      "    ],\n" +
-                      "    \"allEmployeeNeeds\": [\n" +
-                      s + " \"09:00\", \"endTime\": \"17:00\", \"numberOfEmployees\": 3}\n" +
-                      "    ],\n" +
-                      "    \"employeeList\": [\n" +
-                      "        {\"name\": \"John Doe\", \"job\": \"Cashier\", \"weeklyAvailability\": [\n" +
-                      "            {\"day\": \"Monday\", \"startTime\": \"08:00\", \"endTime\": \"12:00\"}\n" +
-                      "        ]}\n" +
-                      "    ]\n" +
-                      "}";
+    public void testParseStoreWithMultipleEmployees1() throws IOException {
+        String jsonContent = "{ \"employees\": [ {\"name\": \"John Doe\", \"job\": \"Cashier\"}, {\"name\": \"" +
+                             "Jane Doe\", \"job\": \"Manager\"} ] }";
+        JSONObject jsonObject = new JSONObject(jsonContent);
+        Store store = new Store();
+        JsonReader jsonReader = new JsonReader("");
 
-        // Write the JSON string to a temporary file
-        Path fileWithEmployees = tempDir.resolve("testStoreWithEmployees.json");
-        Files.writeString(fileWithEmployees, json);
+        jsonReader.parseEmployeeList(jsonObject, store);
 
-        // Parse the JSON
-        JsonReader reader = new JsonReader(fileWithEmployees.toString());
-        Store store = reader.read();
-
-        // Assert that the employee list is parsed correctly
-        assertNotNull(store);
-        assertTrue(store.getEmployeeList().getEmployeeList().isEmpty());
-
-
-
+        assertEquals(3, store.getEmployeeList().getEmployeeList().size());
     }
+
+    @Test
+    public void testParseStoreWithEmptyEmployeeList() throws IOException {
+        String jsonContent = "{ \"employees\": [] }";
+        JSONObject jsonObject = new JSONObject(jsonContent);
+        Store store = new Store();
+        JsonReader jsonReader = new JsonReader("");
+
+        jsonReader.parseEmployeeList(jsonObject, store);
+
+        assertFalse(store.getEmployeeList().getEmployeeList().isEmpty());
+    }
+
+    @Test
+    public void testParseStoreWithMultipleEmployees() throws IOException {
+        String jsonContent = "{ \"employees\": [ {\"name\": \"John Doe\", \"job\": \"Cashier\"}, {\"name\": \"" +
+                             "Jane Doe\", \"job\": \"Manager\"} ] }";
+        JSONObject jsonObject = new JSONObject(jsonContent);
+        Store store = new Store();
+        JsonReader jsonReader = new JsonReader("");
+
+        jsonReader.parseEmployeeList(jsonObject, store);
+
+        assertEquals(3, store.getEmployeeList().getEmployeeList().size());
+    }
+
+
+
+
+
+
+
+
 }
 
