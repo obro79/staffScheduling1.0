@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalTime;
 
 //Tests the JsonReader Class
 class JsonReaderTest {
@@ -181,10 +184,96 @@ class JsonReaderTest {
 
 
 
+    @Test
+    public void testParseEmployeeWithAvailability() throws IOException {
+        // Prepare JSON data for an employee with weekly availability
+        String jsonContent =
+                "{\n" +
+                "  \"name\": \"Alice Johnson\",\n" +
+                "  \"job\": \"Supervisor\",\n" +
+                "  \"weeklyAvailability\": [\n" +
+                "    {\n" +
+                "      \"day\": \"Monday\",\n" +
+                "      \"startTime\": \"09:00\",\n" +
+                "      \"endTime\": \"17:00\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"day\": \"Wednesday\",\n" +
+                "      \"startTime\": \"10:00\",\n" +
+                "      \"endTime\": \"18:00\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
 
 
+        JSONObject employeeObject = new JSONObject(jsonContent);
+        JsonReader jsonReader = new JsonReader(""); // Mocked JsonReader
+        Employee employee = jsonReader.parseEmployee(employeeObject);
+
+        assertNotNull(employee);
+        assertEquals("Alice Johnson", employee.getName());
+        assertEquals("Supervisor", employee.getJob());
+        List<DailyAvailability> availabilities = employee.getWeeklyAvailability();
+        assertEquals(2, availabilities.size());
+        assertEquals(LocalTime.of(9, 0), availabilities.get(0).getStartTime());
+        assertEquals(LocalTime.of(17, 0), availabilities.get(0).getEndTime());
+        assertEquals("Monday", availabilities.get(0).getDay());
+        assertEquals(LocalTime.of(10, 0), availabilities.get(1).getStartTime());
+        assertEquals(LocalTime.of(18, 0), availabilities.get(1).getEndTime());
+        assertEquals("Wednesday", availabilities.get(1).getDay());
+    }
+
+    @Test
+    public void testParseStoreWithMultipleEmployeesAndAvailability() throws IOException {
+        // Prepare JSON data for a store with multiple employees, including their availability
+        String jsonContent =
+                "{\n" +
+                "  \"employees\": [\n" +
+                "    {\n" +
+                "      \"name\": \"Alice Johnson\",\n" +
+                "      \"job\": \"Supervisor\",\n" +
+                "      \"weeklyAvailability\": [\n" +
+                "        {\n" +
+                "          \"day\": \"Monday\",\n" +
+                "          \"startTime\": \"09:00\",\n" +
+                "          \"endTime\": \"17:00\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"name\": \"Bob Smith\",\n" +
+                "      \"job\": \"Sales\",\n" +
+                "      \"weeklyAvailability\": [\n" +
+                "        {\n" +
+                "          \"day\": \"Tuesday\",\n" +
+                "          \"startTime\": \"10:00\",\n" +
+                "          \"endTime\": \"18:00\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
 
 
+        JSONObject jsonObject = new JSONObject(jsonContent);
+        JsonReader jsonReader = new JsonReader(""); // Mocked JsonReader
+        Store store = jsonReader.parseStore(jsonObject);
 
+        assertNotNull(store);
+        assertEquals(3, store.getEmployeeList().getEmployeeList().size());
+        Employee firstEmployee = store.getEmployeeList().getEmployeeList().get(0);
+        assertEquals("John Doe", firstEmployee.getName());
+        assertEquals(0, firstEmployee.getWeeklyAvailability().size());
+        Employee secondEmployee = store.getEmployeeList().getEmployeeList().get(1);
+        assertEquals("Alice Johnson", secondEmployee.getName());
+        assertEquals(1, secondEmployee.getWeeklyAvailability().size());
+    }
 }
+
+
+
+
+
+
+
 
