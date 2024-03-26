@@ -16,6 +16,13 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.List;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 
 //Creates and handles the Graphical user interface
@@ -71,7 +78,7 @@ public class GUI {
 
     //EFFECTS: initializes all the panels for the store and add it to cardPanel
     //MODIFIES: this
-    private void initializePanels() {
+    public void initializePanels() {
         // Main window panel
         JPanel mainPanel = mainWindow();
         this.cardPanel.add(mainPanel, "Main");
@@ -109,7 +116,7 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates the main window with all its buttons
-    private JPanel mainWindow() {
+    public JPanel mainWindow() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -134,7 +141,7 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates the employeeSettingsWindow window with all its buttons
-    private JPanel employeeSettingsWindow() {
+    public JPanel employeeSettingsWindow() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalGlue());
@@ -150,8 +157,10 @@ public class GUI {
         return panel;
     }
 
+
+
     //EFFECTS: returns and creates a panel containing a button
-    private JPanel createButtonPanel(String buttonText, ActionListener actionListener) {
+    public JPanel createButtonPanel(String buttonText, ActionListener actionListener) {
         JButton button = createButton(buttonText, actionListener);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         // Set both the maximum and preferred size to control the button size
@@ -168,13 +177,14 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates a JButton with text and a listener
-    private JButton createButton(String text, ActionListener listener) {
+    public JButton createButton(String text, ActionListener listener) {
         JButton button = new JButton(text);
         button.addActionListener(listener);
         return button;
     }
 
     //EFFECTS: returns and creates the update Store Hours Panel panel with all its buttons
+    //MODIFEIS: this
     public JPanel updateStoreHoursPanel() {
         JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -226,7 +236,7 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates a panel for to update the schedule needs
-    private JPanel updateSchedulingNeedsPanel() {
+    public JPanel updateSchedulingNeedsPanel() {
         JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalGlue());
@@ -251,10 +261,8 @@ public class GUI {
         });
         JButton backButton = createButton("Back", e -> switchToCard("Main"));
 
-        panel.add(dayPanel);
-        panel.add(openTimePanel);
-        panel.add(closeTimePanel);
-        panel.add(check);
+        addPanels(panel,dayPanel,openTimePanel,closeTimePanel,check);
+        panel.add(sameForWeekCheckbox);
         panel.add(saveButton);
         panel.add(backButton);
 
@@ -262,7 +270,7 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates a panel to add an employee
-    private JPanel addEmployeePanel() {
+    public JPanel addEmployeePanel() {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -297,7 +305,7 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates a panel to represent all the stuff you can do with the store
-    private JPanel storeSettingsPanel() {
+    public JPanel storeSettingsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalGlue());
@@ -338,7 +346,7 @@ public class GUI {
     }
 
     //EFFECTS: returns and creates a panel to display all the employee info
-    private JPanel employeeInfoWindow() {
+    public JPanel employeeInfoWindow() {
         JPanel panel = new JPanel(new BorderLayout());
         employeeInfoTextArea.setEditable(false);
 
@@ -380,7 +388,8 @@ public class GUI {
         JComboBox<String> dayDropdown = createComponent(JComboBox.class, DAYS_OF_WEEK, 0);
         JComboBox<String> startTimeDropdown = createComponent(JComboBox.class, TIMES, 0);
         JComboBox<String> endTimeDropdown = createComponent(JComboBox.class, TIMES, 0);
-        JCheckBox sameForWeek = createComponent(JCheckBox.class, "Apply to entire week", 0);
+        JCheckBox sameForWeek = createComponent(JCheckBox.class, "Same for the rest of the week?",
+                0);
 
         JPanel namePanel = createLabeledTextField(new JLabel("Employee Name:"), nameField);
         JPanel dayPanel = createLabeledComboBoxPanel(new JLabel("Day: "),dayDropdown);
@@ -394,6 +403,7 @@ public class GUI {
         JButton backButton = createButton("Back", e -> switchToCard("Main"));
 
         addPanels(panel,namePanel,dayPanel,openTimePanel,closeTimePanel);
+        panel.add(sameForWeek);
         panel.add(nextButton);
         panel.add(backButton);
         panel.add(Box.createVerticalGlue());
@@ -411,7 +421,7 @@ public class GUI {
     }
 
     //EFFECTS: switches the to the card with the given card name
-    private void switchToCard(String cardName) {
+    public void switchToCard(String cardName) {
         updateEmployeeInfo();
         updateStoreInfo();
         cardLayout.show(cardPanel, cardName);
@@ -461,7 +471,7 @@ public class GUI {
 
 
     //EFFECTS creates either a combobox or a checkbox
-    private <T> T createComponent(Class<T> componentClass, Object itemsOrText, int columns) {
+    public <T> T createComponent(Class<T> componentClass, Object itemsOrText, int columns) {
         if (componentClass == JComboBox.class) {
             JComboBox<String> comboBox = new JComboBox<>((String[]) itemsOrText);
             if (columns > 0) {
@@ -477,6 +487,7 @@ public class GUI {
     //SAVE METHODS
 
     //EFFECTS: saves an employee
+    //MODIFEIS: this
     public void saveEmployee(JTextField name,JTextField job) {
         String employeeName = name.getText();
         String employeejob = job.getText();
@@ -491,6 +502,7 @@ public class GUI {
     }
 
     //EFFECTS: saves an employees availability
+    //MODIFEIS: this
     public void saveEmployeeAvailability(JComboBox<String> day, JComboBox<String> open, JComboBox<String> close,
                                          JCheckBox restWeek, JTextField name) {
 
@@ -583,17 +595,36 @@ public class GUI {
     }
 
     //EFFECTS: saves entire store
-    private void saveStore() {
+    public void saveStore() {
+        JPanel panel = new JPanel(new BorderLayout()); // Create a panel with BorderLayout
+
+        JLabel picture;
+        try {
+            BufferedImage myPic = ImageIO.read(this.getClass().getResource("Store.png"));
+            picture = new JLabel(new ImageIcon(myPic));
+            panel.add(picture, BorderLayout.CENTER);
+        } catch (Exception e) {
+            System.out.println("Error loading image: " + e.getMessage());
+            picture = new JLabel("Store saved successfully, but image could not be loaded.");
+            panel.add(picture, BorderLayout.CENTER);
+        }
+
+        JLabel label = new JLabel("Store saved successfully!"); // Create a label with text
+        panel.add(label, BorderLayout.SOUTH);
+
         try {
             storeApp.saveAllStoreAttributes();
-            JOptionPane.showMessageDialog(frame, "Store saved successfully.");
+            JOptionPane.showMessageDialog(null, panel, "Store Saved",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(frame, "Error saving the store: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error saving the store: " + e.getMessage());
         }
     }
 
+
     //EFFECTS: loads entire store from Json file
-    private void loadStore() {
+    //MODIFIES: store
+    public void loadStore() {
         try {
             storeApp.loadAllStoreAttributes();
             JOptionPane.showMessageDialog(frame, "Store loaded successfully.");

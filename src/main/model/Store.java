@@ -7,7 +7,6 @@ import java.util.List;
 
 
 
-
 // Stores all attributes that belong to a store, storeHours, allEmployeeNeeds, employeeList.
 public class Store {
     private static Store instance;
@@ -41,6 +40,10 @@ public class Store {
     public EmployeeList getEmployeeList() {
         return this.employeeList;
 
+    }
+
+    public Store getStore() {
+        return this;
     }
 
 
