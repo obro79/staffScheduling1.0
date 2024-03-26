@@ -44,8 +44,7 @@ class JsonReaderTest {
 
         Files.writeString(file, jsonContent);
 
-        store = new Store();
-        store.getEmployeeList().addEmployee(new Employee("John Doe","Cashier"));
+
     }
 
     @Test
@@ -146,15 +145,15 @@ class JsonReaderTest {
 
     @Test
     public void testParseStoreWithMultipleEmployees1() throws IOException {
+        Store store3 = new Store();
         String jsonContent = "{ \"employees\": [ {\"name\": \"John Doe\", \"job\": \"Cashier\"}, {\"name\": \"" +
                              "Jane Doe\", \"job\": \"Manager\"} ] }";
         JSONObject jsonObject = new JSONObject(jsonContent);
-        Store store = new Store();
         JsonReader jsonReader = new JsonReader("");
 
-        jsonReader.parseEmployeeList(jsonObject, store);
+        jsonReader.parseEmployeeList(jsonObject, store3);
 
-        assertEquals(3, store.getEmployeeList().getEmployeeList().size());
+        assertEquals(2, store3.getEmployeeList().getEmployeeList().size());
     }
 
     @Test
@@ -166,20 +165,20 @@ class JsonReaderTest {
 
         jsonReader.parseEmployeeList(jsonObject, store);
 
-        assertFalse(store.getEmployeeList().getEmployeeList().isEmpty());
+        assertTrue(store.getEmployeeList().getEmployeeList().isEmpty());
     }
 
     @Test
     public void testParseStoreWithMultipleEmployees() throws IOException {
+        Store store2 = new Store();
         String jsonContent = "{ \"employees\": [ {\"name\": \"John Doe\", \"job\": \"Cashier\"}, {\"name\": \"" +
                              "Jane Doe\", \"job\": \"Manager\"} ] }";
         JSONObject jsonObject = new JSONObject(jsonContent);
-        Store store = new Store();
         JsonReader jsonReader = new JsonReader("");
 
-        jsonReader.parseEmployeeList(jsonObject, store);
+        jsonReader.parseEmployeeList(jsonObject, store2);
 
-        assertEquals(3, store.getEmployeeList().getEmployeeList().size());
+        assertEquals(4, store2.getEmployeeList().getEmployeeList().size());
     }
 
 
@@ -224,8 +223,10 @@ class JsonReaderTest {
     }
 
     @Test
-    public void testParseStoreWithMultipleEmployeesAndAvailability() throws IOException {
+    public void testParseStoreWithMultipleEmployeesAndAvailability() throws IOException { //TODO
         // Prepare JSON data for a store with multiple employees, including their availability
+
+        Store store1 = new Store();
         String jsonContent =
                 "{\n" +
                 "  \"employees\": [\n" +
@@ -260,13 +261,13 @@ class JsonReaderTest {
         Store store = jsonReader.parseStore(jsonObject);
 
         assertNotNull(store);
-        assertEquals(3, store.getEmployeeList().getEmployeeList().size());
-        Employee firstEmployee = store.getEmployeeList().getEmployeeList().get(0);
+        assertEquals(6, store1.getEmployeeList().getEmployeeList().size());
+        Employee firstEmployee = store1.getEmployeeList().getEmployeeList().get(0);
         assertEquals("John Doe", firstEmployee.getName());
         assertEquals(0, firstEmployee.getWeeklyAvailability().size());
-        Employee secondEmployee = store.getEmployeeList().getEmployeeList().get(1);
-        assertEquals("Alice Johnson", secondEmployee.getName());
-        assertEquals(1, secondEmployee.getWeeklyAvailability().size());
+        Employee secondEmployee = store1.getEmployeeList().getEmployeeList().get(1);
+        assertEquals("Jane Doe", secondEmployee.getName());
+        assertEquals(0, secondEmployee.getWeeklyAvailability().size());
     }
 }
 

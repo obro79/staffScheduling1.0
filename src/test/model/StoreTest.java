@@ -21,7 +21,6 @@ public class StoreTest {
 
     public void runBefore() {
 
-
     }
 
     @Test
