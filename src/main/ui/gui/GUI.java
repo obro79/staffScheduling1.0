@@ -9,20 +9,17 @@ import model.Store;
 import ui.StoreApp;
 
 import javax.swing.*;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import java.util.Comparator;
+import java.util.Collections;
+import java.util.stream.*;
 
 
 //Creates and handles the Graphical user interface
@@ -122,7 +119,6 @@ public class GUI {
 
         panel.add(Box.createVerticalGlue());
 
-
         panel.add(createButtonPanel("Load Store", e -> loadStore()));
         panel.add(createButtonPanel("Save Store", e -> saveStore()));
         panel.add(createButtonPanel("Employee Settings",
@@ -130,12 +126,7 @@ public class GUI {
         panel.add(createButtonPanel("Schedule Settings",
                 e -> switchToCard("Schedule Settings")));
 
-
-
-
         panel.add(Box.createVerticalGlue());
-
-        // Add the grid panel to the centeredPanel with constraints
 
         return panel;
     }
@@ -156,8 +147,6 @@ public class GUI {
 
         return panel;
     }
-
-
 
     //EFFECTS: returns and creates a panel containing a button
     public JPanel createButtonPanel(String buttonText, ActionListener actionListener) {
@@ -358,10 +347,60 @@ public class GUI {
 
         JPanel bottomPanel = new JPanel(); // For better alignment of the back button
         JButton backButton = createButton("Back", e -> switchToCard("Main"));
+        JButton sortButton = createButton("Sort Alphabetically",
+                e -> makeAlphabetical());
+        JButton sortNoAvailability = createButton("Employees Without Availability",
+                e -> getEmployeesWithNoAvailabilityInfo());
+
         bottomPanel.add(backButton);
+        bottomPanel.add(sortButton);
+        bottomPanel.add(sortNoAvailability);
         panel.add(bottomPanel, BorderLayout.PAGE_END);
 
         return panel;
+    }
+
+    public void makeAlphabetical() {
+        List<Employee> employees = this.storeApp.getThisStore().getEmployeeList().getEmployeeList();
+        // Sort the employees list by name
+        Collections.sort(employees, Comparator.comparing(Employee::getName));
+
+        StringBuilder finalString = new StringBuilder();
+
+        for (Employee emp : employees) {
+            finalString.append("\n");
+            finalString.append("Name: ").append(emp.getName());
+            finalString.append("\n");
+            finalString.append("Job: ").append(emp.getJob());
+            for (DailyAvailability d : emp.getWeeklyAvailability()) {
+                finalString.append("\n");
+                finalString.append(" ");
+                finalString.append(d.toString());
+            }
+        }
+
+        employeeInfoTextArea.setText(finalString.toString());
+       // updateEmployeeInfo();
+    }
+
+    public void getEmployeesWithNoAvailabilityInfo() {
+        List<Employee> employees = this.storeApp.getThisStore().getEmployeeList().getEmployeeList();
+
+        List<Employee> employeesWithNoAvailability = employees.stream()
+                .filter(emp -> emp.getWeeklyAvailability() == null || emp.getWeeklyAvailability().isEmpty())
+                .collect(Collectors.toList());
+
+        StringBuilder finalString = new StringBuilder();
+
+        for (Employee emp : employeesWithNoAvailability) {
+            finalString.append("\n");
+            finalString.append("Name: ").append(emp.getName());
+            finalString.append("\n");
+            finalString.append("Job: ").append(emp.getJob());
+
+        }
+        employeeInfoTextArea.setText(finalString.toString());
+
     }
 
     //EFFECTS: Method to update the text in JTextArea for employees
@@ -420,7 +459,7 @@ public class GUI {
         main.add(e);
     }
 
-    //EFFECTS: switches the to the card with the given card name
+    //EFFECTS: switches  to the card with the given card name
     public void switchToCard(String cardName) {
         updateEmployeeInfo();
         updateStoreInfo();
@@ -502,7 +541,7 @@ public class GUI {
     }
 
     //EFFECTS: saves an employees availability
-    //MODIFEIS: this
+    //MODIFIES: this
     public void saveEmployeeAvailability(JComboBox<String> day, JComboBox<String> open, JComboBox<String> close,
                                          JCheckBox restWeek, JTextField name) {
 
@@ -620,7 +659,6 @@ public class GUI {
             JOptionPane.showMessageDialog(null, "Error saving the store: " + e.getMessage());
         }
     }
-
 
     //EFFECTS: loads entire store from Json file
     //MODIFIES: store

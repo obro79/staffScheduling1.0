@@ -1,5 +1,52 @@
 {
     "storeHours": [],
     "allEmployeeNeeds": [],
-    "employees": []
+    "employees": [
+        {
+            "name": "Owen",
+            "job": "makr",
+            "weeklyAvailability": []
+        },
+        {
+            "name": "Oliver",
+            "job": "makr",
+            "weeklyAvailability": [
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Monday"
+                },
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Tuesday"
+                },
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Wednesday"
+                },
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Thursday"
+                },
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Friday"
+                },
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Saturday"
+                },
+                {
+                    "startTime": "00:00:00",
+                    "endTime": "01:00:00",
+                    "day": "Sunday"
+                }
+            ]
+        }
+    ]
 }

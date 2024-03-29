@@ -36,7 +36,6 @@ public class DailyAvailability implements Writeable {
     }
 
 
-
     public String getDay() {
         return this.day;
     }

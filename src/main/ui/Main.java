@@ -1,7 +1,8 @@
 package ui;
 
-//import model.scheduling.Schedule;
+
 import ui.gui.GUI;
+//import model.scheduling.*;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -25,7 +26,8 @@ public class Main {
 
 //                    storeApp.loadAllStoreAttributes(); //delete later
 //                    Schedule schedule = new Schedule(storeApp); //
-//                    schedule.maximizeEmployeeHours(); //
+//                    schedule.solve();
+
 
                     GUI gui =  new GUI(storeApp);
                     gui.initializeUI();
