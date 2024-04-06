@@ -24,8 +24,6 @@ public class StoreApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-
-
     public static final Scanner scanner = new Scanner(System.in);
 
     //EFFECTS: creates a new instance of a store with a UiHandler, thisStore, jsonWriter, jsonReader, jsonObject

@@ -42,7 +42,8 @@ Employee Need was added for Monday12:0014:00with 4 employees"
 
 
 Phase 4: Task 3
-![IMG_37D11E445829-1.jpeg](..%2FDownloads%2FIMG_37D11E445829-1.jpeg)
+![IMG_0502.jpg](..%2FDownloads%2FIMG_0502.jpg)
+
 after looking at the UML diagram for my project I see some things that could be changed to help improve the structure.
 
 1. The employee list class is uneccesary. It just stores a list of Employees. It does implement the singleton pattern,

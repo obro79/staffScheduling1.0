@@ -2,6 +2,7 @@ package ui.gui;
 
 import model.*;
 import model.scheduling.Schedule;
+import ui.LogPrinter;
 import ui.StoreApp;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ import model.EventLog;
 import model.Event;
 
 //Creates and handles the Graphical user interface
-public class GUI {
+public class GUI implements LogPrinter {
 
     private JFrame frame;
     private CardLayout cardLayout;
@@ -73,17 +74,15 @@ public class GUI {
         this.frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                printLog();
+                printLog(EventLog.getInstance());
             }
         });
     }
 
-    public void printLog() {
+    public void printLog(EventLog el) {
         for (Event e : EventLog.getInstance()) {
             System.out.println(e);
-            System.out.println("test inside the loop");
         }
-        System.out.println("test outstide for loop");
     }
 
 
