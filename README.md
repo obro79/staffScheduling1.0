@@ -24,6 +24,23 @@ adding more employees.
 - As a user, I want to be able to save my list of employees if i choose to
 - As a user, I want to be able to be able to load my employee list if i choose to
 
+
+Phase 4: Task 2 
+
+Examples of Logged Events: 
+
+- "Sat Apr 06 16:03:10 PDT 2024
+Employee Need was added for Monday12:0014:00with 4 employees"
+- "Sat Apr 06 16:03:10 PDT 2024
+  New Employee added with name alex and job job"
+- "Sat Apr 06 16:03:10 PDT 2024
+  Daily Availability was added: Thursday,00:00-23:30"
+- "Sat Apr 06 16:05:03 PDT 2024
+  Employees were sorted alphabetically"
+- "Sat Apr 06 16:05:04 PDT 2024
+  Employees without availability were filtered"
+
+
 Phase 4: Task 3
 
 after looking at the UML diagram for my project I see some things that could be changed to help improve the structure.

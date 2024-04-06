@@ -59,7 +59,7 @@ public class Store {
     //EFFECTS: logs the employee sort function
     //MODIFIES: log
     public void employeeSortLog() {
-        EventLog.getInstance().logEvent(new Event("Employees were sorted"));
+        EventLog.getInstance().logEvent(new Event("Employees were sorted alphabetically"));
     }
 
     //EFFECTS: logs the employee filter function

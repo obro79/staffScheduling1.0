@@ -423,7 +423,6 @@ public class GUI {
         employeeInfoTextArea.setText(finalString.toString());
     }
 
-    //TODO move these logs out of the UI packagae
     //EFFECTS: displays the employees that dont have availability filled out
     public void getEmployeesWithNoAvailabilityInfo() {
         this.storeApp.getThisStore().employeeFilterLog();
