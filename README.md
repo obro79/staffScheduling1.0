@@ -42,11 +42,13 @@ Employee Need was added for Monday12:0014:00with 4 employees"
 
 
 Phase 4: Task 3
-
+![IMG_37D11E445829-1.jpeg](..%2FDownloads%2FIMG_37D11E445829-1.jpeg)
 after looking at the UML diagram for my project I see some things that could be changed to help improve the structure.
 
-1. The employee list class in uneccesary. It just stores a list of Employees it does implement the singleton patter, but
-it doesn't need to do that. Instead I can just have a feild in store hold a list of employees.
+1. The employee list class is uneccesary. It just stores a list of Employees. It does implement the singleton pattern,
+but it doesn't need to do that. Instead I can just have a feild in store hold a list of employees.
 
 2. Also i have 3 classes that have a 0 ... * relationship with DailyAvailability. I'm not entierly sure what fix would
 be best, but some type of heirarchy with an interface could help this.
+
+3. The schedule class does not need an association with the employeeNeeds class it just needs access to the Store app.
