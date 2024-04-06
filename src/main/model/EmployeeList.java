@@ -18,7 +18,6 @@ public class EmployeeList {
         this.employeeList = new ArrayList<>();
     }
 
-
     public List<Employee> getEmployeeList() {
         return this.employeeList;
     }

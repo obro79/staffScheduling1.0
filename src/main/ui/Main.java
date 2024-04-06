@@ -2,7 +2,7 @@ package ui;
 
 
 import ui.gui.GUI;
-//import model.scheduling.*;
+import model.scheduling.*;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class Main {
             public void run() {
                 try {
                     StoreApp storeApp = new StoreApp();
-
+//
 //                    storeApp.loadAllStoreAttributes(); //delete later
 //                    Schedule schedule = new Schedule(storeApp); //
 //                    schedule.solve();

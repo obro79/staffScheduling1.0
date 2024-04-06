@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import org.json.*;
 import persistence.Writeable;
 
-
 //EmployeeNeeds allows user to specify which day, and from a time to another time and the number of employees
 // needed at a time.
 public class EmployeeNeeds implements Writeable {
@@ -20,8 +19,13 @@ public class EmployeeNeeds implements Writeable {
         this.startTime = startTime;
         this.endTime = endTime;
         this.numberOfEmployees = numberOfEmployees;
+        String startString = startTime.toString();
+        String endString = endTime.toString();
+        String numString = String.valueOf(numberOfEmployees);
+        String eventString = "Employee Need was added for "
+                             + day + startString + endString + "with " + numString + " employees";
+        EventLog.getInstance().logEvent(new Event(eventString));
     }
-
 
     //EFFECTS: converts EmployeeNeeds to a string
     public String toString() {
@@ -37,7 +41,6 @@ public class EmployeeNeeds implements Writeable {
         json.put("numberOfEmployees", this.numberOfEmployees);
         return json;
     }
-
 
     public String getDay() {
         return this.day;

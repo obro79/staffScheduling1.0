@@ -19,6 +19,10 @@ public class DailyAvailability implements Writeable {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
+        String startString = startTime.toString();
+        String endString = endTime.toString();
+        EventLog.getInstance().logEvent(new Event("Daily Availability was added: "
+                                                  + day + "," + startString + "-" + endString));
     }
 
     //EFFECTS: returns the DailyAvailability as a String

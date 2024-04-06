@@ -1,26 +1,24 @@
 package ui.gui;
 
-import model.DailyAvailability;
-import model.Employee;
-import model.EmployeeList;
-import model.EmployeeNeeds;
-import model.Store;
-
+import model.*;
+import model.scheduling.Schedule;
 import ui.StoreApp;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.util.Comparator;
 import java.util.Collections;
 import java.util.stream.*;
-
+import java.awt.event.WindowEvent;
+import model.EventLog;
+import model.Event;
 
 //Creates and handles the Graphical user interface
 public class GUI {
@@ -32,7 +30,7 @@ public class GUI {
     private int currentDayIndex;
     private JTextArea employeeInfoTextArea;
     private JTextArea scheduleInfoTextArea;
-    private JTextArea storeInfoTextArea;
+    private JTextArea scheduleAssignments;
 
     private static final String[] DAYS_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
             "Sunday"};
@@ -48,20 +46,21 @@ public class GUI {
         this.currentDayIndex = 0;
         this.employeeInfoTextArea = new JTextArea();
         this.scheduleInfoTextArea = new JTextArea();
-        this.storeInfoTextArea = new JTextArea();
+        this.scheduleAssignments = new JTextArea();
     }
 
-    //EFFECTS: creates the only JFrame and only cardlayout and sets all its attributs
+    //EFFECTS: creates the only JFrame and only cardlayout and sets all its attributes
     public void initializeUI() {
         this.frame = new JFrame("Schedule Manager");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(600, 400));
 
         this.cardLayout = new CardLayout();
-        this.cardPanel = new JPanel(cardLayout); // cardPanel must be initialized before adding panels to it
+        this.cardPanel = new JPanel(cardLayout);
+
 
         // Initialize panels
-        JPanel mainPanel = mainWindow(); // Ensure this method does not return null
+        JPanel mainPanel = mainWindow();
         this.cardPanel.add(mainPanel, "Main");
 
         initializePanels();
@@ -71,7 +70,22 @@ public class GUI {
         this.frame.setLocationRelativeTo(null); // Center window on screen
         this.cardLayout.show(cardPanel, "Main");
         this.frame.setVisible(true);
+        this.frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printLog();
+            }
+        });
     }
+
+    public void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e);
+            System.out.println("test inside the loop");
+        }
+        System.out.println("test outstide for loop");
+    }
+
 
     //EFFECTS: initializes all the panels for the store and add it to cardPanel
     //MODIFIES: this
@@ -109,7 +123,8 @@ public class GUI {
         JPanel viewScheduleAttributes = viewScheduleAttributes();
         cardPanel.add(viewScheduleAttributes, "View All Schedule Stuff");
 
-
+        JPanel viewScheduleWindow = viewScheduleWindow();
+        cardPanel.add(viewScheduleWindow, "Schedule Window");
     }
 
     //EFFECTS: returns and creates the main window with all its buttons
@@ -276,7 +291,6 @@ public class GUI {
         // Save button with action to add an employee
         JButton saveButton = createButton("Save Employee", e -> {
             saveEmployee(nameField,jobField);
-            // Implement saving logic here
         });
 
         // Back button to return to the main menu
@@ -306,7 +320,8 @@ public class GUI {
                 e -> switchToCard("Update Scheduling Needs")));
         panel.add(createButtonPanel("View All Schedule Stuff",
                 e -> switchToCard("View All Schedule Stuff")));
-
+        panel.add(createButtonPanel("Create Schedule",
+                e -> switchToCard("Schedule Window")));
         // Back button to return to the main menu
         panel.add(createButtonPanel("Back", e -> switchToCard("Main")));
 
@@ -360,7 +375,33 @@ public class GUI {
         return panel;
     }
 
+    //TODO initialize panel in that method "Schedule Window"
+    //EFFECTS: returns and creates a panel to display all the employee info
+    public JPanel viewScheduleWindow() {
+        String theString = new Schedule(this.storeApp).solve();
+
+        JPanel panel = new JPanel(new BorderLayout());
+        scheduleAssignments.setEditable(false);
+
+        // Initialize the text area with initial data
+        scheduleAssignments.setText(theString);
+
+        JScrollPane scrollPane = new JScrollPane(scheduleAssignments);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel bottomPanel = new JPanel(); // For better alignment of the back button
+        JButton backButton = createButton("Back", e -> switchToCard("Main"));
+
+
+        bottomPanel.add(backButton);
+        panel.add(bottomPanel, BorderLayout.PAGE_END);
+
+        return panel;
+    }
+
+    //EFFECTS: sorts the employees base on alphabeticalness
     public void makeAlphabetical() {
+        this.storeApp.getThisStore().employeeSortLog();
         List<Employee> employees = this.storeApp.getThisStore().getEmployeeList().getEmployeeList();
         // Sort the employees list by name
         Collections.sort(employees, Comparator.comparing(Employee::getName));
@@ -380,10 +421,12 @@ public class GUI {
         }
 
         employeeInfoTextArea.setText(finalString.toString());
-       // updateEmployeeInfo();
     }
 
+    //TODO move these logs out of the UI packagae
+    //EFFECTS: displays the employees that dont have availability filled out
     public void getEmployeesWithNoAvailabilityInfo() {
+        this.storeApp.getThisStore().employeeFilterLog();
         List<Employee> employees = this.storeApp.getThisStore().getEmployeeList().getEmployeeList();
 
         List<Employee> employeesWithNoAvailability = employees.stream()
@@ -407,14 +450,18 @@ public class GUI {
     //MODIFIES: this
     public void updateEmployeeInfo() {
         employeeInfoTextArea.setText(getEmployeeListInfo());
-
     }
 
     //EFFECTS: Method to update the text in JTextArea for store
     //MODIFIES: this
     public void updateStoreInfo() {
         scheduleInfoTextArea.setText(getStoreInfo());
+    }
 
+    //EFFECTS: updates the text that is displayed in the view schedule window
+    public void updateScheduleText() {
+        String theString = new Schedule(this.storeApp).solve();
+        scheduleAssignments.setText(theString);
     }
 
     //EFFECTS: returns and creates a panel to update the employees availability
@@ -463,6 +510,7 @@ public class GUI {
     public void switchToCard(String cardName) {
         updateEmployeeInfo();
         updateStoreInfo();
+        updateScheduleText();
         cardLayout.show(cardPanel, cardName);
     }
 
@@ -507,7 +555,6 @@ public class GUI {
 
         return finalString;
     }
-
 
     //EFFECTS creates either a combobox or a checkbox
     public <T> T createComponent(Class<T> componentClass, Object itemsOrText, int columns) {
@@ -586,16 +633,16 @@ public class GUI {
 
         LocalTime openTime = LocalTime.parse(startTime);
         LocalTime closeTime = LocalTime.parse(endTime);
-        List<DailyAvailability> storeHours = this.storeApp.getThisStore().getStoreHours();
+        Store storeHours = this.storeApp.getThisStore();
 
         int index = java.util.Arrays.asList(DAYS_OF_WEEK).indexOf(dayOfWeek);
 
         if (selected) {
             for (int i = index; i <= DAYS_OF_WEEK.length - 1; i++) {
-                storeHours.add(new DailyAvailability(DAYS_OF_WEEK[i], openTime, closeTime));
+                storeHours.addStoreHours(new DailyAvailability(DAYS_OF_WEEK[i], openTime, closeTime));
             }
         }
-        storeHours.add(new DailyAvailability(dayOfWeek, openTime, closeTime));
+        storeHours.addStoreHours(new DailyAvailability(dayOfWeek, openTime, closeTime));
         try {
             this.storeApp.saveAllStoreAttributes();
         } catch (FileNotFoundException e) {
@@ -655,6 +702,7 @@ public class GUI {
             storeApp.saveAllStoreAttributes();
             JOptionPane.showMessageDialog(null, panel, "Store Saved",
                     JOptionPane.INFORMATION_MESSAGE);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error saving the store: " + e.getMessage());
         }

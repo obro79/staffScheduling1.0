@@ -33,6 +33,16 @@ public class Store {
         return storeHours;
     }
 
+    //EFFECTS: adds the hours to the store
+    public void addStoreHours(DailyAvailability d) {
+        storeHours.add(d);
+        String day = d.getDay();
+        String startTime = d.getStartTime().toString();
+        String endTime = d.getEndTime().toString();
+        String logString = "Store Hours were updated. " + day + " " + startTime + "-" + endTime;
+        EventLog.getInstance().logEvent(new Event(logString));
+    }
+
     public List<EmployeeNeeds> getAllEmployeeNeeds() {
         return this.allEmployeeNeeds;
     }
@@ -44,6 +54,18 @@ public class Store {
 
     public Store getStore() {
         return this;
+    }
+
+    //EFFECTS: logs the employee sort function
+    //MODIFIES: log
+    public void employeeSortLog() {
+        EventLog.getInstance().logEvent(new Event("Employees were sorted"));
+    }
+
+    //EFFECTS: logs the employee filter function
+    //MODIFIES: log
+    public void employeeFilterLog() {
+        EventLog.getInstance().logEvent(new Event("Employees without availability were filtered"));
     }
 
 

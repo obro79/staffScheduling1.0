@@ -21,9 +21,11 @@ public class Employee implements Writeable {
 
     //EFFECTS: creates a new instance of Employee with name and job and empty availability
     public Employee(String name, String job) {
-        this.weeklyAvailability = new ArrayList<DailyAvailability>();
+        this.weeklyAvailability = new ArrayList<>();
         this.job = job;
         this.name = name;
+        String eventString = "New Employee added with name " + name + " and job " + job;
+        EventLog.getInstance().logEvent(new Event(eventString));
     }
 
 
