@@ -1,0 +1,667 @@
+{
+  "storeHours": [],
+  "allEmployeeNeeds": [
+    {
+      "startTime": "04:00",
+      "endTime": "12:00",
+      "day": "Monday",
+      "numberOfEmployees": 4
+    },
+    {
+      "startTime": "12:00",
+      "endTime": "14:00",
+      "day": "Monday",
+      "numberOfEmployees": 4
+    },
+    {
+      "startTime": "00:00",
+      "endTime": "08:00",
+      "day": "Tuesday",
+      "numberOfEmployees": 2
+    },
+    {
+      "startTime": "00:00",
+      "endTime": "08:00",
+      "day": "Wednesday",
+      "numberOfEmployees": 2
+    },
+    {
+      "startTime": "00:00",
+      "endTime": "08:00",
+      "day": "Thursday",
+      "numberOfEmployees": 2
+    },
+    {
+      "startTime": "00:00",
+      "endTime": "08:00",
+      "day": "Friday",
+      "numberOfEmployees": 2
+    },
+    {
+      "startTime": "08:00",
+      "endTime": "10:00",
+      "day": "Friday",
+      "numberOfEmployees": 3
+    },
+
+    {
+      "startTime": "00:00",
+      "endTime": "08:00",
+      "day": "Saturday",
+      "numberOfEmployees": 2
+    },
+
+    {
+      "startTime": "08:00",
+      "endTime": "12:00",
+      "day": "Saturday",
+      "numberOfEmployees": 8
+    },
+    {
+      "startTime": "00:00",
+      "endTime": "08:00",
+      "day": "Sunday",
+      "numberOfEmployees": 2
+    },
+    {
+      "startTime": "00:00",
+      "endTime": "02:00",
+      "day": "Sunday",
+      "numberOfEmployees": 2
+    },
+    {
+      "startTime": "02:00",
+      "endTime": "05:00",
+      "day": "Sunday",
+      "numberOfEmployees": 6
+    },
+
+    {
+      "startTime": "05:00",
+      "endTime": "07:00",
+      "day": "Sunday",
+      "numberOfEmployees": 3
+    }
+  ],
+  "employees": [
+    {
+      "name": "finn",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "georgia",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "emma",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "ashley",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "henry",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Sunday"
+        }
+
+
+      ]
+    },
+    {
+      "name": "kuzon",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+
+    {
+      "name": "alex",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "kevin",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "noah",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "23:30:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "matthew",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Sunday"
+        }
+      ]
+    },
+    {
+      "name": "luke",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Sunday"
+        }
+
+
+      ]
+    },
+    {
+      "name": "jordan",
+      "job": "job",
+      "weeklyAvailability": [
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Monday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Tuesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Wednesday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Thursday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Friday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Saturday"
+        },
+        {
+          "startTime": "00:00:00",
+          "endTime": "04:00:00",
+          "day": "Sunday"
+        }
+      ]
+    }
+
+
+  ]
+}
