@@ -19,7 +19,6 @@ public class Schedule {
     private StoreApp store;
     private List<EmployeeNeeds> shifts;
 
-    // Adjustments based on provided code structure
 
     public static final Map<String, Integer> DAY_TO_INT = Map.of(
             "Sunday", 0, "Monday", 1, "Tuesday", 2, "Wednesday", 3,
@@ -71,7 +70,6 @@ public class Schedule {
         addMaximumWorkingHoursConstraints();
         ensureShiftCoverage();
         addPenaltyForShortShifts();
-        //ensureMinimumHoursPerWeek();
     }
 
     private int calculateSegmentsForShift(EmployeeNeeds shift) {
@@ -99,9 +97,8 @@ public class Schedule {
         }
 
         // Constraint for maximum hours per day
-        // Assuming each shift has a defined day and segments don't span multiple days
         for (int e = 0; e < numEmployees; e++) {
-            for (int day = 0; day < MAX_DAYS_WEEK; day++) { // Assuming a 7-day week
+            for (int day = 0; day < MAX_DAYS_WEEK; day++) {
                 MPConstraint maxHoursPerDay = solver.makeConstraint(0, MAX_HOURS_DAY, "max_hours_day_" + e
                                                                                       + "_" + day);
                 for (int s = 0; s < numShifts; s++) {
@@ -145,7 +142,6 @@ public class Schedule {
     }
 
     public String solve() {
-        // First, initialize the model variables and add constraints
         initializeModel();
         addConstraints();
 
@@ -171,7 +167,8 @@ public class Schedule {
 
                 for (int seg = 0; seg < xp[e][s].length; seg++) {
                     if (xp[e][s][seg].solutionValue() > 0.5) {
-                        assignedShifts.putIfAbsent(shiftKey, String.format("%s %s to %s", shift.getDay(), shift.getStartTime(), shift.getEndTime()));
+                        assignedShifts.putIfAbsent(shiftKey, String.format("%s %s to %s", shift.getDay(),
+                                shift.getStartTime(), shift.getEndTime()));
                         break; // Prevent adding the same shift multiple times
                     }
                 }
@@ -192,7 +189,7 @@ public class Schedule {
         } else {
             assignmentsBuilder.append(String.format("%s was not assigned any shifts.\n", employeeName));
         }
-        System.out.println(assignmentsBuilder.toString());
+        System.out.println(assignmentsBuilder);
         return assignmentsBuilder.toString();
     }
 
