@@ -41,8 +41,8 @@ Employee Need was added for Monday12:0014:00with 4 employees"
   Employees without availability were filtered"
 
 
-Phase 4: Task 3 
-[Project 2.pdf](..%2FDownloads%2FProject%202.pdf)
+Phase 4: Task 3
+![Project 2.pdf](data/myPicture.pdf "UML Diagram")
 
 after looking at the UML diagram for my project I see some things that could be changed to help improve the structure.
 
