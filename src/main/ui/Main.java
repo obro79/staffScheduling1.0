@@ -23,10 +23,6 @@ public class Main {
             public void run() {
                 try {
                     StoreApp storeApp = new StoreApp();
-//
-//                    storeApp.loadAllStoreAttributes(); //delete later
-//                    Schedule schedule = new Schedule(storeApp); //
-//                    schedule.solve();
 
 
                     GUI gui =  new GUI(storeApp);
