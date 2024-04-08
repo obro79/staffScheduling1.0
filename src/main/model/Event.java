@@ -41,6 +41,8 @@ public class Event {
         return description;
     }
 
+
+    //EFFECTS: returns true if two objects are equal
     @Override
     public boolean equals(Object other) {
         if (other == null) {
@@ -57,11 +59,14 @@ public class Event {
                 && this.description.equals(otherEvent.description));
     }
 
+
+    //EFFECTS: returns an int for a has code
     @Override
     public int hashCode() {
         return (HASH_CONSTANT * dateLogged.hashCode() + description.hashCode());
     }
 
+    //EFFECTS: returns a string for the date that an event was logged
     @Override
     public String toString() {
         return dateLogged.toString() + "\n" + description;

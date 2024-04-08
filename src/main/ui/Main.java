@@ -24,7 +24,6 @@ public class Main {
                 try {
                     StoreApp storeApp = new StoreApp();
 
-
                     GUI gui =  new GUI(storeApp);
                     gui.initializeUI();
 

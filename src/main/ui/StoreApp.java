@@ -52,7 +52,6 @@ public class StoreApp {
         try {
             // Use the read method of JsonReader to load the Store from the JSON file
             thisStore = jsonReader.read(); // Assuming read() returns a Store object
-            System.out.println("Store loaded successfully from file.");
         } catch (IOException e) {
             System.out.println("Unable to load the store from file: " + e.getMessage());
             // Handle the exception, e.g., by logging it or informing the user

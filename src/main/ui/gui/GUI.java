@@ -79,6 +79,8 @@ public class GUI implements LogPrinter {
         });
     }
 
+
+    //EFFECTS: prints all the logged events to the console.
     public void printLog(EventLog el) {
         for (Event e : EventLog.getInstance()) {
             System.out.println(e);
@@ -374,7 +376,7 @@ public class GUI implements LogPrinter {
         return panel;
     }
 
-    //TODO initialize panel in that method "Schedule Window"
+
     //EFFECTS: returns and creates a panel to display all the employee info
     public JPanel viewScheduleWindow() {
         String theString = new Schedule(this.storeApp).solve();

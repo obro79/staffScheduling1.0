@@ -42,14 +42,18 @@ Employee Need was added for Monday12:0014:00with 4 employees"
 
 
 Phase 4: Task 3
-![IMG_0502.jpg](..%2FDownloads%2FIMG_0502.jpg)
+[Project 2.pdf](..%2FDownloads%2FProject%202.pdf)
 
 after looking at the UML diagram for my project I see some things that could be changed to help improve the structure.
 
 1. The employee list class is uneccesary. It just stores a list of Employees. It does implement the singleton pattern,
 but it doesn't need to do that. Instead I can just have a feild in store hold a list of employees.
+2. The schedule class does not need an association with the employeeNeeds class it just needs access to the Store app.
 
-2. Also i have 3 classes that have a 0 ... * relationship with DailyAvailability. I'm not entierly sure what fix would
+3. Also i have 2 classes that have a 0 ... * relationship with DailyAvailability. I'm not entierly sure what fix would
 be best, but some type of heirarchy with an interface could help this.
+4. I don't think the event log class is really neccessary. It just makes sure that the GUI implements the printLog
+method.
 
-3. The schedule class does not need an association with the employeeNeeds class it just needs access to the Store app.
+
+

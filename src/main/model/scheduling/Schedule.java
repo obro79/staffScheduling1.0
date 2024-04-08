@@ -189,7 +189,6 @@ public class Schedule {
         } else {
             assignmentsBuilder.append(String.format("%s was not assigned any shifts.\n", employeeName));
         }
-        System.out.println(assignmentsBuilder);
         return assignmentsBuilder.toString();
     }
 
