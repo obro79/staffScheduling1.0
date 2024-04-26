@@ -42,7 +42,7 @@ Employee Need was added for Monday12:0014:00with 4 employees"
 
 //
 Phase 4: Task 3
-![ProjectUML](../data/ProjectUML.jpg "UML Diagram")
+![ProjectUML](ProjectUML.jpg "UML Diagram")
 
 after looking at the UML diagram for my project I see some things that could be changed to help improve the structure.
 

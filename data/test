@@ -85,7 +85,7 @@
   ],
   "employees": [
     {
-      "name": "finn",
+      "name": "felix",
       "job": "job",
       "weeklyAvailability": [
         {
@@ -131,7 +131,7 @@
       ]
     },
     {
-      "name": "georgia",
+      "name": "harry",
       "job": "job",
       "weeklyAvailability": [
         {
@@ -207,7 +207,7 @@
       ]
     },
     {
-      "name": "emma",
+      "name": "ron",
       "job": "job",
       "weeklyAvailability": [
         {
@@ -248,7 +248,7 @@
       ]
     },
     {
-      "name": "ashley",
+      "name": "asha",
       "job": "job",
       "weeklyAvailability": [
         {
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "name": "noah",
+      "name": "paul",
       "job": "job",
       "weeklyAvailability": [
         {
@@ -537,7 +537,7 @@
       ]
     },
     {
-      "name": "matthew",
+      "name": "luna",
       "job": "job",
       "weeklyAvailability": [
         {
@@ -621,7 +621,7 @@
       ]
     },
     {
-      "name": "jordan",
+      "name": "joe",
       "job": "job",
       "weeklyAvailability": [
         {

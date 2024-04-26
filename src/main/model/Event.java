@@ -59,7 +59,6 @@ public class Event {
                 && this.description.equals(otherEvent.description));
     }
 
-
     //EFFECTS: returns an int for a has code
     @Override
     public int hashCode() {

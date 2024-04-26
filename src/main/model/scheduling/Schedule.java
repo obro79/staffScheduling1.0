@@ -6,8 +6,6 @@ import ui.*;
 import model.*;
 import java.time.Duration;
 import java.util.*;
-import java.util.stream.IntStream;
-import java.time.LocalTime;
 
 
 public class Schedule {
@@ -25,11 +23,9 @@ public class Schedule {
             "Thursday", 4, "Friday", 5, "Saturday", 6);
 
     private static final double HOURS_PER_SEGMENT = 0.5;
-    private static final int SEGMENTS_PER_HOUR = 2;
     private static final int MAX_HOURS_WEEK = 40;
     private static final int MAX_HOURS_DAY = 8;
     private static final int MAX_DAYS_WEEK = 6;
-    private static final double PENALTY_FOR_SHORT_SHIFT = 10;
     private static final double DESIRED_MIN_SHIFT_LENGTH = 2;
 
     public Schedule(StoreApp store) {
@@ -129,7 +125,6 @@ public class Schedule {
     }
 
     private void addPenaltyForShortShifts() { //honestly doing fine without this constraint
-        // Add a soft constraint to minimize the number of short shifts (less than DESIRED_MIN_SHIFT_LENGTH hours)
         for (int e = 0; e < numEmployees; e++) {
             for (int s = 0; s < numShifts; s++) {
                 int segmentsInShift = xp[e][s].length;
@@ -191,8 +186,5 @@ public class Schedule {
         }
         return assignmentsBuilder.toString();
     }
-
-
-
 
 }
