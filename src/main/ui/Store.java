@@ -1,4 +1,8 @@
-package model;
+package ui;
+
+
+import model.*;
+import model.enums.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,17 +36,14 @@ public class Store {
         storeHours.computeIfAbsent(day, k -> new ArrayList<>()).add(timeRange);
     }
 
-    // Get the list of employees
     public List<Employee> getEmployees() {
         return new ArrayList<>(employees);
     }
 
-    // Get the map of shifts
     public Map<Day, List<Shift>> getShifts() {
         return new HashMap<>(shifts);
     }
 
-    // Get the map of store hours
     public Map<Day, List<TimeRange>> getStoreHours() {
         return new HashMap<>(storeHours);
     }

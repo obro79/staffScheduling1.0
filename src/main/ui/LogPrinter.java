@@ -1,6 +1,6 @@
 package ui;
 
-import model.EventLog;
+import model.eventlog.EventLog;
 import model.exception.LogException;
 
 /**

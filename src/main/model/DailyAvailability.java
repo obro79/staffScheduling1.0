@@ -1,6 +1,6 @@
 package model;
 
-import org.json.JSONObject;
+import model.enums.Day;
 
 public class DailyAvailability {
     private Day day;

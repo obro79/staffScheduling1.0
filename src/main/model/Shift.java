@@ -2,6 +2,10 @@
 package model;
 
 
+import model.enums.Day;
+import model.eventlog.Event;
+import model.eventlog.EventLog;
+
 public class Shift {
     private Day day;
     private TimeRange timeRange;
@@ -21,7 +25,6 @@ public class Shift {
     public String toString() {
         return day + ": " + timeRange + ", " + numberOfEmployees + " employees needed";
     }
-
 
     // Getters for Shift fields
     public Day getDay() {
