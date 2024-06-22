@@ -1,54 +1,43 @@
 package model;
 
-import java.time.LocalTime;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writeable;
 
+public class DailyAvailability {
+    private Day day;
+    private TimeRange timeRange;
+    private boolean available;
 
-//This class represents the daily availability that each employee has.
-
-public class DailyAvailability implements Writeable {
-    private String day;
-    private LocalTime startTime;
-    private LocalTime endTime;
-
-
-    //EFFECTS: creates a new instance of DailyAvailability with day, startTime, endTime
-    public DailyAvailability(String day, LocalTime startTime, LocalTime endTime) {
+    public DailyAvailability(Day day, TimeRange timeRange) {
         this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        String startString = startTime.toString();
-        String endString = endTime.toString();
-        EventLog.getInstance().logEvent(new Event("Daily Availability was added: "
-                                                  + day + "," + startString + "-" + endString));
+        this.timeRange = timeRange;
+        this.available = true;
     }
 
-    //EFFECTS: returns the DailyAvailability as a String
+    public DailyAvailability(Day day, boolean available) {
+        this.day = day;
+        this.timeRange = null;
+        this.available = available;
+    }
+
+    @Override
     public String toString() {
-        return day + ": " + startTime + " to " + endTime;
+        if (available) {
+            return day + ": " + timeRange;
+        } else {
+            return day + ": Not Available";
+        }
     }
 
-    //EFFECTS: Turns this into a Json object
-    public JSONObject toJson() {
-        JSONObject dailyAvailability = new JSONObject();
-        dailyAvailability.put("day", this.day);
-        dailyAvailability.put("startTime", this.startTime.toString());
-        dailyAvailability.put("endTime", this.endTime.toString());
-        return dailyAvailability;
+    public Day getDay() {
+        return day;
     }
 
-
-    public String getDay() {
-        return this.day;
+    public TimeRange getTimeRange() {
+        return timeRange;
     }
 
-    public LocalTime getStartTime() {
-        return this.startTime;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public LocalTime getEndTime() {
-        return this.endTime;
-    }
 }
