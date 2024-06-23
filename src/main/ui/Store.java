@@ -37,11 +37,15 @@ public class Store {
     }
 
     public List<Employee> getEmployees() {
-        return new ArrayList<>(employees);
+        return employees;
     }
 
     public Map<Day, List<Shift>> getShifts() {
-        return new HashMap<>(shifts);
+        return shifts;
+    }
+
+    public List<Shift> getShifts(Day day) {
+        return shifts.get(day);
     }
 
     public Map<Day, List<TimeRange>> getStoreHours() {

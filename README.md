@@ -30,9 +30,9 @@ Phase 4: Task 2
 Examples of Logged Events: 
 
 - "Sat Apr 06 16:03:10 PDT 2024
-Employee Need was added for Monday12:0014:00with 4 employees"
+EmployeeTest Need was added for Monday12:0014:00with 4 employees"
 - "Sat Apr 06 16:03:10 PDT 2024
-  New Employee added with name alex and job job"
+  New EmployeeTest added with name alex and job job"
 - "Sat Apr 06 16:03:10 PDT 2024
   Daily Availability was added: Thursday,00:00-23:30"
 - "Sat Apr 06 16:05:03 PDT 2024

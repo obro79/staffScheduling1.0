@@ -30,6 +30,16 @@ public class Employee  {
         EventLog.getInstance().logEvent(new Event(eventString));
     }
 
+    public void addDailyAvailability(DailyAvailability availability) {
+        weeklyAvailability.computeIfAbsent(availability.getDay(), k -> new ArrayList<>()).add(availability);
+    }
+
+    public void addWeeklyAvailability(Day day, TimeRange... timeRanges) {
+        for (TimeRange timeRange : timeRanges) {
+            addDailyAvailability(new DailyAvailability(day, timeRange));
+        }
+    }
+
     //MODIFIES: this
     //EFFECTS: sets employees name to given name
     public void setName(String name) {

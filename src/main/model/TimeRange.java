@@ -33,6 +33,11 @@ public class TimeRange {
         return startTime.isBefore(other.endTime) && endTime.isAfter(other.startTime);
     }
 
+    public boolean isWithin(TimeRange other) {
+        return !startTime.isBefore(other.getStartTime()) && !endTime.isAfter(other.getEndTime());
+    }
+
+
     @Override
     public String toString() {
         return startTime + " to " + endTime;
