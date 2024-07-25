@@ -34,10 +34,9 @@ public class Employee  {
         weeklyAvailability.computeIfAbsent(availability.getDay(), k -> new ArrayList<>()).add(availability);
     }
 
-    public void addWeeklyAvailability(Day day, TimeRange... timeRanges) {
-        for (TimeRange timeRange : timeRanges) {
-            addDailyAvailability(new DailyAvailability(day, timeRange));
-        }
+    public void addWeeklyAvailability(Day day, TimeRange timeRange) {
+        weeklyAvailability.computeIfAbsent(day, k -> new ArrayList<>()).add(new DailyAvailability(day, timeRange));
+        System.out.println("Employee " + name + " availability added for " + day + ": " + timeRange);
     }
 
     //MODIFIES: this
@@ -67,5 +66,7 @@ public class Employee  {
     public Map<Day, List<DailyAvailability>> getWeeklyAvailability() {
         return this.weeklyAvailability;
     }
+
+
 }
 

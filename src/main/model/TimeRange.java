@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalTime;
 import java.time.Duration;
+import java.util.Objects;
+
 import org.json.JSONObject;
 
 
@@ -34,7 +36,36 @@ public class TimeRange {
     }
 
     public boolean isWithin(TimeRange other) {
-        return !startTime.isBefore(other.getStartTime()) && !endTime.isAfter(other.getEndTime());
+        if (!this.startTime.isBefore(other.getStartTime())) {
+            if (!this.endTime.isAfter(other.getEndTime())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getNumberOf15MinuteSegments() {
+        Duration duration = getDuration();
+        long totalMinutes = duration.toMinutes();
+        return (int) totalMinutes / 15;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TimeRange timeRange = (TimeRange) o;
+        return startTime.equals(timeRange.startTime) && endTime.equals(timeRange.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(startTime, endTime);
     }
 
 

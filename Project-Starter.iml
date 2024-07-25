@@ -28,7 +28,10 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="json-20210307" level="project" />
-    <orderEntry type="library" name="google.ortools.java" level="project" />
-    <orderEntry type="library" name="junit.jupiter" level="project" />
+    <orderEntry type="library" exported="" name="google.ortools.java" level="project" />
+    <orderEntry type="library" exported="" name="junit.jupiter" level="project" />
+    <orderEntry type="library" name="choco.solver" level="project" />
+    <orderEntry type="library" name="google.ortools.java1" level="project" />
+    <orderEntry type="library" name="google.ortools.java2" level="project" />
   </component>
 </module>

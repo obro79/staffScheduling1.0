@@ -6,6 +6,8 @@ import model.enums.Day;
 import model.eventlog.Event;
 import model.eventlog.EventLog;
 
+import java.util.Objects;
+
 public class Shift {
     private Day day;
     private TimeRange timeRange;
@@ -33,6 +35,19 @@ public class Shift {
 
     public TimeRange getTimeRange() {
         return timeRange;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shift shift = (Shift) o;
+        return day == shift.day && timeRange.equals(shift.timeRange);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, timeRange);
     }
 
     public int getNumberOfEmployees() {

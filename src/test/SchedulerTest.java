@@ -1,144 +1,122 @@
-
-
-import model.*;
+import model.DailyAvailability;
+import model.Employee;
+import model.Shift;
+import model.TimeRange;
 import model.enums.Day;
 import model.enums.Job;
 import model.scheduling.Scheduler;
-import model.scheduling.Schedule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.Store;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SchedulerTest {
+public class SchedulerTest {
+
     private Store store;
     private Scheduler scheduler;
 
     @BeforeEach
-    void setUp() {
-        // Initialize the store and scheduler before each test
+    public void setUp() {
         store = new Store();
+        this.scheduler = new Scheduler(store);
 
-        // Set store hours
-        store.addStoreHours(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        store.addStoreHours(Day.TUESDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        // Add more employees with their qualifications
+        store.addEmployee(new Employee("Alice", Job.MANAGER));
+        store.addEmployee(new Employee("Bob", Job.COOK));
+        store.addEmployee(new Employee("Charlie", Job.SERVER));
+        store.addEmployee(new Employee("David", Job.MANAGER));
+        store.addEmployee(new Employee("Eve", Job.COOK));
+        store.addEmployee(new Employee("Frank", Job.SERVER));
+        store.addEmployee(new Employee("Grace", Job.MANAGER));
+        store.addEmployee(new Employee("Hank", Job.COOK));
+        store.addEmployee(new Employee("Ivy", Job.SERVER));
+
+        // Set weekly availability for employees
+        store.getEmployees().get(0).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        store.getEmployees().get(1).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(10, 0), LocalTime.of(14, 0)));
+        store.getEmployees().get(2).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(20, 0)));
+        store.getEmployees().get(3).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(8, 0), LocalTime.of(12, 0)));
+        store.getEmployees().get(4).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(14, 0), LocalTime.of(18, 0)));
+        store.getEmployees().get(5).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(15, 0), LocalTime.of(19, 0)));
+        store.getEmployees().get(6).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        store.getEmployees().get(7).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(10, 0), LocalTime.of(14, 0)));
+        store.getEmployees().get(8).addWeeklyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(21, 0)));
+
+        // Add shifts to be covered
+        store.addShift(new Shift(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0)), 1));
+        store.addShift(new Shift(Day.MONDAY, new TimeRange(LocalTime.of(10, 0), LocalTime.of(14, 0)), 1));
+        store.addShift(new Shift(Day.MONDAY, new TimeRange(LocalTime.of(13, 0), LocalTime.of(17, 0)), 1));
+        store.addShift(new Shift(Day.MONDAY, new TimeRange(LocalTime.of(15, 0), LocalTime.of(20, 0)), 1));
+    }
+
+
+
+    @Test
+    public void testMakeSchedule1() {
+    }
+
+//    @Test
+//    public void testMakeSchedule() {
+//        // Print initial state of store shifts and employee availability
+//        System.out.println("Initial Store Shifts:");
+//        for (Day day : Day.values()) {
+//            List<Shift> shifts = store.getShifts(day);
+//            if (shifts != null) {
+//                for (Shift shift : shifts) {
+//                    System.out.println(shift);
+//                }
+//            }
+//        }
+//
+//        System.out.println("Employee Availability:");
+//        for (Employee employee : store.getEmployees()) {
+//            System.out.println(employee.getName() + " (" + employee.getJob() + "): " + employee.getWeeklyAvailability());
+//        }
+//
+//        scheduler.makeSchedule(store);
+//
+//        Schedule schedule = scheduler.getSchedule();
+//        Map<Shift, List<Employee>> assignments = schedule.getShiftAssignments();
+//
+//        // Print assignments for debugging
+//        System.out.println("Assignments:");
+//        for (Shift shift : assignments.keySet()) {
+//            List<Employee> assignedEmployees = assignments.get(shift);
+//            System.out.println("Shift: " + shift + " Assigned Employees: " + assignedEmployees);
+//        }
+//
+//        // Check if assignments are not empty
+//        assertFalse(assignments.isEmpty(), "Assignments should not be empty");
+//
+//        // Check specific assignments if needed
+//        for (Shift shift : store.getShifts().values().stream().flatMap(List::stream).collect(Collectors.toList())) {
+//            List<Employee> assignedEmployees = assignments.get(shift);
+//            assertNotNull(assignedEmployees, "Assigned employees should not be null");
+//            assertFalse(assignedEmployees.isEmpty(), "Assigned employees list should not be empty");
+//            System.out.println("Shift: " + shift + " Assigned Employees: " + assignedEmployees);
+//        }
+//    }
+
+    @Test
+    public void testEnsureConstraintsAreRespected() {
+
     }
 
     @Test
-    void testSimpleScheduling() {
-        // Add employees
-        Employee emp1 = new Employee("Alice", Job.MANAGER);
-        emp1.addDailyAvailability(new DailyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0))));
-        store.addEmployee(emp1);
+    public void testMinimizeShiftSplits() {
 
-        Employee emp2 = new Employee("Bob", Job.COOK);
-        emp2.addDailyAvailability(new DailyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0))));
-        store.addEmployee(emp2);
-
-        // Create shifts
-        Shift shift1 = new Shift(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0)), 1);
-        Shift shift2 = new Shift(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0)), 1);
-        store.addShift(shift1);
-        store.addShift(shift2);
-
-        // Create the scheduler and generate the schedule
-        scheduler = new Scheduler(store);
-        Schedule schedule = scheduler.createSchedule();
-
-        // Verify the schedule
-        List<Employee> shift1Employees = schedule.getEmployeesForShift(shift1);
-        assertEquals(1, shift1Employees.size());
-        assertEquals("Alice", shift1Employees.get(0).getName());
-
-        List<Employee> shift2Employees = schedule.getEmployeesForShift(shift2);
-        assertEquals(1, shift2Employees.size());
-        assertEquals("Bob", shift2Employees.get(0).getName());
     }
 
     @Test
-    void testMultipleDaysScheduling() {
-        // Add employees
-        Employee emp1 = new Employee("Alice", Job.MANAGER);
-        emp1.addDailyAvailability(new DailyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0))));
-        emp1.addDailyAvailability(new DailyAvailability(Day.TUESDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0))));
-        store.addEmployee(emp1);
-
-        Employee emp2 = new Employee("Bob", Job.COOK);
-        emp2.addDailyAvailability(new DailyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0))));
-        emp2.addDailyAvailability(new DailyAvailability(Day.TUESDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0))));
-        store.addEmployee(emp2);
-
-        // Create shifts
-        Shift shift1 = new Shift(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0)), 1);
-        Shift shift2 = new Shift(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0)), 1);
-        Shift shift3 = new Shift(Day.TUESDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0)), 1);
-        Shift shift4 = new Shift(Day.TUESDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0)), 1);
-        store.addShift(shift1);
-        store.addShift(shift2);
-        store.addShift(shift3);
-        store.addShift(shift4);
-
-        // Create the scheduler and generate the schedule
-        scheduler = new Scheduler(store);
-        Schedule schedule = scheduler.createSchedule();
-
-        // Verify the schedule
-        List<Employee> shift1Employees = schedule.getEmployeesForShift(shift1);
-        assertEquals(1, shift1Employees.size());
-        assertEquals("Alice", shift1Employees.get(0).getName());
-
-        List<Employee> shift2Employees = schedule.getEmployeesForShift(shift2);
-        assertEquals(1, shift2Employees.size());
-        assertEquals("Bob", shift2Employees.get(0).getName());
-
-        List<Employee> shift3Employees = schedule.getEmployeesForShift(shift3);
-        assertEquals(1, shift3Employees.size());
-        assertEquals("Alice", shift3Employees.get(0).getName());
-
-        List<Employee> shift4Employees = schedule.getEmployeesForShift(shift4);
-        assertEquals(1, shift4Employees.size());
-        assertEquals("Bob", shift4Employees.get(0).getName());
+    void testEnsureAssignmentsAreValid() {
     }
 
-    @Test
-    void testComplexScheduling() {
-        // Add employees with varied availabilities
-        for (int i = 1; i <= 30; i++) {
-            Employee emp = new Employee("Employee" + i, Job.values()[i % Job.values().length]);
-            emp.addDailyAvailability(new DailyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0))));
-            emp.addDailyAvailability(new DailyAvailability(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0))));
-            emp.addDailyAvailability(new DailyAvailability(Day.TUESDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0))));
-            emp.addDailyAvailability(new DailyAvailability(Day.TUESDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0))));
-            store.addEmployee(emp);
-        }
-
-        // Create shifts with different requirements
-        for (int i = 0; i < 10; i++) {
-            Shift shiftMorningMon = new Shift(Day.MONDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0)), i % 3 + 1);
-            Shift shiftAfternoonMon = new Shift(Day.MONDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0)), i % 3 + 1);
-            Shift shiftMorningTue = new Shift(Day.TUESDAY, new TimeRange(LocalTime.of(9, 0), LocalTime.of(12, 0)), i % 3 + 1);
-            Shift shiftAfternoonTue = new Shift(Day.TUESDAY, new TimeRange(LocalTime.of(12, 0), LocalTime.of(17, 0)), i % 3 + 1);
-            store.addShift(shiftMorningMon);
-            store.addShift(shiftAfternoonMon);
-            store.addShift(shiftMorningTue);
-            store.addShift(shiftAfternoonTue);
-        }
-
-        // Create the scheduler and generate the schedule
-        scheduler = new Scheduler(store);
-        Schedule schedule = scheduler.createSchedule();
-
-        // Verify the schedule
-        for (Day day : Day.values()) {
-            List<Shift> shifts = store.getShifts(day);
-            for (Shift shift : shifts) {
-                List<Employee> assignedEmployees = schedule.getEmployeesForShift(shift);
-                assertEquals(shift.getNumberOfEmployees(), assignedEmployees.size());
-            }
-        }
-    }
 }

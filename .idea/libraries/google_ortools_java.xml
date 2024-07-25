@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="google.ortools.java" type="repository">
-    <properties maven-id="com.google.ortools:ortools-java:9.8.3296" />
+    <properties maven-id="com.google.ortools:ortools-java:9.10.4067" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/ortools-java-9.8.3296.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/ortools-linux-x86-64-9.8.3296.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/ortools-darwin-x86-64-9.8.3296.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/ortools-win32-x86-64-9.8.3296.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/ortools-linux-aarch64-9.8.3296.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/ortools-darwin-aarch64-9.8.3296.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jna-platform-5.13.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jna-5.13.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/protobuf-java-3.25.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/ortools/ortools-java/9.10.4067/ortools-java-9.10.4067.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/ortools/ortools-linux-x86-64/9.10.4067/ortools-linux-x86-64-9.10.4067.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/ortools/ortools-darwin-x86-64/9.10.4067/ortools-darwin-x86-64-9.10.4067.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/ortools/ortools-win32-x86-64/9.10.4067/ortools-win32-x86-64-9.10.4067.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/ortools/ortools-linux-aarch64/9.10.4067/ortools-linux-aarch64-9.10.4067.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/ortools/ortools-darwin-aarch64/9.10.4067/ortools-darwin-aarch64-9.10.4067.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/4.26.1/protobuf-java-4.26.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

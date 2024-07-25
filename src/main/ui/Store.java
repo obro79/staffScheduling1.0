@@ -14,11 +14,15 @@ public class Store {
     private Map<Day, List<Shift>> shifts;
     private Map<Day, List<TimeRange>> storeHours;
 
-    // Constructor
     public Store() {
         this.employees = new ArrayList<>();
         this.shifts = new HashMap<>();
         this.storeHours = new HashMap<>();
+
+        // Initialize shifts for all days
+        for (Day day : Day.values()) {
+            shifts.put(day, new ArrayList<>());
+        }
     }
 
     // Add an employee to the store
